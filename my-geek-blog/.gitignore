@@ -1,0 +1,23 @@
+# 忽略构建输出
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
+
+# 忽略 hugo 可执行文件
+hugo.exe
+hugo.darwin
+hugo.linux
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 日志
+*.log
