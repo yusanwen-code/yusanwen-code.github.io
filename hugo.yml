@@ -44,7 +44,7 @@ params:
   env: production
   title: Geek Blog
   description: '一个极简极客风格的静态博客'
-  author: Geek
+  author: yaoyuliang
   # 默认主题: auto / light / dark
   defaultTheme: auto
   # 禁用主题切换
@@ -68,7 +68,7 @@ params:
 
   # 首页设置
   homeInfoParams:
-    Title: 'Hi, Geek Here 👋'
+    Title: 'Hi, yaoyuliang 👋'
     Content: >
       欢迎来到我的极客博客。
       
@@ -79,7 +79,7 @@ params:
     - name: github
       url: 'https://github.com/yusanwen-code'
     - name: email
-      url: 'mailto:yusanwen-code@users.noreply.github.com'
+      url: 'mailto:yaodawang6@foxmail.com'
     - name: rss
       url: 'index.xml'
 
