@@ -1,0 +1,31 @@
+{{ define "main" }}
+    <header>
+        <h3 class="section-title">
+            {{ T "list.section" }}
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">{{ T "list.page" (len .Data.Terms) }}</h3>
+                <h1 class="section-term">{{ .Title }}</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="widget tagCloud">
+            <div class="widget-content">
+                <ul class="tag-cloud-list">
+                    {{ range .Data.Terms.Alphabetical }}
+                        <li>
+                            <a href="{{ .Page.RelPermalink }}">
+                                {{ .Page.Title }}
+                                <span class="tag-cloud-count">({{ .Count }})</span>
+                            </a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </div>
+{{ end }}

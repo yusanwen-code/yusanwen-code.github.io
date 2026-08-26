@@ -1,0 +1,39 @@
+{{ define "main" }}
+    <header>
+        <h3 class="section-title">
+            {{ if eq .Parent (.GetPage "/") }}
+                {{ T "list.section" }}
+            {{ else }}
+                {{ .Parent.Title }}
+            {{ end }}
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">{{ T "list.page" (len .RegularPages) }}</h3>
+                <h1 class="section-term">{{ .Title }}</h1>
+                {{ with .Params.description }}
+                    <h2 class="section-description">{{ . }}</h2>
+                {{ end }}
+            </div>
+        </div>
+    </header>
+
+    {{/* 主题的 list.html 在 term 页上会因 .Pages 为 bool 崩溃，这里用 .RegularPages 重写 */}}
+    {{ $paginator := .Paginate .RegularPages }}
+    {{ with $paginator }}
+        <section class="article-list--compact">
+            {{ range .Pages }}
+                {{ partial "article-list/compact" . }}
+            {{ end }}
+        </section>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+
+    {{ partialCached "footer/footer" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

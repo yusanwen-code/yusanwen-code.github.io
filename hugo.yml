@@ -1,10 +1,14 @@
 baseURL: 'https://yusanwen-code.github.io'
-languageCode: 'zh-CN'
+locale: 'zh-CN'
 title: '姚玉亮的网络日志'
-theme: 'PaperMod'
+theme: 'hugo-theme-stack'
 
 # 分页设置
 paginate: 10
+
+# 保留文章 URL 结构（/posts/:slug/），避免旧链接失效
+permalinks:
+  post: /posts/:slug/
 
 # 启用 RSS
 enableRobotsTXT: true
@@ -12,92 +16,83 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-# 输出格式
-outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON
-
-# 菜单配置
+# 菜单配置（v4: 社交链接用 menu.social，图标取 assets/icons/ 下的名字）
 menu:
   main:
     - identifier: home
       name: 首页
       url: /
-      weight: 10
+      weight: 1
     - identifier: archives
       name: 归档
-      url: /archives/
-      weight: 20
-    - identifier: tags
-      name: 标签
-      url: /tags/
-      weight: 30
+      url: /page/archives/
+      weight: 2
     - identifier: about
       name: 关于
-      url: /about/
-      weight: 40
-
-# PaperMod 主题参数
-params:
-  env: production
-  title: 姚玉亮的网络日志
-  description: '一个极简极客风格的静态博客'
-  author: yaoyuliang
-  # 默认主题: auto / light / dark
-  defaultTheme: auto
-  # 禁用主题切换
-  disableThemeToggle: false
-  # 启用搜索
-  ShowShareButtons: false
-  ShowReadingTime: true
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: true
-  ShowWordCount: true
-  ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: true
-  tocopen: false
-
-  # 首页设置
-  homeInfoParams:
-    Title: 'Hi, yaoyuliang 👋'
-    Content: >
-      欢迎来到我的极客博客。
-      
-      这里记录技术、思考与创造。
-
-  # 社交链接
-  socialIcons:
-    - name: github
+      url: /page/about/
+      weight: 3
+  social:
+    - identifier: github
+      name: GitHub
       url: 'https://github.com/yusanwen-code'
-    - name: email
+      params:
+        icon: brand-github
+        newTab: true
+    - identifier: email
+      name: Email
       url: 'mailto:yaodawang6@foxmail.com'
-    - name: rss
+      params:
+        icon: link
+        newTab: true
+    - identifier: rss
+      name: RSS
       url: 'index.xml'
+      params:
+        icon: rss
+        newTab: true
 
-  # 编辑链接（可选）
-  editPost:
-    URL: 'https://github.com/yusanwen-code/yusanwen-code.github.io/tree/main/content'
-    Text: '编辑此文'
-    appendFilePath: true
+# Stack 主题参数
+params:
+  # 首页展示的文章目录
+  mainSections:
+    - post
+  description: '一个记录技术、思考与创造的后端博客'
+  author: yaoyuliang
 
-  # 模糊搜索
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    keys: ["title", "permalink", "summary", "content"]
+  # 侧边栏（v4: avatar 是 URL 字符串，不配置则用 emoji 头像）
+  sidebar:
+    emoji: ⚙️
+    subtitle: 后端工程师 · Go · AI
+    compact: false
+
+  # 页脚
+  footer:
+    since: 2023
+    copyright: 保持好奇，持续学习。
+
+  # 文章页设置
+  article:
+    toc: true
+    readingTime: true
+    math: false
+    license:
+      enabled: false
+
+  # 站内搜索
+  search:
+    enabled: true
+
+  # 首页右侧小组件（Stack v4: key 为 homepage / page，参数放元素级 params）
+  widgets:
+    homepage:
+      - type: search
+      - type: categories
+      - type: tag-cloud
+      - type: archives
+        params:
+          limit: 10
+    page:
+      - type: toc
 
 # 标记语言设置
 markup:
@@ -109,4 +104,4 @@ markup:
     lineNos: true
     codeFences: true
     guessSyntax: true
-    noClasses: false
+    noClasses: true
