@@ -10,7 +10,7 @@ yaoyuliang（姚玉亮），一个热爱技术的极客。
 
 ### 技术栈
 
-- 后端：Go / Python / Rust
+- 后端：Go / Python / Rust / Java
 - 前端：React / Vue / 原生 JavaScript
 - 运维：Docker / Kubernetes / Linux
 
