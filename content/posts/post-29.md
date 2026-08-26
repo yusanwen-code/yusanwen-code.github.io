@@ -9,7 +9,7 @@ description: "基于游标的增量拉取与 OpenAlex ID 去重实践"
 
 ## 问题背景
 
-在 数据治理服务 数据治理平台中，我们需要将 OpenAlex 的学术数据（Works、Authors、Institutions 等）同步到本地 MySQL，再通过 StarRocks 外表做多维分析。OpenAlex 全量 Works 数据超过 2.5 亿条，如果每次全量拉取，不仅耗时巨大，还会频繁触发对方的限流策略。我们需要一套可靠的增量同步方案，同时保证重复运行不会产生脏数据。
+在数据治理服务数据治理平台中，我们需要将 OpenAlex 的学术数据（Works、Authors、Institutions 等）同步到本地 MySQL，再通过 StarRocks 外表做多维分析。OpenAlex 全量 Works 数据超过 2.5 亿条，如果每次全量拉取，不仅耗时巨大，还会频繁触发对方的限流策略。我们需要一套可靠的增量同步方案，同时保证重复运行不会产生脏数据。
 
 ## 方案设计
 

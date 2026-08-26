@@ -4,7 +4,7 @@ date: 2026-07-19T10:30:00+08:00
 draft: false
 tags: ["架构演进","职业成长","复盘"]
 categories: ["随笔"]
-description: "从某 SaaS 公司的宠物医疗 SaaS 到公司的 AI 数据平台，一段架构演进复盘。"
+description: "从宠物医疗 SaaS 到企业级 AI 数据平台，一段架构演进复盘。"
 ---
 
 ## 起点：SaaS 时代的微服务拆分
@@ -17,21 +17,15 @@ description: "从某 SaaS 公司的宠物医疗 SaaS 到公司的 AI 数据平�
 
 ## 转折：支付与认证的中台沉淀
 
-2023 年 12 月我加入某科技公司，一开始主导 统一支付平台和 统一认证中心。这两个项目和 SaaS 时代最大的区别是：它们是给多个业务线复用的中台，不是单一产品。
-
-统一支付平台 做三端分离支付、订单状态机、RSA/SHA 签名 OpenAPI、动态计费引擎和对账导出。状态机是核心——一笔订单从创建到回调成功可能经历十几种状态跃迁，任何一个分支没覆盖就是资损。我用显式状态机表 + 幂等键把每条跃迁写死，对账用 Excelize 导出后和渠道逐笔比对。
-
-统一认证中心 则是另一种复杂度：OAuth2/OIDC、RSA 签发 JWT、SSO、多应用 AppID/AppSecret、AppRole 团队隔离、RBAC，还要支持可插拔 Provider（腾讯云 SMS/SES/Captcha）和微信、企微、飞书登录。我用 Wire 做依赖注入，Service/DAO 分层清晰，新增一个登录方式只需要实现 Provider 接口。
+2023 年 12 月我加入某科技公司，一开始主导统一支付平台和统一认证中心。这两个项目和 SaaS 时代最大的区别是：它们是给多个业务线复用的中台，不是单一产品。统一支付平台做三端分离支付、订单状态机、RSA/SHA 签名 OpenAPI、动态计费引擎和对账导出。状态机是核心——一笔订单从创建到回调成功可能经历十几种状态跃迁，任何一个分支没覆盖就是资损。我用显式状态机表 + 幂等键把每条跃迁写死，对账用 Excelize 导出后和渠道逐笔比对。统一认证中心则是另一种复杂度：OAuth2/OIDC、RSA 签发 JWT、SSO、多应用 AppID/AppSecret、AppRole 团队隔离、RBAC，还要支持可插拔 Provider（腾讯云 SMS/SES/Captcha）和微信、企微、飞书登录。我用 Wire 做依赖注入，Service/DAO 分层清晰，新增一个登录方式只需要实现 Provider 接口。
 
 这个阶段我的架构审美从"能拆就拆"转向"该合就合"。中台的价值在于复用，但过度抽象会把所有业务方绑死。边界在哪里，比用什么框架重要得多。
 
 ## 当下：AI 数据平台的工程化挑战
 
-从 数据治理服务 开始，工作性质又变了。S3 预签名上传、PDF 解析、Temporal Worker 数据质量规则引擎、MySQL + StarRocks 数仓、OpenAlex 学术数据同步——这里的核心矛盾从"高并发业务"变成"长流程数据管道"。Temporal 把我从手写状态机和重试里解放出来，Activity 失败自动重试、Workflow 状态持久化，比 go-zero 时代裸写 goroutine + 补偿稳太多。
+从数据治理服务开始，工作性质又变了。S3 预签名上传、PDF 解析、Temporal Worker 数据质量规则引擎、MySQL + StarRocks 数仓、OpenAlex 学术数据同步——这里的核心矛盾从"高并发业务"变成"长流程数据管道"。Temporal 把我从手写状态机和重试里解放出来，Activity 失败自动重试、Workflow 状态持久化，比 go-zero 时代裸写 goroutine + 补偿稳太多。数据集管理服务进一步把 AI 工程化推到台前：Hertz 做接入，eino + pond 跑高并发文档解析、向量化、知识图谱构建，存储用 GaussDB 和 MongoDB。这里我第一次认真处理"GPU/CPU 混合调度"和"大文件内存控制"，pond 的 worker pool 帮我把并发度压在下游能承受的范围内。
 
-数据集管理服务 进一步把 AI 工程化推到台前：Hertz 做接入，eino + pond 跑高并发文档解析、向量化、知识图谱构建，存储用 GaussDB 和 MongoDB。这里我第一次认真处理"GPU/CPU 混合调度"和"大文件内存控制"，pond 的 worker pool 帮我把并发度压在下游能承受的范围内。
-
-到 知识库问答服务 做企业级 LLM 知识库问答时，问题又变成了多轮对话、light_rag、MCP 工具调用、多模型路由。统一 LLM 适配层屏蔽 OpenAI、Azure、VLLM、HuggingFace 的差异，业务侧只认一个 ChatCompletion 接口。我看着它从一个能跑的 DEMO 演进成能接公司多个业务线的平台，中间踩过的坑比前两年加起来还多。
+到知识库问答服务做企业级 LLM 知识库问答时，问题又变成了多轮对话、light_rag、MCP 工具调用、多模型路由。统一 LLM 适配层屏蔽 OpenAI、Azure、VLLM、HuggingFace 的差异，业务侧只认一个 ChatCompletion 接口。我看着它从一个能跑的 DEMO 演进成能接公司多个业务线的平台，中间踩过的坑比前两年加起来还多。
 
 ## 沉淀：什么变了，什么没变
 

@@ -124,4 +124,4 @@ func RSAVerifyMiddleware(appDao dao.AppDAO, rdb *redis.Client) gin.HandlerFunc {
 
 ## 小结
 
-OpenAPI 签名机制的核心不是算法多强，而是规则是否明确、边界是否清晰。RSA 签名把"谁发的、有没有被改、是不是重放"三件事一次解决，配合公钥轮换和 Nonce 防重放，统一支付平台 上线至今没出现过签名层面的安全事件。商户接入文档里我还专门给了 Java、Python、Go 三语言的 SDK 示例，减少了大量联调时间。
+OpenAPI 签名机制的核心不是算法多强，而是规则是否明确、边界是否清晰。RSA 签名把"谁发的、有没有被改、是不是重放"三件事一次解决，配合公钥轮换和 Nonce 防重放，统一支付平台上线至今没出现过签名层面的安全事件。商户接入文档里我还专门给了 Java、Python、Go 三语言的 SDK 示例，减少了大量联调时间。

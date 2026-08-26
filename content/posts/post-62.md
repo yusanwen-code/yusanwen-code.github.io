@@ -9,7 +9,7 @@ description: "用一个统一适配层接入 DeepSeek、通义、智谱、Kimi �
 
 ## 问题背景
 
-做 知识库问答服务 的时候，我们就面对一个现实：企业客户不可能只用一家大模型。有的客户数据合规要求必须用国产模型（通义、智谱、DeepSeek、Kimi、百川、文心），有的要接私有部署的 VLLM 或 HuggingFace 推理服务，还有的要按成本/质量在不同模型间路由。如果业务代码里到处直接写各家 SDK，光是认证方式、请求字段、流式格式的差异就够喝一壶，更别提换模型时改一大片。
+做知识库问答服务的时候，我们就面对一个现实：企业客户不可能只用一家大模型。有的客户数据合规要求必须用国产模型（通义、智谱、DeepSeek、Kimi、百川、文心），有的要接私有部署的 VLLM 或 HuggingFace 推理服务，还有的要按成本/质量在不同模型间路由。如果业务代码里到处直接写各家 SDK，光是认证方式、请求字段、流式格式的差异就够喝一壶，更别提换模型时改一大片。
 
 alchemy-furnace 作为开源项目，更不能把用户绑死在某一家。我的做法是：**所有供应商一律走 OpenAI 兼容协议，用一个统一适配层屏蔽差异，业务层只认 `provider + model`。** 这篇讲这个适配层怎么设计。
 
@@ -147,7 +147,7 @@ func (s *ProviderService) TestConnect(ctx context.Context, provider string) erro
 
 **各家兼容程度不一**。DeepSeek 和 Kimi 的兼容做得最彻底，几乎零适配；通义的 DashScope 兼容模式个别字段（比如 `result_format`）行为和官方 OpenAI 有差异；智谱早期版本的 tool_calls 字段命名有出入；文心的 OpenAI 兼容上线较晚，历史上还要单独处理 access_token。我的策略是：**对差异点不搞大而全的分支，而是在 `ProviderConfig` 里用 capability flag 标注**（`supports_tools`、`stream_chunk_path`、`auth_style`），解析时按 flag 走，主流程保持统一。新增供应商通常只加配置，不改代码。
 
-**流式 SSE 的坑最多**。有的供应商在 chunk 里带 `usage`，有的不带；有的会在最后一个 chunk 前插入空行；Ollama 的 `/v1` 模式和原生 `/api/chat` 字段还不一样。我统一在 `parse_sse_chunk` 里做归一化，对外只吐 `{content, tool_calls, done}`，把各家的脏活留在适配层。做 知识库问答服务 时我们在这层吃过亏，所以这次一开始就把流式归一化做扎实。
+**流式 SSE 的坑最多**。有的供应商在 chunk 里带 `usage`，有的不带；有的会在最后一个 chunk 前插入空行；Ollama 的 `/v1` 模式和原生 `/api/chat` 字段还不一样。我统一在 `parse_sse_chunk` 里做归一化，对外只吐 `{content, tool_calls, done}`，把各家的脏活留在适配层。做知识库问答服务时我们在这层吃过亏，所以这次一开始就把流式归一化做扎实。
 
 **超时和重试要按供应商调**。DeepSeek 长文本生成可能超过 30 秒，VLLM 自托管网络抖动常见，Ollama 首次加载模型要十几秒。我给每个 provider 单独配 `timeout` 和 `retry`，重试只对 5xx 和连接错误生效，4xx（尤其是 400 参数错误、429 限流）不盲目重试，避免把配额打爆。
 

@@ -9,7 +9,7 @@ description: "用 Context 透传 GORM 事务，让 Service 与 DAO 解耦"
 
 ## 问题背景
 
-在 统一认证中心 的 Service/DAO 分层中，经常出现一个业务操作要跨多张表且必须原子的场景：创建应用时要同时写 apps、app_credentials、audit_logs；给用户授权时要写 user_roles 和 role_permissions 快照。
+在统一认证中心的 Service/DAO 分层中，经常出现一个业务操作要跨多张表且必须原子的场景：创建应用时要同时写 apps、app_credentials、audit_logs；给用户授权时要写 user_roles 和 role_permissions 快照。
 
 最直接的写法是 Service 层 `db.Transaction(func(tx *gorm.DB) error { ... })`，然后把 tx 作为参数传给 DAO。但这样 DAO 方法签名全部要带上 `tx *gorm.DB`，和普通查询混在一起很难看，而且嵌套调用时代码里到处是 tx 透传。我们想要的是：DAO 方法签名保持干净，能自动感知"当前是否在事务里"。
 
@@ -93,4 +93,4 @@ func (s *AppService) CreateApp(ctx context.Context, req CreateAppReq) (int64, er
 
 ## 小结
 
-通过 Context 透传事务，DAO 层保持了只依赖 ctx 的干净签名，Service 层用 WithTx 包裹业务逻辑就能保证原子性。配合 GORM 自带的 savepoint 嵌套事务，统一认证中心 里大部分多表写操作都能用这套模式覆盖，代码可读性和可测试性都比手动透传 tx 好。
+通过 Context 透传事务，DAO 层保持了只依赖 ctx 的干净签名，Service 层用 WithTx 包裹业务逻辑就能保证原子性。配合 GORM 自带的 savepoint 嵌套事务，统一认证中心里大部分多表写操作都能用这套模式覆盖，代码可读性和可测试性都比手动透传 tx 好。

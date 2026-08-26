@@ -4,12 +4,12 @@ date: 2024-08-15T10:30:00+08:00
 draft: false
 tags: ["OAuth","微信登录","飞书"]
 categories: ["认证"]
-description: "统一认证中心 中三端 OAuth 登录与账号绑定的统一抽象"
+description: "统一认证中心中三端 OAuth 登录与账号绑定的统一抽象"
 ---
 
 ## 问题背景
 
-统一认证中心除了账号密码，还需要支持微信、企业微信、飞书的一键登录，并且要让同一个真人能把多个第三方身份绑定到同一个 统一认证中心 账号。三个平台的 OAuth 流程相似但细节差异很大：微信网页授权用 code 换 access_token 再拿 unionid；企业微信需要 corpid + agentid 且 userid 在企业内唯一；飞书走标准 OIDC 风格，有独立的 user_info 端点。
+统一认证中心除了账号密码，还需要支持微信、企业微信、飞书的一键登录，并且要让同一个真人能把多个第三方身份绑定到同一个统一认证中心账号。三个平台的 OAuth 流程相似但细节差异很大：微信网页授权用 code 换 access_token 再拿 unionid；企业微信需要 corpid + agentid 且 userid 在企业内唯一；飞书走标准 OIDC 风格，有独立的 user_info 端点。
 
 如果每个平台写一套独立的 callback，维护成本很高。我们的目标是抽象出统一的 Provider 接口，新增平台只实现接口，业务层不感知差异。
 
@@ -117,7 +117,7 @@ func (p *FeishuProvider) Exchange(ctx context.Context, code string) (*Identity, 
 ## 踩坑与权衡
 
 - 微信的 unionid 只有在开放平台绑定同主体应用后才会返回，网页授权单独拿不到。我们最初以为 openid 够用，结果同一用户在公众号和小程序间无法识别，后来补了 unionid 机制。
-- 企业微信的 userid 是企业内管理员导入的，OAuth 拿到的 userid 不一定等于 统一认证中心 里的手机号，需要提供手动绑定入口。
+- 企业微信的 userid 是企业内管理员导入的，OAuth 拿到的 userid 不一定等于统一认证中心里的手机号，需要提供手动绑定入口。
 - 自动注册虽然体验好，但会产生大量"空壳账号"。我们后来加了策略：如果同一手机号已存在账号，提示用户登录后绑定，而不是直接新建。
 - state 必须一次性消费，回调里立即 Del，防止重放。state 只存 Redis 不写库，5 分钟过期自动清理。
 - 飞书的 app_access_token 和 user_access_token 是两个东西，别拿错；企业微信的 access_token 有有效期和频次限制，要做缓存。

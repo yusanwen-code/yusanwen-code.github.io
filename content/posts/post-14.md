@@ -4,12 +4,12 @@ date: 2024-03-27T10:30:00+08:00
 draft: false
 tags: ["OAuth2", "OIDC", "JWT"]
 categories: ["安全"]
-description: "统一认证中心 实现标准 OAuth2/OIDC 协议端点的工程细节"
+description: "统一认证中心实现标准 OAuth2/OIDC 协议端点的工程细节"
 ---
 
 ## 问题背景
 
-统一认证中心 第一版只做了内部系统的 SSO，用的是自定义的 cookie + session 方案。后来要接入外部第三方应用，还要让企业客户用自己的飞书/企微做身份源（IdP），自定义协议就走不通了。我当时决定把 统一认证中心 改造成标准的 **OAuth2/OIDC Provider**，让任何符合协议的客户端都能接入，同时也能作为 RP 对接外部 IdP。
+统一认证中心第一版只做了内部系统的 SSO，用的是自定义的 cookie + session 方案。后来要接入外部第三方应用，还要让企业客户用自己的飞书/企微做身份源（IdP），自定义协议就走不通了。我当时决定把统一认证中心改造成标准的 **OAuth2/OIDC Provider**，让任何符合协议的客户端都能接入，同时也能作为 RP 对接外部 IdP。
 
 标准协议听起来就是实现几个端点，但真正落地有一堆工程细节：授权码模式的 PKCE、state/nonce 防 CSRF、redirect_uri 严格校验、ID Token 的签名与 claims、JWKS 公钥轮换。
 
@@ -211,4 +211,4 @@ func (s *KeyService) PublicKeySet() jwk.Set {
 
 ## 小结
 
-实现标准 OAuth2/OIDC 的工作量不在代码量，而在把协议里那些 MUST/SHOULD 的安全要求逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。统一认证中心 改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能通过同一个 OIDC 联邦框架对接，扩展性比自定义协议好得多。标准协议的价值，就在于它让"对接"这件事不再需要一对一谈判。
+实现标准 OAuth2/OIDC 的工作量不在代码量，而在把协议里那些 MUST/SHOULD 的安全要求逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。统一认证中心改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能通过同一个 OIDC 联邦框架对接，扩展性比自定义协议好得多。标准协议的价值，就在于它让"对接"这件事不再需要一对一谈判。

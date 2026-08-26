@@ -9,9 +9,9 @@ description: "用 pond 限制并发、收集错误，平稳跑大批量向量化
 
 ## 问题背景
 
-数据集管理服务 里一个数据集可能有上千份文档，每份文档切分出几十到上百个 chunk，每个 chunk 都要调一次 embedding 接口。最朴素的写法是 for 循环里直接 `go func()`，结果是几千个 goroutine 同时调远程 embedding 服务：瞬间把对方 QPS 打满、自己内存暴涨、还没法统一收集错误和控制取消。
+数据集管理服务里一个数据集可能有上千份文档，每份文档切分出几十到上百个 chunk，每个 chunk 都要调一次 embedding 接口。最朴素的写法是 for 循环里直接 `go func()`，结果是几千个 goroutine 同时调远程 embedding 服务：瞬间把对方 QPS 打满、自己内存暴涨、还没法统一收集错误和控制取消。
 
-我们需要的是一个有上限、能等结果、能感知 context 取消的 goroutine 池。试过手写 worker channel，也试过 `errgroup`，最后在 数据集管理服务 里选了 pond（`github.com/alitto/pond`），它的 API 简洁，内置池大小、任务队列、等待和错误聚合。
+我们需要的是一个有上限、能等结果、能感知 context 取消的 goroutine 池。试过手写 worker channel，也试过 `errgroup`，最后在数据集管理服务里选了 pond（`github.com/alitto/pond`），它的 API 简洁，内置池大小、任务队列、等待和错误聚合。
 
 ## 方案设计
 
@@ -84,4 +84,4 @@ func (v *Vectorizer) embedChunks(ctx context.Context, chunks []*Chunk) ([]*Vecto
 
 ## 小结
 
-向量化是典型的高并发 IO 场景，关键不是"起更多 goroutine"，而是"把并发数控制在下游能承受的范围内"。pond 用很小的 API 成本提供了池化、等待、错误聚合和 context 取消，比手写 channel+WaitGroup 省心。数据集管理服务 用文档级和 chunk 级两个池，既保证了吞吐，又不会把 embedding 服务打垮。
+向量化是典型的高并发 IO 场景，关键不是"起更多 goroutine"，而是"把并发数控制在下游能承受的范围内"。pond 用很小的 API 成本提供了池化、等待、错误聚合和 context 取消，比手写 channel+WaitGroup 省心。数据集管理服务用文档级和 chunk 级两个池，既保证了吞吐，又不会把 embedding 服务打垮。

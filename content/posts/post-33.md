@@ -9,7 +9,7 @@ description: "用统一接口屏蔽多模型供应商差异的设计"
 
 ## 问题背景
 
-知识库问答服务 需要对接的模型来源很杂：有 OpenAI 官方 API，有走 Azure OpenAI 的企业部署，有内部用 VLLM 跑的开源模型（Qwen、DeepSeek），还有通过 HuggingFace TGI 部署的模型。每家的 API 格式、鉴权方式、流式协议都不一样，直接在业务代码里 if-else 会迅速腐烂。
+知识库问答服务需要对接的模型来源很杂：有 OpenAI 官方 API，有走 Azure OpenAI 的企业部署，有内部用 VLLM 跑的开源模型（Qwen、DeepSeek），还有通过 HuggingFace TGI 部署的模型。每家的 API 格式、鉴权方式、流式协议都不一样，直接在业务代码里 if-else 会迅速腐烂。
 
 更麻烦的是，业务方可能今天用 GPT-4o，明天因为成本原因切到 DeepSeek，或者高峰期自动降级到 VLLM 上的开源模型。我们需要一个统一的适配层，让上层只面对一套接口，底层模型可配置、可替换、可路由。
 

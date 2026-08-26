@@ -4,14 +4,14 @@ date: 2026-05-17T10:30:00+08:00
 draft: false
 tags: ["MCP","生态","工具"]
 categories: ["AI"]
-description: "从 知识库问答服务 的 MCP 工具调用实践，看协议落地与工具市场演进。"
+description: "从知识库问答服务的 MCP 工具调用实践，看协议落地与工具市场演进。"
 ---
 
 ## 问题背景
 
-去年我们在 知识库问答服务 里做企业级知识库问答，早期工具调用是通过 Function Calling 硬编码在 Prompt 里的：每接一个内部系统（工单、报表、知识库检索），就要改一遍适配层、重新发版。工具多了之后，模型上下文里塞几十个 JSON Schema，token 浪费严重，而且不同 LLM 供应商的 Function Calling 格式还略有差异，统一适配层写得很痛苦。
+去年我们在知识库问答服务里做企业级知识库问答，早期工具调用是通过 Function Calling 硬编码在 Prompt 里的：每接一个内部系统（工单、报表、知识库检索），就要改一遍适配层、重新发版。工具多了之后，模型上下文里塞几十个 JSON Schema，token 浪费严重，而且不同 LLM 供应商的 Function Calling 格式还略有差异，统一适配层写得很痛苦。
 
-MCP（Model Context Protocol）出现后，我把它看作"工具调用界的 USB-C"：客户端和工具之间不再点对点耦合，而是通过一个标准化的 Server 暴露 resources、tools、prompts。我们在 知识库问答服务 里把内部的检索、工单查询、数据导出等能力封成了几个 MCP Server，模型按需 discover 和 call。
+MCP（Model Context Protocol）出现后，我把它看作"工具调用界的 USB-C"：客户端和工具之间不再点对点耦合，而是通过一个标准化的 Server 暴露 resources、tools、prompts。我们在知识库问答服务里把内部的检索、工单查询、数据导出等能力封成了几个 MCP Server，模型按需 discover 和 call。
 
 ## 方案与设计
 
@@ -21,10 +21,10 @@ MCP 的核心是三类原语：
 - **Tools**：可执行函数，模型决定何时调用
 - **Prompts**：预置的提示词模板，用户主动触发
 
-我们的架构是：知识库问答服务 作为 MCP Client，通过 stdio 或 SSE 连接多个 MCP Server。工具注册时不再硬编码 Schema，而是启动时 `list_tools` 拉取，再转换成各家 LLM 的 Function Calling 格式。这样加一个工具就是部署一个 Server，主服务不用动。
+我们的架构是：知识库问答服务作为 MCP Client，通过 stdio 或 SSE 连接多个 MCP Server。工具注册时不再硬编码 Schema，而是启动时 `list_tools` 拉取，再转换成各家 LLM 的 Function Calling 格式。这样加一个工具就是部署一个 Server，主服务不用动。
 
 ```go
-// 知识库问答服务 中 MCP Client 的简化封装
+// 知识库问答服务中 MCP Client 的简化封装
 type MCPClient struct {
     conn     *client.Client
     tools    []Tool
@@ -77,7 +77,7 @@ func (c *MCPClient) CallTool(ctx context.Context, name string, args map[string]a
 
 第二，**stdio vs SSE 部署**。本地开发用 stdio 很方便，但线上多实例时 stdio 要随 Client 进程拉起，隔离和扩缩容麻烦。我们内部工具用 SSE 部署成独立服务，第三方或本地脚本用 stdio，两种都要支持。
 
-第三，**权限与审计**。MCP 让工具接入变容易了，但也意味着模型能触发的操作更多了。我们对写操作类工具（发工单、导出数据）强制加二次确认和审批流，并在 知识库问答服务 侧记录每次 tool call 的 trace_id、入参、结果，对接 ELK 和 Jaeger。
+第三，**权限与审计**。MCP 让工具接入变容易了，但也意味着模型能触发的操作更多了。我们对写操作类工具（发工单、导出数据）强制加二次确认和审批流，并在知识库问答服务侧记录每次 tool call 的 trace_id、入参、结果，对接 ELK 和 Jaeger。
 
 第四，**生态正在形成但还早期**。官方和社区已经有文件系统、数据库、Git、Slack 等 Server，但质量参差不齐，生产用前要自己过一遍代码。我判断接下来会出现"工具市场"——企业内部会有一个 MCP Registry，团队把各自的能力发布上去，就像今天的 npm 包一样被发现和复用。
 

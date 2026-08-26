@@ -4,7 +4,7 @@ date: 2025-11-11T10:30:00+08:00
 draft: false
 tags: ["Redis", "分布式锁", "高并发"]
 categories: ["分布式"]
-description: "统一支付平台 计费引擎里，Redis 锁 + Lua 原子扣减的落地与踩坑"
+description: "统一支付平台计费引擎里，Redis 锁 + Lua 原子扣减的落地与踩坑"
 ---
 
 ## 问题背景
@@ -94,7 +94,7 @@ func DeductQuota(ctx context.Context, rdb redis.Cmdable, merchantID string, amou
 
 第一，早期用 `GET` 再 `DEL` 两步释放锁，出过事故：A 业务执行超过 TTL，锁自动过期，B 拿到了锁，A 结束时把 B 的锁删了。Lua 比对 value 是必须的，不能省。
 
-第二，单实例 Redis 锁在主从切换时有小概率丢锁。统一支付平台 是资金场景，我们的兜底是：扣减 Lua 里仍做余额判断，最终以数据库对账为准；锁只做并发控制，不做唯一正确性来源。对强一致要求更高的场景应考虑 etcd/ZooKeeper，而不是盲信 Redlock。
+第二，单实例 Redis 锁在主从切换时有小概率丢锁。统一支付平台是资金场景，我们的兜底是：扣减 Lua 里仍做余额判断，最终以数据库对账为准；锁只做并发控制，不做唯一正确性来源。对强一致要求更高的场景应考虑 etcd/ZooKeeper，而不是盲信 Redlock。
 
 第三，看门狗必须和 ctx 绑定，业务结束或 panic 时能退出，否则 goroutine 会泄漏。第四，锁粒度按 merchant_id 比全局锁吞吐高得多，但要注意单商户热点 key，如果某商户并发极高还要进一步分桶（`quota:{merchant}:{shard}`）再聚合。第五，TTL 取业务 P99 的两倍左右比较稳妥，太长会在异常时阻塞，太短会提前过期。
 
