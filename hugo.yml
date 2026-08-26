@@ -62,7 +62,7 @@ params:
   # 侧边栏（v4: avatar 是 URL 字符串，不配置则用 emoji 头像）
   sidebar:
     emoji: ⚙️
-    subtitle: 后端工程师 · Go · AI
+    subtitle: AI 全栈
     compact: false
 
   # 页脚
