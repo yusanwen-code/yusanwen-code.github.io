@@ -1,6 +1,6 @@
 baseURL: 'https://yusanwen-code.github.io'
 languageCode: 'zh-CN'
-title: 'Geek Blog'
+title: '姚玉亮的网络日志'
 theme: 'PaperMod'
 
 # 分页设置
@@ -42,7 +42,7 @@ menu:
 # PaperMod 主题参数
 params:
   env: production
-  title: Geek Blog
+  title: 姚玉亮的网络日志
   description: '一个极简极客风格的静态博客'
   author: yaoyuliang
   # 默认主题: auto / light / dark
