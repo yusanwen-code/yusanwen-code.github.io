@@ -3,6 +3,7 @@ title: "合成提示词缓存：性格变化时的自动重建策略"
 slug: "post-61"
 date: 2026-03-31T10:30:00+08:00
 draft: false
+image: /images/post-61-cover.jpg
 tags: ["缓存", "Prompt", "Agent"]
 categories: ["AI"]
 description: "给炼丹产物的合成 prompt 加缓存，并在金丹变更时自动失效重建"
@@ -125,3 +126,5 @@ async def synthesize_identity(a: dict, b: dict) -> str:
 ## 小结
 
 合成提示词缓存的核心是把"失效判断"从主动删除变成"内容寻址"：用 lineage_hash 做 key，金丹版本化、算子版本化、参数入 hash，内容一变 key 就变，旧值自然淘汰。配合 singleflight 防击穿、低温度稳定子任务、异步预热，把"每次对话都炼丹"变成"只有人格真正变化时才炼丹"。这套缓存让分身对话的首 token 延迟基本退化为一次普通 LLM 调用，而不是一次完整的融合流程。
+
+> 封面图：[alexkerhead / Flickr](https://www.flickr.com/photos/26354629@N02/4012739993) · CC BY 2.0

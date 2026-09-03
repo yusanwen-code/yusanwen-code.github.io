@@ -3,6 +3,7 @@ title: "基于 pond 的 goroutine 池在文档向量化中的应用"
 slug: "post-41"
 date: 2025-05-23T10:30:00+08:00
 draft: false
+image: /images/post-41-cover.jpg
 tags: ["pond", "goroutine池", "向量化"]
 categories: ["Go"]
 description: "用 pond 限制并发、收集错误，平稳跑大批量向量化任务"
@@ -86,3 +87,5 @@ func (v *Vectorizer) embedChunks(ctx context.Context, chunks []*Chunk) ([]*Vecto
 ## 小结
 
 向量化是典型的高并发 IO 场景，关键不是"起更多 goroutine"，而是"把并发数控制在下游能承受的范围内"。pond 用很小的 API 成本提供了池化、等待、错误聚合和 context 取消，比手写 channel+WaitGroup 省心。数据集管理服务用文档级和 chunk 级两个池，既保证了吞吐，又不会把 embedding 服务打垮。
+
+> 封面图：[gliak00 / Flickr](https://www.flickr.com/photos/126219266@N06/30083358625) · CC BY-SA 2.0

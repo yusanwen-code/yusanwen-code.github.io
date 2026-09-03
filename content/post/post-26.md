@@ -3,6 +3,7 @@ title: "S3 预签名上传在大文件治理场景的实践"
 slug: "post-26"
 date: 2024-10-01T10:30:00+08:00
 draft: false
+image: /images/post-26-cover.jpg
 tags: ["S3","预签名","对象存储"]
 categories: ["存储"]
 description: "用预签名 URL 让客户端直传 S3，减轻后端带宽压力"
@@ -119,3 +120,5 @@ func (h *FileHandler) Complete(c *gin.Context) {
 ## 小结
 
 预签名上传把后端从数据通路中摘出来，只做签名和校验，带宽压力下降明显，客户端还能享受对象存储的分片和断点续传能力。配合 file_objects 表的状态机，上传、校验、解析三步衔接清晰，是大文件场景值得采用的模式。
+
+> 封面图：[Aaron Volkening / Flickr](https://www.flickr.com/photos/87297882@N03/52077049549) · CC BY 2.0

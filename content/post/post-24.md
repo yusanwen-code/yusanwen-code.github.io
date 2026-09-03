@@ -3,6 +3,7 @@ title: "Go 事务通过 Context 透传由 DAO 层感知的设计"
 slug: "post-24"
 date: 2024-08-30T10:30:00+08:00
 draft: false
+image: /images/post-24-cover.jpg
 tags: ["事务","Context","DAO"]
 categories: ["Go"]
 description: "用 Context 透传 GORM 事务，让 Service 与 DAO 解耦"

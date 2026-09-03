@@ -3,6 +3,7 @@ title: "多金丹融合：Promptbreeder 风格的变异算子与血统追溯"
 slug: "post-60"
 date: 2026-03-16T10:30:00+08:00
 draft: false
+image: /images/post-60-cover.jpg
 tags: ["Promptbreeder", "Agent", "进化算法"]
 categories: ["AI"]
 description: "用 crossover 和 mutation 算子融合多个人格，并记录完整血统"
@@ -140,3 +141,5 @@ def build_lineage(elixirs, operator, params, notes):
 ## 小结
 
 多金丹融合的关键不是"让 LLM 综合一下"，而是用结构化算子控制组合过程，用血统记录可解释、可复现。Crossover 做组合，Mutation 做探索，Ensemble 处理专长差异，lineage_hash 做身份账本。这套机制让炼丹从"开盲盒"变成了一个可以迭代、可以追溯的工程过程。下一篇讲怎么基于血统做合成提示词缓存。
+
+> 封面图：[Flocci Nivis / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=178341781) · CC BY 4.0

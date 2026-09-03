@@ -3,6 +3,7 @@ title: "从单体到账号中台：统一认证中心的架构思考"
 slug: "post-13"
 date: 2024-03-11T10:30:00+08:00
 draft: false
+image: /images/post-13-cover.jpg
 tags: ["认证", "账号中台", "架构"]
 categories: ["架构"]
 description: "某科技公司统一认证中心从 0 到 1 架构设计"
@@ -146,3 +147,5 @@ func (s *Service) Issue(ctx context.Context, userID int64, appID string) (*Token
 ## 小结
 
 做账号中台的核心不是技术炫技，而是克制——只做"身份、认证、应用信任"这三件事，把组织、资源权限留给业务系统。统一认证中心上线后，新业务接入 SSO 只需要半天，离职员工账号在一个地方关掉就全端下线，安全审计也有了统一入口。对我来说，这套架构最大的价值是把"登录"这件每个系统都要重复做的事，真正做成了一个可复用的平台能力。
+
+> 封面图：[anthony arrigo / Flickr](https://www.flickr.com/photos/34831177@N06/3232156751) · CC BY 2.0

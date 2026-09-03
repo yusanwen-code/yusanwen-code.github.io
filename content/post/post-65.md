@@ -3,6 +3,7 @@ title: "智能体工作流编排：从知识库问答到多步任务"
 slug: "post-65"
 date: 2026-06-02T10:30:00+08:00
 draft: false
+image: /images/post-65-cover.jpg
 tags: ["Agent","工作流","编排"]
 categories: ["AI"]
 description: "从单轮 RAG 到多步 Agent 工作流，我们在知识库问答服务中的编排实践。"
@@ -86,3 +87,5 @@ Agent 节点内部走 ReAct 循环：模型输出思考 + 工具调用，执行�
 ## 小结
 
 从单轮 RAG 走到多步工作流，本质是把"模型一次想清楚"换成"系统分步兜底"。确定性节点负责可靠，Agent 节点负责灵活，编排器负责把两者粘起来并守住成本和循环上限。下一步我们在试把常用工作流模板化，让业务方自己拖拽配置，而不是每次都让后端写代码。
+
+> 封面图：[ell brown / Flickr](https://www.flickr.com/photos/39415781@N06/7522618254) · CC BY 2.0

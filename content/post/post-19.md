@@ -3,6 +3,7 @@ title: "可插拔 Provider 抽象：短信/邮件/验证码的配置化管理"
 slug: "post-19"
 date: 2024-06-13T10:30:00+08:00
 draft: false
+image: /images/post-19-cover.jpg
 tags: ["Provider","抽象","可扩展"]
 categories: ["设计模式"]
 description: "统一认证中心中短信邮件验证码的可插拔 Provider 抽象与配置化"
@@ -70,3 +71,5 @@ func (s *VerifyService) SendCode(ctx context.Context, channel, target string) er
 ## 小结
 
 可插拔 Provider 抽象让统一认证中心的通知通道从硬编码变成了配置化，新增供应商只需实现接口并注册，业务代码零改动。这种"业务逻辑依赖接口、具体实现靠配置选择"的思路后来也用在了知识库问答服务的 LLM 适配层上——统一抽象 OpenAI、Azure、VLLM、HuggingFace 等多家供应商，本质是一样的设计模式。
+
+> 封面图：[espensorvik / Flickr](https://www.flickr.com/photos/28478778@N05/5729002702) · CC BY 2.0

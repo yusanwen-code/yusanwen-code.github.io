@@ -3,6 +3,7 @@ title: "腾讯云 SMS/SES/Captcha 多租户通道按需切换实践"
 slug: "post-20"
 date: 2024-06-29T10:30:00+08:00
 draft: false
+image: /images/post-20-cover.jpg
 tags: ["腾讯云","SMS","多租户"]
 categories: ["认证"]
 description: "统一认证中心中腾讯云多通道按租户切换与配置隔离实践"
@@ -65,3 +66,5 @@ Provider 缓存用 sync.Map，key 是配置内容的 hash。配置变更时更�
 ## 小结
 
 多租户通道按需切换让统一认证中心既支持平台统一配置快速接入，又支持客户自带腾讯云账号实现签名和凭证隔离。加密存储、Provider 缓存、默认回退、人机校验这几个机制组合在一起，在安全性和易用性之间取得了平衡，支撑了多业务线和外部客户的验证码与通知需求。
+
+> 封面图：[Matthew Summerton / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=53726675) · CC BY-SA 3.0

@@ -6,6 +6,7 @@ categories: ["AI"]
 tags: ["限流","重试","降级"]
 description: "知识库问答服务对接多家大模型时，限流重试降级的工程做法"
 draft: false
+image: /images/post-47-cover.jpg
 ---
 
 ## 问题背景
@@ -153,3 +154,5 @@ func (r *Router) callWithBreaker(ctx context.Context, key ModelKey, req ChatRequ
 ## 小结
 
 LLM 集成真正的稳定性问题，绝大多数不在模型本身，而在它周边的网络和配额。统一适配层 + 令牌桶限流 + 有选择的指数退避重试 + 熔断器驱动的多供应商降级，让知识库问答服务在任何一家供应商出问题时都能"带病工作"，业务侧基本无感。
+
+> 封面图：[wbaiv / Flickr](https://www.flickr.com/photos/9998127@N06/4432362793) · CC BY-SA 2.0

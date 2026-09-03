@@ -3,6 +3,7 @@ title: "用 Zap + ELK 构建 Go 服务结构化日志体系"
 slug: "post-50"
 date: 2025-10-11T10:30:00+08:00
 draft: false
+image: /images/post-50-cover.jpg
 tags: ["Zap", "ELK", "日志"]
 categories: ["可观测性"]
 description: "在统一认证中心、统一支付平台等多服务里用 Zap + ELK 落地结构化日志的实践"
@@ -93,3 +94,5 @@ gRPC 服务端拦截器从 metadata 透传 trace_id，保证跨进程串联，�
 ## 小结
 
 结构化日志不是换个日志库那么简单，关键是字段规范（trace_id、error、latency、biz_code）和上下游透传。Zap 解决"打什么、怎么打"，ELK 解决"去哪查"。这套体系搭好后，统一认证中心跨服务的登录排障从几十分钟缩到了分钟级。
+
+> 封面图：[dfulmer / Flickr](https://www.flickr.com/photos/28376044@N00/4350618884) · CC BY 2.0

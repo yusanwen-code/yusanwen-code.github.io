@@ -3,6 +3,7 @@ title: "统一 LLM API 适配层：封装 OpenAI、Azure、VLLM、HuggingFace"
 slug: "post-33"
 date: 2025-01-18T10:30:00+08:00
 draft: false
+image: /images/post-33-cover.jpg
 tags: ["LLM","适配层","OpenAI"]
 categories: ["AI"]
 description: "用统一接口屏蔽多模型供应商差异的设计"
@@ -174,3 +175,5 @@ func (r *Router) Route(modelName string, requiredCaps ...Capability) (LLMProvide
 ## 小结
 
 统一适配层的价值在于"变化隔离"。新增一个模型供应商时，只需要实现 `LLMProvider` 接口并注册，上层业务代码完全不用改。以 OpenAI 格式为基准也是务实的选择——毕竟大部分新供应商都在主动兼容这个标准。有了这层抽象，模型切换和降级变得像配置路由一样简单。
+
+> 封面图：[kewl / Flickr](https://www.flickr.com/photos/58411470@N00/7006904747) · CC BY 2.0

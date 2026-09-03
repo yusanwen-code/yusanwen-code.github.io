@@ -3,6 +3,7 @@ title: "Gin 中间件实战：JWT 认证与请求日志异步落盘 MongoDB"
 slug: "post-06"
 date: 2023-11-23T10:30:00+08:00
 draft: false
+image: /images/post-06-cover.jpg
 tags: ["Gin","JWT","MongoDB"]
 categories: ["Go"]
 description: "在 Gin 中实现 JWT 认证中间件，并将请求日志通过 channel 异步写入 MongoDB"
@@ -177,3 +178,5 @@ func LogWriter(ctx context.Context, coll *mongo.Collection, ch <-chan *AccessLog
 ## 小结
 
 认证和日志是每个 Web 服务的标配，但做好需要注意细节：JWT 要校验签名算法防止 alg 混淆攻击，日志要异步但不能丢（channel 满降级文件），敏感字段必须在入口脱敏，请求体读后要放回。这两个中间件后来成为我所有 Go Web 项目的基础组件。
+
+> 封面图：[Tawheed Manzoor / Flickr](https://www.flickr.com/photos/11309626@N02/2309847575) · CC BY 2.0

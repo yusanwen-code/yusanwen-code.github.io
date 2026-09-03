@@ -3,6 +3,7 @@ title: "MySQL + StarRocks 多数据源架构：数据仓库配置管理"
 slug: "post-28"
 date: 2024-11-01T10:30:00+08:00
 draft: false
+image: /images/post-28-cover.jpg
 tags: ["StarRocks","MySQL","数仓"]
 categories: ["数据"]
 description: "交易型 MySQL 与分析型 StarRocks 的多数据源分工与同步"
@@ -120,3 +121,5 @@ sink {
 ## 小结
 
 MySQL + StarRocks 的组合本质上是让专业的引擎干专业的事：MySQL 扛交易、StarRocks 扛分析。多数据源架构的关键不是"自动路由"这种花哨功能，而是清晰的职责划分、显式的依赖注入、可靠的数据同步链路和对数据延迟的坦诚。配置管理统一收口后，新增一个分析查询就是写一个走 StarRocks DAO 的方法，和在线业务互不干扰。
+
+> 封面图：[U.S. Army Corps of Engineers Savannah District / Flickr](https://www.flickr.com/photos/45417428@N05/9296682182) · CC BY 2.0

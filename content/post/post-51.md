@@ -3,6 +3,7 @@ title: "Jaeger 在微服务排障中的真实案例"
 slug: "post-51"
 date: 2025-10-26T10:30:00+08:00
 draft: false
+image: /images/post-51-cover.jpg
 tags: ["Jaeger", "排障", "链路追踪"]
 categories: ["可观测性"]
 description: "宠物医疗 SaaS 系统 go-zero 微服务里，用 Jaeger 定位一次 5 秒卡顿的真实过程"
@@ -81,3 +82,5 @@ err := db.WithContext(ctx).Create(&patient).Error
 ## 小结
 
 链路追踪的价值不在"接了"，而在用它解决具体问题。那次 AI 冷启动排查之后我养成习惯：任何一次跨服务慢请求，先开 Jaeger 看瀑布图，而不是翻日志。Trace 是微服务时代的调试器，没有它，十多个 gRPC 服务之间的调用就是一个黑盒。
+
+> 封面图：[somegeekintn / Flickr](https://www.flickr.com/photos/66335021@N00/3709203268) · CC BY 2.0

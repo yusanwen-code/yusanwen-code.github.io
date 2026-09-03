@@ -3,6 +3,7 @@ title: "线上问题排查方法论：从日志、链路到监控"
 slug: "post-68"
 date: 2026-07-19T10:30:00+08:00
 draft: false
+image: /images/post-68-cover.jpg
 tags: ["排障","日志","监控"]
 categories: ["可观测性"]
 description: "从宠物医疗 SaaS 系统到 AI 数据平台，我总结的线上排障三步法。"

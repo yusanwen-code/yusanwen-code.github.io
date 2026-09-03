@@ -3,6 +3,7 @@ title: "Go 网关 + Python 合成引擎 + Next.js 三段式架构实践"
 slug: "post-58"
 date: 2026-02-13T10:30:00+08:00
 draft: false
+image: /images/post-58-cover.jpg
 tags: ["Go", "FastAPI", "Next.js"]
 categories: ["架构"]
 description: "alchemy-furnace 为什么用三段式架构，以及它们之间如何协作"
@@ -114,3 +115,5 @@ evt.onmessage = (e) => {
 ## 小结
 
 三段式不是为了炫技，而是让每种语言做它最擅长的事：Go 守住稳定和并发的底线，Python 承接 AI 的快速迭代，Next.js 提供交互体验。边界靠"Python 不直连业务库、所有内部调用带签名、任务状态归 Go 管"这三条约束来保证清晰。这套结构让我能一个人独立完成全栈交付，又不至于让任何一层变成难以维护的大泥球。
+
+> 封面图：[Me in ME / Flickr](https://www.flickr.com/photos/12357841@N02/9736647550) · CC BY 2.0

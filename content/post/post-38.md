@@ -3,6 +3,7 @@ title: "Function Calling 在企业工具调用场景的工程化"
 slug: "post-38"
 date: 2025-04-06T10:30:00+08:00
 draft: false
+image: /images/post-38-cover.jpg
 tags: ["Function Calling", "工具调用", "LLM"]
 categories: ["AI"]
 description: "把 Function Calling 从 demo 做成生产可用的工具调用框架"
@@ -110,3 +111,5 @@ for iter := 0; iter < maxIter; iter++ {
 ## 小结
 
 Function Calling 的工程化重点不在"调通接口"，而在围绕模型不确定性做防御：schema 校验、执行隔离、迭代上限、结果裁剪。知识库问答服务用统一的 Tool 接口和执行循环把这些横切逻辑收敛到框架里，新增业务工具只需要实现接口、写好描述，就能安全地交给模型调用。
+
+> 封面图：[M McBey / Flickr](https://www.flickr.com/photos/158652122@N02/49467795397) · CC BY 2.0

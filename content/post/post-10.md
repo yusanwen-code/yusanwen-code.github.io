@@ -3,6 +3,7 @@ title: "动态计费引擎：复杂计费规则的配置化与计算实践"
 slug: "post-10"
 date: 2024-01-25T10:30:00+08:00
 draft: false
+image: /images/post-10-cover.jpg
 tags: ["计费引擎", "规则引擎", "支付"]
 categories: ["支付"]
 description: "统一支付平台动态计费引擎从硬编码到配置化的演进"
@@ -162,3 +163,5 @@ func (c *Calculator) apply(ctx context.Context, action Action, d Dimension) (dec
 ## 小结
 
 动态计费引擎的本质是把"业务策略"从代码里剥离出来。统一支付平台这套引擎上线后，新商户接入的费率配置从"排期等开发"变成运营自助几分钟完成，而且每一笔手续费都有规则版本可追溯，对账和客诉处理都轻松很多。规则引擎不必追求大而全，能覆盖业务、能调试、能灰度就够用。
+
+> 封面图：[Ralf Steinberger / Flickr](https://www.flickr.com/photos/145472109@N04/32920934354) · CC BY 2.0

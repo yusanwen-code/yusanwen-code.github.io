@@ -3,6 +3,7 @@ title: "基于 Jaeger 的全链路追踪：从 gRPC 到 HTTP 的上下文透传"
 slug: "post-03"
 date: 2023-10-07T10:30:00+08:00
 draft: false
+image: /images/post-03-cover.jpg
 tags: ["Jaeger","链路追踪","OpenTracing"]
 categories: ["可观测性"]
 description: "宠物医疗 SaaS 系统微服务中 Jaeger 链路追踪的接入与跨协议上下文透传实践"
@@ -125,3 +126,5 @@ func TracingMiddleware(tracer opentracing.Tracer) gin.HandlerFunc {
 ## 小结
 
 全链路追踪的价值不在平时，而在故障时——它把跨服务的黑盒变成了可观测的调用链。关键是 context 透传不能有断点：HTTP 入口、gRPC 双向、异步 goroutine 都要覆盖。踩过这些坑后，宠物医疗 SaaS 系统排查一次跨服务故障的平均时间从小时级降到了分钟级。
+
+> 封面图：[dolbinator1000 / Flickr](https://www.flickr.com/photos/126654539@N08/16164233084) · CC BY 2.0

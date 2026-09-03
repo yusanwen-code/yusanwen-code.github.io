@@ -3,6 +3,7 @@ title: "微信、企业微信、飞书 OAuth 一键登录与账号绑定"
 slug: "post-23"
 date: 2024-08-15T10:30:00+08:00
 draft: false
+image: /images/post-23-cover.jpg
 tags: ["OAuth","微信登录","飞书"]
 categories: ["认证"]
 description: "统一认证中心中三端 OAuth 登录与账号绑定的统一抽象"
@@ -126,3 +127,5 @@ func (p *FeishuProvider) Exchange(ctx context.Context, code string) (*Identity, 
 ## 小结
 
 把三个平台抽象成统一的 Provider 接口后，新增钉钉或自定义 OIDC 应用只需实现两个方法。账号绑定的核心是 `user_identities` 这张关系表和 state 机制，剩下的就是对各平台文档细节的耐心处理。
+
+> 封面图：[_Franck Michel_ / Flickr](https://www.flickr.com/photos/33634811@N07/29928732713) · CC BY 2.0

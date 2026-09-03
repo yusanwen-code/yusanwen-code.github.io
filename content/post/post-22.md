@@ -3,6 +3,7 @@ title: "基于 Snowflake 的分布式 ID 生成与高并发数据一致性"
 slug: "post-22"
 date: 2024-07-30T10:30:00+08:00
 draft: false
+image: /images/post-22-cover.jpg
 tags: ["Snowflake","分布式ID","高并发"]
 categories: ["分布式"]
 description: "在统一认证中心中落地 Snowflake 的工程实践与时钟回拨处理"
@@ -110,3 +111,5 @@ func (u *User) BeforeCreate(tx *gorm.DB) error {
 ## 小结
 
 Snowflake 的原理不复杂，但真正落地要把 WorkerID 分配、时钟回拨、批量写入锁竞争这几件事处理好。我们在统一认证中心中跑了大半年，数千家机构日常认证请求下没有出现过 ID 重复或趋势乱序，相比自增主键在分库分表和排序场景都省心不少。
+
+> 封面图：[yellowcloud / Flickr](https://www.flickr.com/photos/63794141@N00/3197605452) · CC BY 2.0

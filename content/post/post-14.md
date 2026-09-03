@@ -3,6 +3,7 @@ title: "OAuth2/OIDC 认证中心实现：authorize/token/userinfo 与 JWKS"
 slug: "post-14"
 date: 2024-03-27T10:30:00+08:00
 draft: false
+image: /images/post-14-cover.jpg
 tags: ["OAuth2", "OIDC", "JWT"]
 categories: ["安全"]
 description: "统一认证中心实现标准 OAuth2/OIDC 协议端点的工程细节"
@@ -213,3 +214,5 @@ func (s *KeyService) PublicKeySet() jwk.Set {
 ## 小结
 
 实现标准 OAuth2/OIDC 的工作量不在代码量，而在把协议里那些 MUST/SHOULD 的安全要求逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。统一认证中心改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能通过同一个 OIDC 联邦框架对接，扩展性比自定义协议好得多。标准协议的价值，就在于它让"对接"这件事不再需要一对一谈判。
+
+> 封面图：[Strooks-traveller1 / Flickr](https://www.flickr.com/photos/44241312@N08/4059216490) · CC BY-SA 2.0

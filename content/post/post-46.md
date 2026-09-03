@@ -6,6 +6,7 @@ categories: ["AI"]
 tags: ["RAG","评测","召回率"]
 description: "把 RAG 拆成检索和生成两段，分别打分，别只凭感觉"
 draft: false
+image: /images/post-46-cover.jpg
 ---
 
 ## 问题背景
@@ -110,3 +111,5 @@ func (e *Evaluator) RunOne(ctx context.Context, caseItem Case) EvalResult {
 ## 小结
 
 RAG 评测没什么银弹，但有两条原则要守住：一是检索和生成分开评，否则定位不了问题；二是一定要有一份能持续回归的标注集，让每次改动都有数字可对比。知识库问答服务后来几次大的 Prompt 和切片策略调整，都是靠这套评测拦住了"感觉变好实际变差"的改动。
+
+> 封面图：[kstepanoff / Flickr](https://www.flickr.com/photos/68732633@N04/7520487412) · CC BY 2.0

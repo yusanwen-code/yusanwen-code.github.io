@@ -3,6 +3,7 @@ title: "使用 Redis + go-cache 构建多级缓存降低数据库压力"
 slug: "post-05"
 date: 2023-11-07T10:30:00+08:00
 draft: false
+image: /images/post-05-cover.jpg
 tags: ["Redis","go-cache","多级缓存"]
 categories: ["缓存"]
 description: "本地 go-cache 与 Redis 组合的多级缓存设计、穿透击穿防护与一致性策略"
@@ -129,3 +130,5 @@ func (m *MultiLevelCache) GetWithLoad(ctx context.Context, key string,
 ## 小结
 
 多级缓存不是银弹，适合读多写少、对短暂不一致容忍的场景。本地 TTL 要远短于 Redis，缓存空值防穿透，singleflight 防击穿，强一致数据不要碰本地缓存。把缓存按一致性分级，比一刀切要靠谱得多。
+
+> 封面图：[rob.wall / Flickr](https://www.flickr.com/photos/49503072941@N01/2262564867) · CC BY 2.0

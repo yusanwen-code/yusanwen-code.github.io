@@ -3,6 +3,7 @@ title: "MySQL 复杂查询优化：从 EXPLAIN 到索引重构"
 slug: "post-53"
 date: 2025-11-26T10:30:00+08:00
 draft: false
+image: /images/post-53-cover.jpg
 tags: ["MySQL", "索引优化", "EXPLAIN"]
 categories: ["数据库"]
 description: "数据治理服务数据资产检索接口从 5 秒到百毫秒的优化过程"
@@ -76,3 +77,5 @@ id  table  type   key                       rows   Extra
 ## 小结
 
 EXPLAIN 是基本功，重点看 `type`、`key`、`rows`、`Extra` 四列；索引设计要匹配真实的 WHERE 和 ORDER BY，而不是凭感觉给每个字段都加索引。把模糊搜索卸载到 ES、让 MySQL 干它最擅长的结构化查询，这个组合在数据治理服务里稳定扛住了日常数据资产检索。
+
+> 封面图：[David W. Siu / Flickr](https://www.flickr.com/photos/7400937@N07/5101688010) · CC BY 2.0

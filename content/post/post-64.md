@@ -3,6 +3,7 @@ title: "MCP 生态观察：从协议到工具市场"
 slug: "post-64"
 date: 2026-05-17T10:30:00+08:00
 draft: false
+image: /images/post-64-cover.jpg
 tags: ["MCP","生态","工具"]
 categories: ["AI"]
 description: "从知识库问答服务的 MCP 工具调用实践，看协议落地与工具市场演进。"
@@ -85,3 +86,5 @@ func (c *MCPClient) CallTool(ctx context.Context, name string, args map[string]a
 ## 小结
 
 MCP 不是又一个 Agent 框架，而是一套让"模型—工具"解耦的协议。对我们做 LLM 平台的人来说，它把工具接入从"改代码发版"变成了"注册即插即用"，长期看会沉淀成企业内部的工具资产市场。下一个值得关注的问题是：当工具数量上百之后，怎么做路由、权限和版本治理。
+
+> 封面图：[ell brown / Flickr](https://www.flickr.com/photos/39415781@N06/8654687733) · CC BY 2.0

@@ -3,6 +3,7 @@ title: "数据治理服务架构：原始文件、PDF 解析与论文元数据�
 slug: "post-25"
 date: 2024-09-15T10:30:00+08:00
 draft: false
+image: /images/post-25-cover.jpg
 tags: ["数据治理","PDF解析","架构"]
 categories: ["数据"]
 description: "数据治理服务中原始文件到结构化论文元数据的治理链路"
@@ -86,3 +87,5 @@ async def parse_pdf(key: str) -> dict:
 ## 小结
 
 数据治理没有银弹，核心是把脏活拆成可观测、可重试、可替换的阶段。原始文件不变、解析与清洗分离、元数据多态存储，这套架构让我们在面对不同来源的学术数据时能逐步加规则而不推倒重来。
+
+> 封面图：[Barta IV / Flickr](https://www.flickr.com/photos/98640399@N08/10030588973) · CC BY 2.0

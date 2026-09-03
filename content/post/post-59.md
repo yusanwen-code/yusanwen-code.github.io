@@ -3,6 +3,7 @@ title: "结构化技能包：把 Agent 人格特质封装为可复用模块"
 slug: "post-59"
 date: 2026-02-28T10:30:00+08:00
 draft: false
+image: /images/post-59-cover.jpg
 tags: ["Agent", "Prompt", "技能包"]
 categories: ["AI"]
 description: "为什么用一段大 prompt 做人设会失控，以及金丹技能包的结构设计"
@@ -115,3 +116,5 @@ def render_elixir(e: dict) -> str:
 ## 小结
 
 把人格从一段大 prompt 重构为结构化技能包，本质上是把"提示词工程"拉回"软件工程"：字段是接口，渲染是实现，版本和 hash 是可复现性的保证。它让复用、diff、融合、缓存这些在散文 prompt 上几乎做不了的事变得自然。金丹这一层立住了，多金丹融合才有可靠的输入。
+
+> 封面图：[karen horton / Flickr](https://www.flickr.com/photos/8790226@N06/3494617614) · CC BY 2.0

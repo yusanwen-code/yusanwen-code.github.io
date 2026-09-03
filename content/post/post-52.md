@@ -3,6 +3,7 @@ title: "Redis 分布式锁在高并发扣减场景的正确姿势"
 slug: "post-52"
 date: 2025-11-11T10:30:00+08:00
 draft: false
+image: /images/post-52-cover.jpg
 tags: ["Redis", "分布式锁", "高并发"]
 categories: ["分布式"]
 description: "统一支付平台计费引擎里，Redis 锁 + Lua 原子扣减的落地与踩坑"
@@ -102,3 +103,5 @@ func DeductQuota(ctx context.Context, rdb redis.Cmdable, merchantID string, amou
 ## 小结
 
 Redis 分布式锁的"正确姿势"是：唯一 token 加 Lua 释放、合理 TTL 加看门狗、细粒度 key，并且承认它在主从切换等异常下不是强一致的。资金系统里，锁是性能优化，数据库唯一约束和定期对账才是正确性的底线。
+
+> 封面图：[Horia Varlan / Flickr](https://www.flickr.com/photos/10361931@N06/4268291295) · CC BY 2.0

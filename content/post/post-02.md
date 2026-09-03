@@ -3,6 +3,7 @@ title: "gRPC 在宠物医疗 SaaS 微服务通信中的落地实践"
 slug: "post-02"
 date: 2023-09-22T10:30:00+08:00
 draft: false
+image: /images/post-02-cover.jpg
 tags: ["gRPC","go-zero","微服务"]
 categories: ["微服务"]
 description: "宠物医疗 SaaS 系统微服务拆分中 gRPC 通信的 proto 设计、拦截器与错误码实践"
@@ -97,3 +98,5 @@ client := zrpc.MustNewClient(c.ClinicRpc,
 ## 小结
 
 gRPC 在微服务内部通信上带来的强类型约束和性能提升是实打实的，尤其配合 go-zero 的 etcd 服务发现，基本不用自己处理连接管理。关键是 proto 设计要有纪律：字段编号一旦分配不可复用，业务错误和 RPC 错误分层处理，大载荷走对象存储而不是塞进消息体。
+
+> 封面图：[David Davies / Flickr](https://www.flickr.com/photos/44124390461@N01/5339417741) · CC BY-SA 2.0

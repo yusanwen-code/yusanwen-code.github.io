@@ -3,6 +3,7 @@ title: "eino 框架实战：高并发文档解析流水线"
 slug: "post-40"
 date: 2025-05-07T10:30:00+08:00
 draft: false
+image: /images/post-40-cover.jpg
 tags: ["eino", "并发", "文档解析"]
 categories: ["AI"]
 description: "用 eino 编排数据集管理服务的文档解析与向量化流水线"

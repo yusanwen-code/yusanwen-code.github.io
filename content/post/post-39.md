@@ -3,6 +3,7 @@ title: "多模型路由设计：按成本、能力与延迟选择模型"
 slug: "post-39"
 date: 2025-04-22T10:30:00+08:00
 draft: false
+image: /images/post-39-cover.jpg
 tags: ["模型路由", "LLM", "成本优化"]
 categories: ["AI"]
 description: "知识库问答服务统一适配层之上的模型选择与降级策略"
@@ -105,3 +106,5 @@ type Client interface {
 ## 小结
 
 多模型路由把"选模型"这件事从业务代码里抽离出来。知识库问答服务里业务方只描述"我需要什么能力、预算多少"，路由决定具体走哪家、哪个模型，并在异常时自动降级。统一适配层加路由，让我们能平滑地接入新模型、在供应商之间切换，也把整体推理成本控制在可预期范围内。
+
+> 封面图：[Elsie esq. / Flickr](https://www.flickr.com/photos/61132483@N00/347928333) · CC BY 2.0

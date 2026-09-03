@@ -3,6 +3,7 @@ title: "Excelize 流式导出百万级支付对账数据"
 slug: "post-11"
 date: 2024-02-09T10:30:00+08:00
 draft: false
+image: /images/post-11-cover.jpg
 tags: ["Excelize", "流式处理", "性能优化"]
 categories: ["Go"]
 description: "统一支付平台对账文件用 Excelize StreamWriter 百万行导出实战"
@@ -142,3 +143,5 @@ _ = sw.SetColStyle("D", moneyStyle)
 ## 小结
 
 百万行 Excel 导出的关键不是某个库的神技，而是"整条链路都流式"：数据库流式读、Excel 流式写、对象存储流式传，任何一环攒在内存里都会爆。Excelize 的 StreamWriter 已经把最难的 XML 分片写做好了，应用层只要把数据生产和消费解耦，加上背压，就能稳定跑下来。统一支付平台改造后对账导出再没 OOM 过，运营也不再追着要文件。
+
+> 封面图：[NYC Wanderer / Flickr](https://www.flickr.com/photos/10183029@N00/3631902258) · CC BY-SA 2.0

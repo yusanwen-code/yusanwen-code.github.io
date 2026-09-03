@@ -3,6 +3,7 @@ title: "Wire 依赖注入实战：Service/DAO 分层与接口解耦"
 slug: "post-21"
 date: 2024-07-14T10:30:00+08:00
 draft: false
+image: /images/post-21-cover.jpg
 tags: ["Wire","依赖注入","分层架构"]
 categories: ["Go"]
 description: "在统一认证中心等项目用 Wire 实现 Service/DAO 分层与接口解耦"
@@ -67,3 +68,5 @@ Wire 最大的坑是"依赖循环"——ServiceA 依赖 ServiceB，ServiceB 又�
 ## 小结
 
 Wire 让统一认证中心、统一支付平台这些项目的依赖关系从隐式变成显式，构造链由 Wire 生成代码管理，Service 只依赖接口，单测时随便换 mock。编译期检查也比运行时 DI 框架更让人安心。配合清晰的 Service/DAO 分层和 ProviderSet 模块化，项目即使增长到几十个组件，main 函数依然干净可维护，这也是我们团队后来所有 Go 后端项目的标准做法。
+
+> 封面图：[Unhindered by Talent / Flickr](https://www.flickr.com/photos/26406919@N00/461050192) · CC BY-SA 2.0

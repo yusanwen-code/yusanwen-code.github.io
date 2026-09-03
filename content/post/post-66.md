@@ -3,6 +3,7 @@ title: "独立完成前端页面：Vibe Coding 下的全栈闭环"
 slug: "post-66"
 date: 2026-06-18T10:30:00+08:00
 draft: false
+image: /images/post-66-cover.jpg
 tags: ["Vibe Coding","前端","全栈"]
 categories: ["AI编程"]
 description: "后端工程师用 Claude Code 和 Cursor 独立交付前端页面的真实体验。"
@@ -56,3 +57,5 @@ r.POST("/api/skills", func(c *gin.Context) {
 ## 小结
 
 Vibe Coding 没有把前端变成"不需要学"，而是把门槛从"记住所有 API"降到了"理解核心概念 + 会描述需求 + 能判断对错"。后端工程师独立交付前端的最大红利，是你能同时掌控契约和实现，联调成本归零。alchemy-furnace 上线后，我反而觉得这种全栈闭环的效率，比前后端分工还高——至少在产品快速迭代期是这样。
+
+> 封面图：[juhansonin / Flickr](https://www.flickr.com/photos/38869431@N00/9791626204) · CC BY 2.0

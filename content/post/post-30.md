@@ -3,6 +3,7 @@ title: "KubeSphere 容器化部署最佳实践：发布效率提升 80%"
 slug: "post-30"
 date: 2024-12-02T10:30:00+08:00
 draft: false
+image: /images/post-30-cover.jpg
 tags: ["KubeSphere","Docker","Kubernetes"]
 categories: ["DevOps"]
 description: "从构建到灰度发布的容器化落地经验"
@@ -121,3 +122,5 @@ build-and-push:
 ## 小结
 
 容器化不是终点，标准化才是。迁移到 KubeSphere 后，发布从原来人工 SSH 操作变成了 CI 自动完成，发布效率提升约 80%，故障回滚控制在 5 分钟内。更重要的是，新同事入职不需要再背部署文档，看 KubeSphere 界面就能理解整个服务拓扑。
+
+> 封面图：[roger4336 / Flickr](https://www.flickr.com/photos/24736216@N07/5696972687) · CC BY-SA 2.0

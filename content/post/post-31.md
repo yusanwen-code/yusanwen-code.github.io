@@ -3,6 +3,7 @@ title: "企业级 LLM 问答服务架构总览"
 slug: "post-31"
 date: 2024-12-18T10:30:00+08:00
 draft: false
+image: /images/post-31-cover.jpg
 tags: ["LLM","RAG","架构设计"]
 categories: ["AI"]
 description: "知识库问答服务的分层架构与核心模块设计"
@@ -106,3 +107,5 @@ func (h *Handler) ChatStream(c *gin.Context) {
 ## 小结
 
 知识库问答服务的核心价值不在于封装了多少模型，而在于把鉴权、检索、上下文、工具调用这些共性能力沉淀成平台，让业务方只需要关心自己的知识库和提示词。统一接入后，Key 管理、成本统计、审计日志都有了着落，新业务接入 LLM 的周期从周级降到了天级。
+
+> 封面图：[robert.claypool / Flickr](https://www.flickr.com/photos/35106989@N08/6780155266) · CC BY 2.0

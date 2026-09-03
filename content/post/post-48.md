@@ -6,6 +6,7 @@ categories: ["AI"]
 tags: ["SSE","流式","LLM"]
 description: "知识库问答服务里用 SSE 把 LLM token 实时推到前端的细节"
 draft: false
+image: /images/post-48-cover.jpg
 ---
 
 ## 问题背景
@@ -153,3 +154,5 @@ while (true) {
 ## 小结
 
 SSE 看起来简单，就是"写一点 flush 一点"，但真正做到稳定可用，要处理代理缓冲、心跳保活、取消传播、错误帧、多供应商格式统一这一整套细节。知识库问答服务改成流式后，用户主观体验的提升远大于我们投入的改造工作量，也成了后来所有 LLM 接口的默认输出方式。
+
+> 封面图：[talaakso / Flickr](https://www.flickr.com/photos/23807585@N07/37797004762) · CC BY 2.0

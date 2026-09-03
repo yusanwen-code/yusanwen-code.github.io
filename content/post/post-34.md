@@ -3,6 +3,7 @@ title: "light_rag 轻量检索在知识库问答中的集成"
 slug: "post-34"
 date: 2025-02-03T10:30:00+08:00
 draft: false
+image: /images/post-34-cover.jpg
 tags: ["RAG","light_rag","检索"]
 categories: ["AI"]
 description: "轻量级 RAG 框架 light_rag 的接入与调优"
@@ -151,3 +152,5 @@ result, err := h.ragClient.Retrieve(ctx, RetrieveRequest{
 ## 小结
 
 light_rag 在传统向量 RAG 和重型 GraphRAG 之间找到了一个不错的平衡点：图谱增强带来了跨文档关联能力，增量更新和轻量存储又不至于让索引流程变得不可承受。对于我们这种几百到几千篇文档的企业知识库，它的投入产出比是最合适的。检索模式可切换的设计也让我们能根据问题复杂度灵活权衡效果和延迟。
+
+> 封面图：[archer10 (Dennis) / Flickr](https://www.flickr.com/photos/22490717@N02/21543878609) · CC BY-SA 2.0

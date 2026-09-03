@@ -3,6 +3,7 @@ title: "AI Vibe Coding 工作流：用 Claude Code 全栈交付"
 slug: "post-55"
 date: 2025-12-28T10:30:00+08:00
 draft: false
+image: /images/post-55-cover.jpg
 tags: ["Claude Code", "Vibe Coding", "全栈"]
 categories: ["AI编程"]
 description: "一个人用 Claude Code 交付 Go+Python+Next.js 全栈项目的工作流"
@@ -61,3 +62,5 @@ description: "一个人用 Claude Code 交付 Go+Python+Next.js 全栈项目的�
 ## 小结
 
 Claude Code 让我这种以后端为主的人敢一个人扛前端和算法服务。它最擅长样板代码、测试用例、跨文件重构和根据报错自修复；我负责架构、边界和验收。alchemy-furnace 能在业余时间快速做到 46 star，这套工作流功不可没。
+
+> 封面图：[recursion_see_recursion / Flickr](https://www.flickr.com/photos/39027808@N00/1423312308) · CC BY 2.0

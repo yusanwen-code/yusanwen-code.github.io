@@ -5,6 +5,7 @@ date: 2025-09-25T10:30:00+08:00
 categories: ["AI"]
 tags: ["Prompt","可维护性","LLM"]
 draft: false
+image: /images/post-49-cover.jpg
 description: "Prompt 是代码，按软件工程的方式管理它的版本、测试和复用"
 ---
 

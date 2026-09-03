@@ -3,6 +3,7 @@ title: "基于 RSA 非对称签名签发 JWT 的多系统单点登录实践"
 slug: "post-15"
 date: 2024-04-12T10:30:00+08:00
 draft: false
+image: /images/post-15-cover.jpg
 tags: ["JWT","SSO","RSA"]
 categories: ["安全"]
 description: "在统一认证中心用 RSA 签发 JWT 实现多系统 SSO"
@@ -71,3 +72,5 @@ func ParseToken(pub *rsa.PublicKey, tokenStr string) (*Claims, error) {
 ## 小结
 
 RSA 非对称签名让私钥收敛在认证中心，下游只持公钥，安全性和可扩展性都比 HMAC 好。配合短有效期 Access Token、Refresh Token 轮转和 Redis 黑名单，我们在统一认证中心里支撑了多业务系统的 SSO，后续接微信、企微、飞书登录也只是多一种签发来源，验签侧完全不用改。
+
+> 封面图：[pixishared / Flickr](https://www.flickr.com/photos/60614544@N02/6878462778) · CC BY-SA 2.0

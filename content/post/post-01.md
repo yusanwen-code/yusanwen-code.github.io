@@ -3,6 +3,7 @@ title: "从 fasthttp 迁移到 go-zero：一次 C/S 到 B/S 的架构重构实�
 slug: "post-01"
 date: 2023-09-06T10:30:00+08:00
 draft: false
+image: /images/post-01-cover.jpg
 tags: ["go-zero","fasthttp","架构迁移"]
 categories: ["架构"]
 description: "宠物医疗 SaaS 系统从 fasthttp 长连接到 go-zero B/S 微服务的迁移过程与踩坑"
@@ -88,3 +89,5 @@ func NewServiceContext(c config.Config) *ServiceContext {
 ## 小结
 
 从 fasthttp C/S 迁到 go-zero B/S，最大的收益不是性能，而是交付节奏：浏览器即开即用，发版不再依赖客户端升级；微服务拆分后，单个服务可以独立部署。go-zero 的工具链和治理能力让我们在没有专职中间件团队的情况下也能把微服务跑起来，这对中小团队很实在。
+
+> 封面图：[cbowns / Flickr](https://www.flickr.com/photos/15417585@N00/2414578731) · CC BY-SA 2.0

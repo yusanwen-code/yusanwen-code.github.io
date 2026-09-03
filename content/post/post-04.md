@@ -3,6 +3,7 @@ title: "Go channels 在用户行为异步上报中的应用与踩坑"
 slug: "post-04"
 date: 2023-10-23T10:30:00+08:00
 draft: false
+image: /images/post-04-cover.jpg
 tags: ["channel","goroutine","异步"]
 categories: ["Go"]
 description: "用 buffered channel 做用户行为异步上报的设计、背压处理与 panic 恢复"
@@ -125,3 +126,5 @@ func (r *Reporter) Close() {
 ## 小结
 
 buffered channel 做异步上报是 Go 里很朴素的方案，但"简单"不等于"随便写"。非阻塞发送、批量写入、panic 恢复、优雅关闭、channel 水位监控，这五样缺一不可。这套模式后来也被我复用到了操作日志和通知推送场景。
+
+> 封面图：[conner395 / Flickr](https://www.flickr.com/photos/91779914@N00/4870254022) · CC BY 2.0

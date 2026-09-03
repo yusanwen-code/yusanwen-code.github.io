@@ -3,6 +3,7 @@ title: "OpenAI 兼容多供应商接入：DeepSeek、通义、智谱、Kimi"
 slug: "post-62"
 date: 2026-04-16T10:30:00+08:00
 draft: false
+image: /images/post-62-cover.jpg
 tags: ["LLM", "多供应商", "OpenAI兼容"]
 categories: ["AI"]
 description: "用一个统一适配层接入 DeepSeek、通义、智谱、Kimi 等 OpenAI 兼容供应商"
@@ -159,3 +160,5 @@ func (s *ProviderService) TestConnect(ctx context.Context, provider string) erro
 ## 小结
 
 OpenAI 兼容协议让多供应商接入从"每家一套 SDK"变成了"一套 HTTP + 少量 capability 配置"。适配层的价值不在代码量，而在它守住了业务代码的稳定性：加一个新供应商主要是配置工作，炼丹逻辑和对话逻辑完全不需要改。配合 capability flag、流式归一化、按供应商的超时重试，这套适配层既能接云端国产模型，也能接自托管的 VLLM/Ollama，给了用户和部署者最大的选择自由。
+
+> 封面图：[Asurnipal / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=108237140) · CC BY-SA 4.0

@@ -3,6 +3,7 @@ title: "炼丹炉 alchemy-furnace：多人格融合 Agent 系统设计"
 slug: "post-57"
 date: 2026-01-28T10:30:00+08:00
 draft: false
+image: /images/post-57-cover.jpg
 tags: ["Agent", "开源", "alchemy-furnace"]
 categories: ["开源"]
 description: "把多个 Agent 人格像炼丹一样融合成一个新人格的系统设计"

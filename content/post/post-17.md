@@ -3,6 +3,7 @@ title: "AppRole 与应用团队隔离：多业务线权限自治的实现"
 slug: "post-17"
 date: 2024-05-13T10:30:00+08:00
 draft: false
+image: /images/post-17-cover.jpg
 tags: ["RBAC","权限模型","多租户"]
 categories: ["认证"]
 description: "统一认证中心中 AppRole 与团队隔离实现多业务线权限自治"
@@ -57,3 +58,5 @@ JWT 里我们带了当前 team_id 和各应用的 role 映射，业务系统在�
 ## 小结
 
 AppRole 加 Team 的两层模型让全局管控和应用自治达到了平衡：统一认证中心管身份和团队边界，应用自己管角色和权限点。这套设计在我们接入统一支付平台、数据治理服务、知识库问答服务多个业务线后被证明是可扩展的，新应用接入时定义自己的角色即可，不需要改认证中心的表结构。
+
+> 封面图：[bfi Office Furniture / Flickr](https://www.flickr.com/photos/94689970@N00/5187997234) · CC BY-SA 2.0

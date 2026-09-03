@@ -3,6 +3,7 @@ title: "基于 Temporal Worker 的数据质量规则引擎与自动检查"
 slug: "post-27"
 date: 2024-10-16T10:30:00+08:00
 draft: false
+image: /images/post-27-cover.jpg
 tags: ["Temporal","规则引擎","数据质量"]
 categories: ["数据"]
 description: "用 Temporal 编排可配置的数据质量检查工作流"
@@ -117,3 +118,5 @@ func RunRuleActivity(ctx context.Context, datasetID int64, r QualityRule) (RuleR
 ## 小结
 
 把数据质量规则做成配置 + Temporal Workflow 编排后，新增一条规则就是加一行配置和一个 Activity 分支，不再需要发版。Temporal 的持久化、重试、信号机制让长耗时、需要人工介入的检查流程变得可靠，数据治理从"事后救火"变成了"事前卡口"。
+
+> 封面图：[jitze / Flickr](https://www.flickr.com/photos/40648743@N00/1849093841) · CC BY 2.0

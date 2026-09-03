@@ -3,6 +3,7 @@ title: "支付平台三端分离架构设计：多场景统一支付的落地"
 slug: "post-07"
 date: 2023-12-09T10:30:00+08:00
 draft: false
+image: /images/post-07-cover.jpg
 tags: ["支付","架构设计","Gin"]
 categories: ["架构"]
 description: "统一支付平台用户端、商户端、管理端三端分离与统一支付内核的设计实践"
@@ -162,3 +163,5 @@ func MerchantSignAuth(redis *redis.Client, merchantSvc MerchantService) gin.Hand
 ## 小结
 
 三端分离的本质不是物理上拆三个服务，而是把"谁在用"和"怎么支付"解耦：接入层处理认证、权限、DTO 组装，核心层保证订单状态机的一致性和支付渠道的可扩展性。支付系统最忌讳的是在业务代码里直接改订单状态，所有流转必须经过状态机校验，这是资金安全的底线。
+
+> 封面图：[The City of Toronto / Flickr](https://www.flickr.com/photos/34608255@N08/10056440086) · CC BY 2.0

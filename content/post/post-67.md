@@ -3,6 +3,7 @@ title: "Go 与 Python 混部：gRPC 还是 HTTP？我的选型权衡"
 slug: "post-67"
 date: 2026-07-03T10:30:00+08:00
 draft: false
+image: /images/post-67-cover.jpg
 tags: ["Go","Python","gRPC"]
 categories: ["架构"]
 description: "在数据集管理服务和 alchemy-furnace 中，Go 与 Python 混部的通信选型。"
@@ -82,3 +83,5 @@ func (c *FusionClient) Fuse(ctx context.Context, req *FusionRequest) (*FusionRes
 ## 小结
 
 我的选型原则很简单：内部高并发 + 结构化 + 流式用 gRPC；跨边界、低频、强调试便利性用 HTTP。别为了"显得先进"在所有地方都上 gRPC，也别为了省事在高频内部链路上用 JSON 硬扛。协议是手段，把瓶颈和团队维护成本算清楚，答案自然就出来了。
+
+> 封面图：[thebarrowboy / Flickr](https://www.flickr.com/photos/48778414@N04/6848661735) · CC BY 2.0

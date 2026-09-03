@@ -3,6 +3,7 @@ title: "支付平台账单对账模块设计：多维度数据聚合与差异处
 slug: "post-12"
 date: 2024-02-25T10:30:00+08:00
 draft: false
+image: /images/post-12-cover.jpg
 tags: ["对账", "账单", "数据聚合"]
 categories: ["支付"]
 description: "统一支付平台对账模块多维聚合与差异自动处理"
@@ -156,3 +157,5 @@ func (h *CrossDayHandler) Handle(ctx context.Context, diff Diff) (bool, error) {
 ## 小结
 
 对账模块看起来不性感，却是支付平台的"良心"。统一支付平台这套设计上线后，每天自动出对账结果，差异自动分类、能自动核销的不打扰运营，不能自动的带着凭证进工单。账对得平，财务才睡得着；差异处理有迹可循，客诉来了也能快速定位是平台问题、渠道问题还是跨日问题。
+
+> 封面图：[ccPixs.com / Flickr](https://www.flickr.com/photos/86530412@N02/7953227784) · CC BY 2.0

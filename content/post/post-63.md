@@ -3,6 +3,7 @@ title: "API Key 加密存储与演示模式内存 Mock 的设计"
 slug: "post-63"
 date: 2026-05-02T10:30:00+08:00
 draft: false
+image: /images/post-63-cover.jpg
 tags: ["加密", "Mock", "API Key"]
 categories: ["安全"]
 description: "供应商 API Key 的 AES-GCM 加密存储，以及 DEMO_MODE 下的内存 Mock"
@@ -174,3 +175,5 @@ else:
 ## 小结
 
 API Key 加密和 DEMO_MODE 看起来是两件事，本质上都是在"可控边界内运行不可信输入"：加密让数据库泄露不等于 Key 泄露，主密钥版本化让轮转可行；DEMO_MODE 让任何人都能安全体验产品而不碰真实额度，通过在适配层整体替换 LLMClient 实现业务无感知。安全设计不追求绝对，而是把风险分层、把接口留好，让默认配置就足够安全，更高需求可以平滑升级到 KMS。这是我从统一支付平台签名到统一认证中心密钥管理一路积累的习惯。
+
+> 封面图：[archer10 (Dennis) / Flickr](https://www.flickr.com/photos/22490717@N02/44662916642) · CC BY-SA 2.0

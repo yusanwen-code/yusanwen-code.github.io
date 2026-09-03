@@ -3,6 +3,7 @@ title: "OpenAlex 学术数据同步：增量拉取与去重设计"
 slug: "post-29"
 date: 2024-11-16T10:30:00+08:00
 draft: false
+image: /images/post-29-cover.jpg
 tags: ["OpenAlex","数据同步","去重"]
 categories: ["数据"]
 description: "基于游标的增量拉取与 OpenAlex ID 去重实践"
@@ -115,3 +116,5 @@ func (s *Syncer) SyncWorks(ctx context.Context) error {
 ## 小结
 
 增量同步的本质是"用状态换取重复劳动"。OpenAlex 提供的游标和日期过滤机制让增量拉取变得简单，而以业务唯一 ID 做 Upsert 则保证了幂等性。配合 Temporal 的重试和状态持久化，整个同步流程稳定跑了数月，没有出现过数据重复或丢失。
+
+> 封面图：[BinaryApe / Flickr](https://www.flickr.com/photos/93001633@N00/4882162452) · CC BY 2.0

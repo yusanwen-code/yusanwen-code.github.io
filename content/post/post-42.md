@@ -3,6 +3,7 @@ title: "数据集管理服务架构设计"
 slug: "post-42"
 date: 2025-06-08T10:30:00+08:00
 draft: false
+image: /images/post-42-cover.jpg
 tags: ["数据集", "架构", "S3"]
 categories: ["架构"]
 description: "Hertz + S3 + eino/pond 构建文档解析与知识图谱服务"
@@ -100,3 +101,5 @@ func NewDatasetService(
 ## 小结
 
 数据集管理服务的核心思路是"上传走对象存储直传，处理走异步工作流，检索做多路召回"。Hertz 提供高性能 API 层，S3 承载原始文件，eino+pond 解决解析并发，Temporal 保证任务可靠，GaussDB+MongoDB 分别承接元数据和向量图谱。这套架构支撑了知识库问答服务的知识库问答，也为后续知识图谱和多模态检索留了扩展空间。
+
+> 封面图：[motleypixel / Flickr](https://www.flickr.com/photos/16894864@N05/6239564720) · CC BY 2.0

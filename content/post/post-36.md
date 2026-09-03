@@ -3,6 +3,7 @@ title: "MCP 协议接入实践：让大模型调用多源工具"
 slug: "post-36"
 date: 2025-03-06T10:30:00+08:00
 draft: false
+image: /images/post-36-cover.jpg
 tags: ["MCP", "工具调用", "LLM"]
 categories: ["AI"]
 description: "在知识库问答服务中接入 MCP，把异构工具统一为标准协议"
@@ -87,3 +88,5 @@ func (r *MCPRegistry) Call(ctx context.Context, server, tool string, args map[st
 ## 小结
 
 MCP 本质上是把"模型怎么发现和调用工具"这件事标准化了。接入后，知识库问答服务新增工具从改代码变成加一个 server 配置，工具的复用和独立演进都清爽很多。对我们这种多模型、多工具的企业问答场景，MCP 是目前投入产出比很高的一层抽象。
+
+> 封面图：[qubodup / Flickr](https://www.flickr.com/photos/21051491@N02/23636230004) · CC BY 2.0

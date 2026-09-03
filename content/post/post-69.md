@@ -3,6 +3,7 @@ title: "两年八个月后端架构演进：从 SaaS 到 AI 数据平台"
 slug: "post-69"
 date: 2023-12-19T10:30:00+08:00
 draft: false
+image: /images/post-69-cover.jpg
 tags: ["架构演进","职业成长","复盘"]
 categories: ["随笔"]
 description: "从宠物医疗 SaaS 到企业级 AI 数据平台，一段架构演进复盘。"
@@ -40,3 +41,5 @@ description: "从宠物医疗 SaaS 到企业级 AI 数据平台，一段架构�
 ## 小结
 
 从 SaaS 到中台再到 AI 数据平台，我没有刻意追过技术潮流，只是被业务推着走，遇到什么问题就解什么问题。回头看，真正的成长不是学了多少新框架，而是面对一个全新领域时，能快速抓住核心矛盾、用工程化方式把它落地。这条路还在继续，AI 时代的后端架构，才刚刚开始有意思。
+
+> 封面图：[M McBey / Flickr](https://www.flickr.com/photos/158652122@N02/49925355486) · CC BY 2.0

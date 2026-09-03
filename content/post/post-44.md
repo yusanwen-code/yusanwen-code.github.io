@@ -5,6 +5,7 @@ date: 2025-07-09T10:30:00+08:00
 categories: ["AI"]
 tags: ["知识图谱","NER","信息抽取"]
 draft: false
+image: /images/post-44-cover.jpg
 description: "数据集管理服务里用 LLM 做实体关系抽取的工程实践"
 ---
 
@@ -106,3 +107,5 @@ INSERT EDGE cites(evidence) VALUES "bert_base"->"attention_is_all_you_need":("..
 ## 小结
 
 从非结构化文档构建知识图谱，工程上比算法更难的是"降噪"和"对齐"。用 LLM 做开放抽取召回高，但必须用 Evidence 校验、实体对齐、类型规则把幻觉压下去。我们最终让图谱和向量检索互补：向量负责找相关段落，图谱负责沿关系扩展，知识库问答服务的多跳问答质量有了肉眼可见的提升。
+
+> 封面图：[Neal. / Flickr](https://www.flickr.com/photos/31878512@N06/3839707719) · CC BY 2.0

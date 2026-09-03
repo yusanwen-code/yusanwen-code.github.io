@@ -3,6 +3,7 @@ title: "分库分表设计：支付与认证场景的水平拆分经验"
 slug: "post-54"
 date: 2025-12-12T10:30:00+08:00
 draft: false
+image: /images/post-54-cover.jpg
 tags: ["分库分表", "水平拆分", "高并发"]
 categories: ["数据库"]
 description: "统一支付平台订单与统一认证中心登录日志的分片策略、路由与扩容经验"
@@ -82,3 +83,5 @@ func LoginLogTable(ts time.Time) string {
 ## 小结
 
 分库分表是"先苦后甜"，核心不是中间件配置，而是想清楚四件事：按什么维度分片、哪些查询必须落在单片、跨片查询去哪查、未来怎么扩容。统一支付平台和统一认证中心两个场景策略完全不同，本身就说明分片没有银弹。
+
+> 封面图：[mikecogh / Flickr](https://www.flickr.com/photos/89165847@N00/6068966667) · CC BY-SA 2.0

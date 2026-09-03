@@ -3,6 +3,7 @@ title: "多轮对话上下文管理：滑动窗口与 Token 预算控制"
 slug: "post-32"
 date: 2025-01-02T10:30:00+08:00
 draft: false
+image: /images/post-32-cover.jpg
 tags: ["对话","上下文","Token"]
 categories: ["AI"]
 description: "在 Token 限制内管理多轮对话历史的方案"
@@ -140,3 +141,5 @@ func (b *PromptBuilder) Build(query string, history []Message, ragContexts []str
 ## 小结
 
 上下文管理的本质是在有限预算内做信息取舍。滑动窗口解决了"留多少"的问题，Token 预算解决了"能不能放下"的问题，摘要则弥补了裁剪带来的信息损失。三层配合下来，即使是几十轮的长对话，模型也能保持连贯，同时不会触发 Token 超限错误。
+
+> 封面图：[graymalkn / Flickr](https://www.flickr.com/photos/22244945@N00/3278868063) · CC BY 2.0

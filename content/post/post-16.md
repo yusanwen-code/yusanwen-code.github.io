@@ -3,6 +3,7 @@ title: "多应用接入体系设计：AppID/AppSecret 与应用级 AccessToken"
 slug: "post-16"
 date: 2024-04-27T10:30:00+08:00
 draft: false
+image: /images/post-16-cover.jpg
 tags: ["AppID","AccessToken","多应用"]
 categories: ["认证"]
 description: "统一认证中心中多应用接入的 AppID/AppSecret 与应用级 Token 设计"
@@ -62,3 +63,5 @@ AppSecret 明文只展示一次这个设计，初期被不少接入方抱怨"忘
 ## 小结
 
 AppID/AppSecret 是多应用接入的基石，独立身份让权限、限流、审计都能按应用维度切分。应用级 Access Token 解决了服务间调用的身份问题，但要配合 scope 最小权限和短有效期。我们在统一认证中心里靠这套体系接入了公司内多个业务系统，新增应用只需要在管理后台创建、分配权限，不需要改认证中心代码。
+
+> 封面图：[kalleboo / Flickr](https://www.flickr.com/photos/82365211@N00/8203658681) · CC BY 2.0

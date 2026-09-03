@@ -3,6 +3,7 @@ title: "GaussDB 与 MongoDB 在数据集服务中的选型与应用"
 slug: "post-45"
 date: 2025-07-24T10:30:00+08:00
 draft: false
+image: /images/post-45-cover.jpg
 tags: ["GaussDB","MongoDB","选型"]
 categories: ["数据库"]
 description: "结构化元数据用 GaussDB，半结构化文档用 MongoDB，各司其职"
@@ -121,3 +122,5 @@ _, err := coll.UpdateOne(ctx, filter, update)
 ## 小结
 
 GaussDB 和 MongoDB 在数据集管理服务里不是替代关系，而是分工。强一致、要事务、要报表的核心元数据走 GaussDB；schema 多变、写多读少、嵌套深的解析中间态走 MongoDB。选型的关键不是"哪个数据库更先进"，而是把数据按访问模式切开，让每一类数据都落在它最舒服的存储里。
+
+> 封面图：[Laenulfean / Flickr](https://www.flickr.com/photos/60359963@N00/5943132296) · CC BY-SA 2.0

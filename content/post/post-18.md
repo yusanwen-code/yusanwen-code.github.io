@@ -3,6 +3,7 @@ title: "RBAC 权限模型：用户-团队-角色的设计与落地"
 slug: "post-18"
 date: 2024-05-29T10:30:00+08:00
 draft: false
+image: /images/post-18-cover.jpg
 tags: ["RBAC","权限","账号中台"]
 categories: ["认证"]
 description: "统一认证中心中用户-团队-角色 RBAC 模型的设计与落地"

@@ -3,6 +3,7 @@ title: "RAG 系统中的文档分块策略与效果对比"
 slug: "post-37"
 date: 2025-03-21T10:30:00+08:00
 draft: false
+image: /images/post-37-cover.jpg
 tags: ["RAG", "分块", "Embedding"]
 categories: ["AI"]
 description: "固定窗口、语义分块、结构化分块在真实语料上的取舍"
@@ -120,3 +121,5 @@ Embedding 阶段所有 chunk 统一过向量模型，写入向量库时带上 me
 ## 小结
 
 没有万能分块尺寸，分块策略要跟着文档类型走。结构化文档优先用结构信息，纯文本用递归字符分块兜底，表格单独成块。在数据集管理服务里我们按文档类型路由 Chunker，并把分块结果和 metadata 一起入库，知识库问答服务的问答命中率比定长切分有明显改善。
+
+> 封面图：[duh.denise / Flickr](https://www.flickr.com/photos/36979168@N03/4437143239) · CC BY 2.0

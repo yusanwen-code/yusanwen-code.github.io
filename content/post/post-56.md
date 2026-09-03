@@ -3,6 +3,7 @@ title: "Cursor 与 Claude Code 对比：我的 AI 编程实战配置"
 slug: "post-56"
 date: 2026-01-12T10:30:00+08:00
 draft: false
+image: /images/post-56-cover.jpg
 tags: ["Cursor", "Claude Code", "效率"]
 categories: ["AI编程"]
 description: "日常写代码用 Cursor，复杂重构用 Claude Code，我的组合配置"
@@ -40,3 +41,5 @@ Claude Code 的 `CLAUDE.md` 我在上一篇已经展示，重点是项目结构�
 ## 小结
 
 我的配置是：Cursor 当主力编辑器处理日常 CRUD 和前端，Claude Code 当 Agent 处理跨文件、跨服务、需要自己跑命令的任务。两个工具都配好项目规则、都要求自跑测试、都不让它碰密钥。工具是手段，对代码的判断力才是核心。
+
+> 封面图：[MattsMacintosh / Flickr](https://www.flickr.com/photos/48126477@N05/6036720300) · CC BY 2.0

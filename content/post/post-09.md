@@ -3,6 +3,7 @@ title: "基于 RSA/SHA 签名的 OpenAPI 安全机制实现"
 slug: "post-09"
 date: 2024-01-09T10:30:00+08:00
 draft: false
+image: /images/post-09-cover.jpg
 tags: ["RSA", "签名", "OpenAPI"]
 categories: ["安全"]
 description: "统一支付平台 OpenAPI 签名校验与防重放机制设计"
@@ -126,3 +127,5 @@ func RSAVerifyMiddleware(appDao dao.AppDAO, rdb *redis.Client) gin.HandlerFunc {
 ## 小结
 
 OpenAPI 签名机制的核心不是算法多强，而是规则是否明确、边界是否清晰。RSA 签名把"谁发的、有没有被改、是不是重放"三件事一次解决，配合公钥轮换和 Nonce 防重放，统一支付平台上线至今没出现过签名层面的安全事件。商户接入文档里我还专门给了 Java、Python、Go 三语言的 SDK 示例，减少了大量联调时间。
+
+> 封面图：[Simon A. Eugster / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=52421294) · CC BY-SA 3.0

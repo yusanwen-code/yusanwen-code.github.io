@@ -3,6 +3,7 @@ title: "S3 对象存储体系：文档与数据的高性能上传"
 slug: "post-43"
 date: 2025-06-23T10:30:00+08:00
 draft: false
+image: /images/post-43-cover.jpg
 tags: ["S3","对象存储","上传"]
 categories: ["存储"]
 description: "从预签名到分片上传，聊聊数据集服务里的 S3 实战"
@@ -111,3 +112,5 @@ func (h *UploadHandler) ApplyUpload(ctx context.Context, c *app.RequestContext) 
 ## 小结
 
 S3 预签名上传本质上是把"数据面"和"控制面"分开：业务后端只管鉴权和元数据，字节流直接走对象存储。配合分片上传和定时清理，我们在数据集管理服务里稳定支撑了大量文档的并发入库，后端服务的内存和带宽几乎不再受文件大小影响。
+
+> 封面图：[jdnx / Flickr](https://www.flickr.com/photos/21442511@N08/4423023837) · CC BY 2.0

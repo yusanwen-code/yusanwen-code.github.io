@@ -3,6 +3,7 @@ title: "支付订单状态机设计：多类型订单的创建、支付与结算
 slug: "post-08"
 date: 2023-12-24T10:30:00+08:00
 draft: false
+image: /images/post-08-cover.jpg
 tags: ["状态机", "订单系统", "DDD"]
 categories: ["支付"]
 description: "统一支付平台多类型订单状态机落地实践"
@@ -127,3 +128,5 @@ func (h *PayHandler) WxNotify(c *gin.Context) {
 ## 小结
 
 订单状态机的价值不在代码多精巧，而在于把"业务规则"从散落在 service 层的 if 里收敛到一个看得见的地方。统一支付平台后续接入退款、分账、跨境支付时，我们做的第一件事都是先在状态图上画新状态和新事件，再写代码，这套习惯帮团队少踩了很多状态错乱的坑。
+
+> 封面图：[Kecko / Flickr](https://www.flickr.com/photos/70981241@N00/7632054886) · CC BY 2.0
