@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="428" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="46" font-size="20" font-weight="700" fill="#1e293b">Claude Code Workflow：6 Task × 4 波次并行编排</text>
+
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <line x1="44" y1="148" x2="836" y2="148" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="44" y1="238" x2="836" y2="238" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="44" y1="328" x2="836" y2="328" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <text x="44" y="103" font-size="14" font-weight="700" fill="#6366f1">Wave A</text>
+  <text x="44" y="193" font-size="14" font-weight="700" fill="#8b5cf6">Wave B</text>
+  <text x="44" y="283" font-size="14" font-weight="700" fill="#f59e0b">Wave C</text>
+  <text x="44" y="373" font-size="14" font-weight="700" fill="#10b981">Wave D</text>
+
+  <rect x="140" y="78" width="200" height="40" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="240" y="103" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#4338ca">Task1</tspan><tspan fill="#1e293b"> 前端入口</tspan></text>
+
+  <rect x="370" y="78" width="200" height="40" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="470" y="103" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#4338ca">Task2</tspan><tspan fill="#1e293b"> Python 蒸馏链路</tspan></text>
+
+  <rect x="600" y="78" width="200" height="40" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="700" y="103" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#4338ca">Task3</tspan><tspan fill="#1e293b"> Skill 渲染器</tspan></text>
+
+  <rect x="370" y="168" width="200" height="40" rx="10" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="470" y="193" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#6d28d9">Task2b</tspan><tspan fill="#1e293b"> 错误透传</tspan></text>
+
+  <rect x="600" y="168" width="200" height="40" rx="10" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="700" y="193" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#6d28d9">Task4</tspan><tspan fill="#1e293b"> 导出接口</tspan></text>
+
+  <rect x="600" y="258" width="200" height="40" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="700" y="283" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#b45309">Task5</tspan><tspan fill="#1e293b"> 导出对话框</tspan></text>
+
+  <rect x="370" y="348" width="200" height="40" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="470" y="373" text-anchor="middle" font-size="13"><tspan font-weight="700" fill="#047857">Task6</tspan><tspan fill="#1e293b"> 端到端验收</tspan></text>
+
+  <line x1="470" y1="120" x2="470" y2="164" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arw)"/>
+  <line x1="700" y1="120" x2="700" y2="164" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arw)"/>
+  <line x1="700" y1="210" x2="700" y2="254" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arw)"/>
+  <line x1="470" y1="210" x2="470" y2="344" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arw)"/>
+  <polyline points="700,300 700,330 575,330 575,344" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arw)"/>
+
+  <text x="44" y="414" font-size="12" fill="#94a3b8">同一波内任务互不依赖、文件隔离；波与波之间靠产物衔接</text>
+</svg>

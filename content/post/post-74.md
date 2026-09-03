@@ -3,6 +3,7 @@ title: "高低模型分工：用最少的 token 做最难的任务"
 slug: "post-74"
 date: 2026-08-30T18:00:00+08:00
 draft: false
+image: /images/post-74-cover.jpg
 tags: ["Claude Code", "成本", "工作流"]
 categories: ["AI"]
 description: "我最初的做法是高模型出计划、低模型执行，跑了几轮发现这不是最佳实践。这篇复盘坑在哪，并给出按难度分级的完整分工框架。"
@@ -48,6 +49,8 @@ Claude Code 的 Workflow 里每个子 Agent 可以独立指定模型档位和努
 | 常规型 | 中模型 + 中 effort | 常规功能实现、测试编写、中等重构、普通调试 |
 | 机械型 | 低模型 + low effort | 模板化改动、纯函数实现、i18n 文案、跑测试与验证 |
 
+![按难度分级的三个模型档位与三个旋钮](/images/post-74-tiers.svg)
+
 ## 用最少的 token 做最难的任务
 
 核心思想一句话：**把大部分任务变简单，让高模型 token 只花在"决定"上，不花在"执行"上。**
@@ -82,3 +85,5 @@ Claude Code 的 Workflow 里每个子 Agent 可以独立指定模型档位和努
 > **计划用最贵的，执行用最便宜的，评审用最贵的，验证用最便宜的；任务写不清晰就升档，失败超过两次就升级。**
 
 模型分级省的不是高模型的钱，是**浪费在错模型上的钱**。最难的活依然要最贵的模型——这句话反过来也成立：**大部分活之所以难，是因为你没把它写清楚。** 把任务写清楚，是高模型 token 花得最值的地方。
+
+> 封面图：[Krzysztof Golik / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Clock_gears_in_the_St_Maximus_church_in_Magnac-Laval_02.jpg) · CC BY-SA 4.0

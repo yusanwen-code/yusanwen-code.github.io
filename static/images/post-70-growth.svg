@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="398" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="52" font-size="20" font-weight="700" fill="#1e293b">AI 时代后端工程师成长路线：四级台阶</text>
+  <text x="44" y="76" font-size="13" fill="#64748b">基本功 → AI 工程化 → 全栈闭环 → 技术判断力</text>
+
+  <rect x="44" y="240" width="186" height="104" rx="10" fill="#e0e7ff"/>
+  <rect x="240" y="180" width="186" height="164" rx="10" fill="#c7d2fe"/>
+  <rect x="436"  y="120" width="186" height="184" rx="10" fill="#a5b4fc"/>
+  <rect x="632" y="60" width="204" height="284" rx="10" fill="#818cf8"/>
+
+  <text x="137" y="270" text-anchor="middle" font-size="14" font-weight="700" fill="#312e81">第一阶段</text>
+  <text x="137" y="292" text-anchor="middle" font-size="13" fill="#3730a3">后端基本功</text>
+  <text x="137" y="312" text-anchor="middle" font-size="11.5" fill="#4c1d95">地基：语言·数据库·微服务</text>
+
+  <text x="333" y="210" text-anchor="middle" font-size="14" font-weight="700" fill="#312e81">第二阶段</text>
+  <text x="333" y="232" text-anchor="middle" font-size="13" fill="#3730a3">AI 工程化</text>
+  <text x="333" y="252" text-anchor="middle" font-size="11.5" fill="#4c1d95">数据管道 · 向量检索</text>
+  <text x="333" y="270" text-anchor="middle" font-size="11.5" fill="#4c1d95">LLM 网关 · Agent</text>
+
+  <text x="529" y="150" text-anchor="middle" font-size="14" font-weight="700" fill="#312e81">第三阶段</text>
+  <text x="529" y="172" text-anchor="middle" font-size="13" fill="#3730a3">全栈闭环</text>
+  <text x="529" y="194" text-anchor="middle" font-size="11.5" fill="#4c1d95">前端+后端+引擎</text>
+  <text x="529" y="212" text-anchor="middle" font-size="11.5" fill="#4c1d95">独立交付完整产品</text>
+
+  <text x="734" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">第四阶段</text>
+  <text x="734" y="112" text-anchor="middle" font-size="13" fill="#ffffff">技术判断力</text>
+  <text x="734" y="132" text-anchor="middle" font-size="11.5" fill="#eef2ff">权衡 · 沉淀 · 开源</text>
+  <text x="734" y="150" text-anchor="middle" font-size="11.5" fill="#eef2ff">读源码 · 写博客</text>
+  <text x="734" y="168" text-anchor="middle" font-size="11.5" fill="#eef2ff">长跑，不是冲刺</text>
+
+  <text x="44" y="376" font-size="12" fill="#94a3b8">AI 只会放大基本功的差距，不会抹平它</text>
+</svg>

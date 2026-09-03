@@ -3,6 +3,7 @@ title: "对话编排层重构：从 Go 业务编排迁移到 Python LangGraph"
 slug: "post-76"
 date: 2026-09-02T20:00:00+08:00
 draft: false
+image: /images/post-76-cover.jpg
 tags: ["架构", "LangGraph", "Agent"]
 categories: ["AI"]
 description: "提示词构建、群聊调度、模型调用编排，从 Go 网关整体搬进 Python LangGraph，形成「Go 管数据与 CRUD、Python 管智能编排」的分层架构。这篇复盘为什么迁、边界怎么划、图怎么搭、可恢复执行怎么做到。"
@@ -58,20 +59,18 @@ description: "提示词构建、群聊调度、模型调用编排，从 Go 网�
 
 整个编排是四层图，顶层一张会话图：
 
-```text
-ConversationGraph          ← 一次用户轮的入口
-├── hydrate_context
-├── route_session
-├── SingleChatGraph
-│   └── DaoistGraph
-└── GroupChatGraph
-    ├── classify_directive
-    ├── deterministic_router
-    ├── supervisor
-    ├── dispatch_daoists
-    │   └── DaoistGraph × N
-    ├── convergence
-    └── propose_memory
+```mermaid
+flowchart TD
+    A["ConversationGraph（一次用户轮入口）"] --> B["hydrate_context"] --> C["route_session"]
+    C --> D["SingleChatGraph"] --> D1["DaoistGraph（复用子图）"]
+    C --> E["GroupChatGraph"] --> F["classify_directive"]
+    F --> G["deterministic_router（确定性指令）"]
+    F --> H["supervisor（开放讨论出计划）"]
+    G --> I["dispatch_daoists"]
+    H --> I
+    I --> J["DaoistGraph × N"]
+    I --> K["convergence 收敛"]
+    K --> L["propose_memory 记忆提案 → Go 校验落库"]
 ```
 
 关键设计是 **DaoistGraph 作为可复用子图**：单聊直接调它，群聊每个发言人各自子运行一张。单聊和每个群成员走的是**同一条 prompt 构建 + 模型调用管线**——选定记忆、编译人设与金丹行为、调模型、校验响应、流出事件。这一条保证了"行为可解释"：单聊什么效果，群聊里同一个道人就是什么效果，不存在两套 prompt 逻辑。
@@ -150,3 +149,5 @@ feat(chat): persist orchestration runs idempotently
 - **契约先行让两端各自演进。** 11 个类型化事件 + run_id 幂等 + 快照式输入，Go 和 Python 之间只有契约没有纠缠；Go 仍然是数据的事实源，Python 在快照上做编排，记忆用提案-校验的方式回流。
 
 这次重构真正的收益在后面：工具调用、人工审批中断（`permission_required` 事件已在契约里预留）、长任务规划、更复杂的多 Agent 协作——这些以后都是"在图里加节点"，不再需要动 Go。架构分层的意义不是当下的优雅，是**把未来的变化留在了便宜的地方**。
+
+> 封面图：[Creativity103 / Flickr](https://www.flickr.com/photos/Creativity103/5227842611) · CC BY 2.0

@@ -3,6 +3,7 @@ title: "Claude Code 的 Workflow 功能：6 任务分 4 波，多 Agent 并行�
 slug: "post-73"
 date: 2026-08-27T22:30:00+08:00
 draft: false
+image: /images/post-73-cover.jpg
 tags: ["AI 全栈", "Agent", "工作流"]
 categories: ["AI"]
 description: "一个 141 行的 mjs 脚本，把 6 个开发任务、4 个波次、多个 AI Agent 编排起来，并行开发炼丹炉横跨三端的大功能。"
@@ -33,15 +34,7 @@ Workflow 的编排原语就几个：`agent()` 派一个 Agent 做一件事，`pa
 
 6 个任务不是一把梭全并行——它们之间有依赖。分波的核心原则：**同一波内的任务互不依赖且文件隔离，波与波之间靠产物衔接**。
 
-```
-Wave A（并行×3）   Task1 前端收紧女娲入口
-                   Task2 Python 蒸馏链路（国内源优先+熔断+阶段错误码）
-                   Task3 Skill 渲染器（规范化导出格式）
-Wave B（并行×2）   Task2b Go/前端错误按阶段透传   ← 依赖 Task2 的结构化错误
-                   Task4 导出接口（Go+前端 service） ← 依赖 Task3 的渲染器
-Wave C（串行）     Task5 金丹详情导出对话框 ← 依赖 Task4 的接口
-Wave D（验收）     Task6 全量回归 + 安全核对 + 修复
-```
+![Claude Code Workflow：6 Task × 4 波次并行编排](/images/post-73-waves.svg)
 
 Wave A 三个任务互不依赖：前端改入口、Python 改链路、Python 写渲染器，改动文件完全不重叠，并行跑。Wave B 接合服务端：错误透传要读 Task2 的产物（Python 结构化错误），导出接口要调 Task3 的渲染器——等 A 波完成再动。C、D 依此类推。
 
@@ -81,3 +74,5 @@ Wave A 三个任务互不依赖：前端改入口、Python 改链路、Python �
 - **上下文隔离是并行的前提。** 每个 Agent 只拿自己的任务片段，看不到其他任务的 prompt——专注 + 不越界。
 
 这个脚本不是银弹：它适合任务边界清晰、文件可隔离、有测试兜底的场景。如果任务互相纠缠，先拆任务再谈并行。项目、计划文档和完整脚本都在 [GitHub](https://github.com/yusanwen-code/alchemy-furnace) 上，Wave A 的并行底座写法可以直接抄。
+
+> 封面图：[richard_clyborne / Flickr](https://www.flickr.com/photos/richard_clyborne/32874464137) · CC BY 2.0

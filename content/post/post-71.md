@@ -3,6 +3,7 @@ title: "一次聊需求，三仓同落地：我的 superpowers 全栈开发工�
 slug: "post-71"
 date: 2026-08-27T09:00:00+08:00
 draft: false
+image: /images/post-71-cover.jpg
 tags: ["AI 全栈", "工作流", "效率"]
 categories: ["随笔"]
 description: "用 Claude Code 的 superpowers 工作流，把跨仓库需求从脑暴聊到前后端同步落地。"
@@ -15,6 +16,11 @@ description: "用 Claude Code 的 superpowers 工作流，把跨仓库需求从�
 这个需求横跨三个仓库：数据集管理服务、数据管理后台、知识库问答服务。
 
 以前这种需求在我这儿是这么过的：拉群对齐需求 → 各写各的需求文档 → 前后端各自开工 → 联调时发现字段名对不上、分页参数叫法不一样 → 返工。现在我用 Claude Code 的 superpowers 工作流走了一遍完整流程，发现整个链条可以被压缩成四步：**brainstorming 聊需求 → 方案对比 → 写 spec → 生成实施计划**。这篇就记录这个过程，顺便聊聊我的感受。
+
+```mermaid
+flowchart LR
+    A["brainstorming 聊需求"] --> B["方案对比"] --> C["写 spec 落盘"] --> D["生成实施计划"] --> E["add-dir 挂三仓并行落地"]
+```
 
 ## 第一步：先探索代码，再开口问
 

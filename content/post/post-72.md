@@ -3,6 +3,7 @@ title: "复杂任务的快速实现：我的 Claude Code 工作流"
 slug: "post-72"
 date: 2026-08-27T21:00:00+08:00
 draft: false
+image: /images/post-72-cover.jpg
 tags: ["Claude Code", "工作流", "AI"]
 categories: ["AI"]
 description: "复杂任务难的不是写代码，而是需求模糊、代码陌生、链路长、步骤多。我的 Claude Code 工作流怎么逐个拆掉它们。"
@@ -79,6 +80,11 @@ Claude Code 的 add-dir 可以把多个项目目录加进同一个会话，三�
 
 一个复杂任务在我这里是这样的节奏（示意）：
 
+```mermaid
+flowchart LR
+    T1["探索 + 脑暴"] --> T2["方案 + spec"] --> T3["实施计划"] --> T4["执行三仓"] --> T5["评审 · 验证 · 部署"]
+```
+
 | 环节 | 干什么 | 用时 |
 |---|---|---|
 | 探索 + 脑暴 | 读代码、一次一个问题澄清需求 | 一个上午 |
@@ -94,3 +100,5 @@ Claude Code 的 add-dir 可以把多个项目目录加进同一个会话，三�
 复杂任务的复杂度分布大概是这样：需求 > 链路 > 步骤 > 代码。Claude Code 的 workflow 没有任何魔法，它只是把"该问的、该查的、该记的、该验的"变成了流程的默认动作，让 AI 和人的精力都集中在真正难的地方。
 
 真正快的不是写代码那一下，而是不返工。
+
+> 封面图：[jurvetson / Flickr](https://www.flickr.com/photos/jurvetson/6858583426) · CC BY 2.0

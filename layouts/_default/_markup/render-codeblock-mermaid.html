@@ -1,0 +1,32 @@
+{{/*
+	Mermaid render hook: turns ```mermaid blocks in content markdown into
+	<pre class="mermaid"> and loads the self-hosted mermaid.min.js once per page.
+*/}}
+<pre class="mermaid">
+{{ .Inner | htmlEscape | safeHTML }}
+</pre>
+{{ if not (.Page.Store.Get "mermaidLoaded") }}
+{{ .Page.Store.Set "mermaidLoaded" true }}
+<style>
+	.mermaid {
+		background: #ffffff;
+		border: 1px solid #e5e7eb;
+		border-radius: 10px;
+		padding: 1rem;
+		text-align: center;
+		overflow-x: auto;
+	}
+	.mermaid svg {
+		max-width: 100%;
+		height: auto;
+	}
+</style>
+<script src="{{ "js/mermaid.min.js" | relURL }}" defer></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		if (window.mermaid) {
+			mermaid.initialize({ startOnLoad: true, theme: "default", flowchart: { curve: "basis" } });
+		}
+	});
+</script>
+{{ end }}

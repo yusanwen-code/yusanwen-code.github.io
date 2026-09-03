@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="428" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="46" font-size="20" font-weight="700" fill="#1e293b">按难度分级，不按角色分级</text>
+  <text x="44" y="70" font-size="13" fill="#64748b">同一个任务交给哪个模型，由它的难度决定，不由"计划/执行"角色决定</text>
+
+  <rect x="44" y="96" width="240" height="196" rx="10" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <path d="M44,140 h240 v-34 a10,10 0 0 0 -10,-10 h-220 a10,10 0 0 0 -10,10 z" fill="#8b5cf6"/>
+  <text x="164" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">判断型</text>
+  <text x="164" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">高模型 + 高 effort</text>
+  <text x="164" y="200" text-anchor="middle" font-size="12.5" fill="#1e293b">需求探索与脑暴</text>
+  <text x="164" y="224" text-anchor="middle" font-size="12.5" fill="#1e293b">接口契约设计</text>
+  <text x="164" y="248" text-anchor="middle" font-size="12.5" fill="#1e293b">代码评审</text>
+  <text x="164" y="272" text-anchor="middle" font-size="12.5" fill="#1e293b">根因定位 · 安全核对</text>
+
+  <rect x="320" y="96" width="240" height="196" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <path d="M320,140 h240 v-34 a10,10 0 0 0 -10,-10 h-220 a10,10 0 0 0 -10,10 z" fill="#6366f1"/>
+  <text x="440" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">常规型</text>
+  <text x="440" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#4338ca">中模型 + 中 effort</text>
+  <text x="440" y="200" text-anchor="middle" font-size="12.5" fill="#1e293b">常规功能实现</text>
+  <text x="440" y="224" text-anchor="middle" font-size="12.5" fill="#1e293b">测试编写</text>
+  <text x="440" y="248" text-anchor="middle" font-size="12.5" fill="#1e293b">中等重构</text>
+  <text x="440" y="272" text-anchor="middle" font-size="12.5" fill="#1e293b">普通调试</text>
+
+  <rect x="596" y="96" width="240" height="196" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M596,140 h240 v-34 a10,10 0 0 0 -10,-10 h-220 a10,10 0 0 0 -10,10 z" fill="#10b981"/>
+  <text x="716" y="126" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">机械型</text>
+  <text x="716" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">低模型 + low effort</text>
+  <text x="716" y="200" text-anchor="middle" font-size="12.5" fill="#1e293b">模板化改动</text>
+  <text x="716" y="224" text-anchor="middle" font-size="12.5" fill="#1e293b">纯函数实现</text>
+  <text x="716" y="248" text-anchor="middle" font-size="12.5" fill="#1e293b">i18n 文案</text>
+  <text x="716" y="272" text-anchor="middle" font-size="12.5" fill="#1e293b">跑测试与验证</text>
+
+  <text x="440" y="336" text-anchor="middle" font-size="13" fill="#64748b">三个旋钮——任务写不清晰就升档，失败超过两次就升级</text>
+
+  <circle cx="200" cy="380" r="20" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+  <line x1="200" y1="380" x2="213" y2="367" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
+  <text x="200" y="420" text-anchor="middle" font-size="13" fill="#475569">模型档位</text>
+
+  <circle cx="440" cy="380" r="20" fill="#ffffff" stroke="#6366f1" stroke-width="3"/>
+  <line x1="440" y1="380" x2="453" y2="367" stroke="#6366f1" stroke-width="3" stroke-linecap="round"/>
+  <text x="440" y="420" text-anchor="middle" font-size="13" fill="#475569">努力度</text>
+
+  <circle cx="680" cy="380" r="20" fill="#ffffff" stroke="#10b981" stroke-width="3"/>
+  <line x1="680" y1="380" x2="693" y2="367" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+  <text x="680" y="420" text-anchor="middle" font-size="13" fill="#475569">边界清晰度</text>
+</svg>
