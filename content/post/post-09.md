@@ -9,15 +9,15 @@ categories: ["安全"]
 description: "统一支付平台 OpenAPI 签名校验与防重放机制设计"
 ---
 
-## 问题背景
+## 为什么是 RSA，不是 HMAC
 
-统一支付平台对外开放 OpenAPI 时，安全是第一道门槛。商户的服务器要调用我们的下单、查询、退款接口，不能靠 Session，也不能把 AppSecret 在网络上乱跑。我当时参考了微信支付、支付宝那一套签名机制，定下来用 **RSA 非对称签名 + SHA256 摘要 + 时间戳/随机串防重放** 的方案。
+商户的服务器要调我们的下单、查询、退款接口，安全是第一道门槛。没法靠 Session，也不能让 AppSecret 在网络上裸奔。我参考了微信支付、支付宝那一套签名机制，最后定下 RSA 非对称签名加 SHA256 摘要，再用时间戳和随机串防重放。
 
-为什么不全用 HMAC？因为 HMAC 是对称的，平台也持有商户的密钥，一旦平台侧泄露，商户无法自证清白；而 RSA 模式下商户自己保管私钥，平台只存公钥，验签责任边界清晰。
+为什么不全用 HMAC？因为 HMAC 是对称的，平台手里也捏着商户的密钥，一旦平台侧泄露，商户没法自证清白。换成 RSA 就没有这个问题：商户的私钥自己保管，平台只存公钥，谁发的、有没有被改，验签时责任边界清清楚楚。
 
-## 方案设计
+## 签名串怎么拼
 
-签名串的构造规则我们定得很死，避免商户各自实现出错：
+签名串的构造规则我们定得很死：
 
 1. 按 ASCII 升序排列所有非空业务参数（不含 `sign`、`sign_type`、`sign_version`）；
 2. 拼接成 `key1=value1&key2=value2`；
@@ -25,11 +25,9 @@ description: "统一支付平台 OpenAPI 签名校验与防重放机制设计"
 4. 商户私钥做 SHA256WithRSA 签名，Base64 编码后放在 `X-Sign` Header；
 5. 同时带 `X-App-Id`、`X-Timestamp`（秒）、`X-Nonce`。
 
-平台校验四件事：AppId 是否存在、时间戳是否在 5 分钟窗口内、Nonce 是否在 Redis 里未出现过（防重放）、签名是否通过。
+定这么死是故意的。签名串最怕商户各自发挥：参数排序差一点、大小写差一点，验签就永远过不去，还查不出是哪边的问题。
 
-## 关键代码
-
-签名串构造是最容易出歧义的地方，我直接把它写成一个纯函数，平台和 SDK 共用：
+构造逻辑我直接写成一个纯函数，平台和 SDK 共用：
 
 ```go
 func BuildSignString(query url.Values, body []byte) string {
@@ -60,7 +58,13 @@ func BuildSignString(query url.Values, body []byte) string {
 }
 ```
 
-验签中间件长这样，挂在 Gin 的 OpenAPI 路由组上：
+## 验签四道关
+
+平台校验四件事：AppId 是否存在、时间戳是否在 5 分钟窗口内、Nonce 是否在 Redis 里没出现过（防重放）、签名是否通过。
+
+![OpenAPI 验签：签名在商户侧生成，四道关在平台侧依次过](/images/post-09-sign-verify.svg)
+
+验签挂在 Gin 的 OpenAPI 路由组上，是个中间件：
 
 ```go
 func RSAVerifyMiddleware(appDao dao.AppDAO, rdb *redis.Client) gin.HandlerFunc {
@@ -90,7 +94,6 @@ func RSAVerifyMiddleware(appDao dao.AppDAO, rdb *redis.Client) gin.HandlerFunc {
             c.AbortWithStatusJSON(401, gin.H{"code": "APP_NOT_FOUND"})
             return
         }
-
         body, _ := c.GetRawData()
         c.Request.Body = io.NopCloser(bytes.NewBuffer(body)) // 回放给后续 handler
         signStr := BuildSignString(c.Request.URL.Query(), body)
@@ -112,20 +115,20 @@ func RSAVerifyMiddleware(appDao dao.AppDAO, rdb *redis.Client) gin.HandlerFunc {
 }
 ```
 
-`GetRawData` 之后记得用 `io.NopCloser` 把 body 放回去，否则后续 `ShouldBindJSON` 会读到空，这是我第一次联调踩的坑。
+`GetRawData` 之后记得用 `io.NopCloser` 把 body 放回去，否则后续 `ShouldBindJSON` 会读到空。这是我第一次联调踩的坑。
 
-## 踩坑与权衡
+## 四个权衡
 
-**第一是 GET 请求的 body 处理**。GET 请求没有 body，我们约定 `body_sha256` 字段直接填空字符串的 SHA256（即 `e3b0c442...`），而不是省略这个字段，这样签名串结构稳定，SDK 不用写两套分支。
+第一是 GET 请求的 body 处理。GET 没有 body，我们约定 `body_sha256` 字段直接填空字符串的 SHA256（即 `e3b0c442...`），而不是省略这个字段。签名串结构稳定，SDK 不用写两套分支。
 
-**第二是 Nonce 的存储成本**。用 Redis 存 10 分钟窗口的 Nonce，看着有压力，实际上 AppId 维度隔离后单商户 QPS 并不高，10 分钟过期自动回收，不需要上滑动窗口或布隆过滤器。
+第二是 Nonce 的存储成本。Redis 存 10 分钟窗口的 Nonce，看着有压力，实际上按 AppId 隔离之后单商户 QPS 并不高，10 分钟过期自动回收，没必要上滑动窗口或布隆过滤器。
 
-**第三是密钥轮换**。App 表里我留了 `public_key` 和 `public_key_prev` 两个字段，轮换时新公钥入主字段、旧公钥降级到 prev，中间件依次尝试两把公钥，给商户 24 小时灰度窗口，避免一刀切验签失败。
+第三是密钥轮换。App 表里留了 `public_key` 和 `public_key_prev` 两个字段，轮换时新公钥进主字段、旧公钥降到 prev，中间件两把都试。商户有 24 小时灰度窗口，不会一刀切验签失败。
 
-**第四是要不要上 AES 加密 body**。考虑到平台已经全链路 HTTPS，且签名能防篡改，我们没有再做请求体加密，只在涉及银行卡号等敏感字段时由业务层单独做字段级加密，避免给所有商户增加对接成本。
+第四是要不要加密 body。平台已经全链路 HTTPS，签名本身防篡改，最后没做请求体加密，只有银行卡号这类敏感字段由业务层单独做字段级加密。给所有商户平添一层对接成本，不值。
 
-## 小结
+## 上线之后
 
-OpenAPI 签名机制的核心不是算法多强，而是规则是否明确、边界是否清晰。RSA 签名把"谁发的、有没有被改、是不是重放"三件事一次解决，配合公钥轮换和 Nonce 防重放，统一支付平台上线至今没出现过签名层面的安全事件。商户接入文档里我还专门给了 Java、Python、Go 三语言的 SDK 示例，减少了大量联调时间。
+上线至今，没出过签名层面的安全事件。回头看，这套机制的核心不在算法多强，而在规则够不够死、边界够不够清：谁发的、有没有被改、是不是重放，一趟验签全解决。商户接入文档里我配了 Java、Python、Go 三份 SDK 示例，写文档花的功夫，比后来省下的联调时间少多了。
 
 > 封面图：[Simon A. Eugster / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=52421294) · CC BY-SA 3.0

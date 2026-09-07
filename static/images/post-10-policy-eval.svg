@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">计费引擎：一条策略怎么算出一笔手续费</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">规则从上到下求值，命中第一条即返回</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="150" width="160" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="140" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">订单上下文</text>
+  <text x="140" y="198" text-anchor="middle" font-size="11" fill="#64748b">金额 · 商户标签</text>
+  <text x="140" y="216" text-anchor="middle" font-size="11" fill="#64748b">开户时间 · 渠道</text>
+
+  <line x1="222" y1="168" x2="262" y2="168" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="96" width="280" height="250" rx="12" fill="#fcfcfd" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="270" y="122" font-size="12" font-weight="700" fill="#475569">策略 P_NEW_USER_3M · priority 100</text>
+
+  <rect x="270" y="130" width="240" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="390" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">规则 1：新商户前 3 个月</text>
+  <text x="390" y="172" text-anchor="middle" font-size="11" fill="#475569">tags 含 new 且 未过开户日 + 3 个月</text>
+  <text x="390" y="190" text-anchor="middle" font-size="11" fill="#059669">命中 → 固定 0 元</text>
+
+  <line x1="390" y1="208" x2="390" y2="242" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="400" y="230" font-size="10" fill="#94a3b8">未命中</text>
+
+  <rect x="270" y="246" width="240" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="390" y="268" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">规则 2：兜底费率</text>
+  <text x="390" y="288" text-anchor="middle" font-size="11" fill="#475569">amount ≥ 0，恒命中</text>
+  <text x="390" y="306" text-anchor="middle" font-size="11" fill="#475569">费率 0.6% · 最低 0.01 · 月封顶 500</text>
+
+  <line x1="512" y1="168" x2="576" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="536" y="158" font-size="10" fill="#94a3b8">命中</text>
+
+  <line x1="512" y1="284" x2="596" y2="244" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="580" y="140" width="180" height="100" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="670" y="166" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">命中 → 计费动作</text>
+  <text x="670" y="188" text-anchor="middle" font-size="11" fill="#6d28d9">固定 / 比例 / 阶梯</text>
+  <text x="670" y="206" text-anchor="middle" font-size="11" fill="#6d28d9">最低收费 min_fee 兜底</text>
+
+  <line x1="670" y1="242" x2="670" y2="286" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="678" y="268" font-size="10" fill="#94a3b8">带月封顶时</text>
+
+  <rect x="580" y="290" width="200" height="72" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="680" y="312" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">月封顶 cap_monthly</text>
+  <text x="680" y="332" text-anchor="middle" font-size="11" fill="#64748b">cap 表原子递增，先加后判</text>
+  <text x="680" y="350" text-anchor="middle" font-size="11" fill="#64748b">并发超额就是这样防的</text>
+
+  <line x1="680" y1="364" x2="680" y2="396" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="390" y1="348" x2="390" y2="396" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="400" width="530" height="60" rx="10" fill="#059669"/>
+  <text x="515" y="424" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">输出：fee + policy_id + version 写到订单</text>
+  <text x="515" y="444" text-anchor="middle" font-size="11" fill="#d1fae5">对账时能精确还原按哪条规则算的</text>
+
+  <text x="44" y="498" font-size="12" fill="#94a3b8">金额一律 shopspring/decimal，不用 float64 · 新规则白名单灰度 24 小时再全量</text>
+</svg>

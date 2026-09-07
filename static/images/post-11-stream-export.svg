@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="428" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">百万行对账导出：整条链路都流式</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">DB 游标读 · StreamWriter 逐行写 · io.Pipe 直传对象存储</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <text x="201" y="118" text-anchor="middle" font-size="10.5" fill="#94a3b8">生产者</text>
+  <text x="606" y="118" text-anchor="middle" font-size="10.5" fill="#94a3b8">消费者</text>
+
+  <path d="M444,128 L444,96 L282,96 L282,124" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arwC)"/>
+  <text x="363" y="88" text-anchor="middle" font-size="10" fill="#94a3b8">写慢了就堵生产者（背压）</text>
+
+  <rect x="50" y="130" width="140" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="120" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">DB 游标分页</text>
+  <text x="120" y="180" text-anchor="middle" font-size="11" fill="#64748b">id &gt; lastID</text>
+  <text x="120" y="198" text-anchor="middle" font-size="11" fill="#64748b">每页 2000</text>
+
+  <line x1="192" y1="172" x2="208" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="212" y="130" width="140" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="282" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">buffered channel</text>
+  <text x="282" y="180" text-anchor="middle" font-size="11" fill="#475569">容量几千行</text>
+  <text x="282" y="198" text-anchor="middle" font-size="11" fill="#475569">天然背压</text>
+
+  <line x1="354" y1="172" x2="368" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="374" y="130" width="140" height="84" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="444" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">StreamWriter</text>
+  <text x="444" y="180" text-anchor="middle" font-size="11" fill="#6d28d9">SetRow 逐行写</text>
+  <text x="444" y="198" text-anchor="middle" font-size="11" fill="#6d28d9">行号自维护</text>
+
+  <line x1="516" y1="172" x2="530" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="536" y="130" width="140" height="84" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="606" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">io.Pipe</text>
+  <text x="606" y="180" text-anchor="middle" font-size="11" fill="#b45309">Write 变 Reader</text>
+  <text x="606" y="198" text-anchor="middle" font-size="11" fill="#b45309">内存级管道</text>
+
+  <line x1="678" y1="172" x2="692" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="698" y="130" width="140" height="84" rx="10" fill="#059669"/>
+  <text x="768" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">S3/MinIO</text>
+  <text x="768" y="180" text-anchor="middle" font-size="11" fill="#d1fae5">PutObject 边传</text>
+  <text x="768" y="198" text-anchor="middle" font-size="11" fill="#d1fae5">磁盘零临时文件</text>
+
+  <rect x="50" y="270" width="380" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="70" y="296" font-size="12" font-weight="700" fill="#b45309">Sheet 行数上限 1048576</text>
+  <text x="70" y="316" font-size="11" fill="#64748b">写满 100 万行，先 Flush 再切 Sheet2、Sheet3</text>
+
+  <rect x="460" y="270" width="380" height="64" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="480" y="296" font-size="12" font-weight="700" fill="#059669">全程零临时文件</text>
+  <text x="480" y="316" font-size="11" fill="#047857">4C8G 实测：内存 100MB 以内，约 40 秒</text>
+
+  <text x="44" y="386" font-size="12" fill="#94a3b8">读、写、传任何一环攒在内存里都会爆，流式必须做到底</text>
+</svg>

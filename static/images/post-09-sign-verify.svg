@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">OpenAPI 签名与验签：签名在商户侧，四道关在平台侧</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">商户私钥签名，平台依次校验 AppId、时间戳、Nonce、签名本身</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fca5a5"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="112" font-size="12" font-weight="700" fill="#475569">商户侧</text>
+  <text x="430" y="112" font-size="12" font-weight="700" fill="#475569">平台侧 · 验签中间件</text>
+
+  <rect x="60" y="124" width="240" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="180" y="146" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">① 参数按 ASCII 升序</text>
+  <text x="180" y="166" text-anchor="middle" font-size="11" fill="#64748b">拼成 key1=value1&amp;key2=value2</text>
+
+  <line x1="180" y1="177" x2="180" y2="190" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="60" y="192" width="240" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="180" y="214" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">② 追加 body_sha256</text>
+  <text x="180" y="234" text-anchor="middle" font-size="11" fill="#64748b">上行 JSON 原文的 SHA256，不做字段排序</text>
+
+  <line x1="180" y1="245" x2="180" y2="258" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="60" y="260" width="240" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="180" y="282" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">③ 私钥签名，Base64</text>
+  <text x="180" y="302" text-anchor="middle" font-size="11" fill="#64748b">SHA256WithRSA，放 X-Sign</text>
+
+  <line x1="180" y1="313" x2="180" y2="328" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="60" y="332" width="57" height="26" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="89" y="349" text-anchor="middle" font-size="9.5" fill="#475569">X-App-Id</text>
+  <rect x="121" y="332" width="57" height="26" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="349" text-anchor="middle" font-size="9.5" fill="#475569">X-Timestamp</text>
+  <rect x="182" y="332" width="57" height="26" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="211" y="349" text-anchor="middle" font-size="9.5" fill="#475569">X-Nonce</text>
+  <rect x="243" y="332" width="57" height="26" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="272" y="349" text-anchor="middle" font-size="9.5" fill="#475569">X-Sign</text>
+  <text x="60" y="380" font-size="11" fill="#64748b">签名串只算一次，请求头带出去</text>
+
+  <line x1="312" y1="242" x2="424" y2="242" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="368" y="232" text-anchor="middle" font-size="11" fill="#94a3b8">HTTPS</text>
+
+  <rect x="430" y="124" width="250" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="555" y="146" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">① AppId 存在且 ACTIVE？</text>
+  <text x="555" y="166" text-anchor="middle" font-size="11" fill="#64748b">查商户表</text>
+
+  <line x1="555" y1="177" x2="555" y2="190" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="430" y="192" width="250" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="555" y="214" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">② 时间戳在 ±5 分钟内？</text>
+  <text x="555" y="234" text-anchor="middle" font-size="11" fill="#64748b">与服务器时间差超过 300 秒就拒</text>
+
+  <line x1="555" y1="245" x2="555" y2="258" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="430" y="260" width="250" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="555" y="282" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">③ Nonce 首次出现？</text>
+  <text x="555" y="302" text-anchor="middle" font-size="11" fill="#64748b">Redis SetNX，10 分钟过期</text>
+
+  <line x1="555" y1="313" x2="555" y2="326" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="430" y="328" width="250" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="555" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">④ 签名验证通过？</text>
+  <text x="555" y="370" text-anchor="middle" font-size="11" fill="#64748b">用商户公钥做 SHA256WithRSA 验签</text>
+
+  <line x1="680" y1="150" x2="706" y2="150" stroke="#fca5a5" stroke-width="1.5" marker-end="url(#arwR)"/>
+  <rect x="710" y="133" width="140" height="34" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="780" y="154" text-anchor="middle" font-size="11" fill="#dc2626">401 APP_NOT_FOUND</text>
+
+  <line x1="680" y1="218" x2="706" y2="218" stroke="#fca5a5" stroke-width="1.5" marker-end="url(#arwR)"/>
+  <rect x="710" y="201" width="140" height="34" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="780" y="222" text-anchor="middle" font-size="11" fill="#dc2626">401 TIMESTAMP_EXPIRED</text>
+
+  <line x1="680" y1="286" x2="706" y2="286" stroke="#fca5a5" stroke-width="1.5" marker-end="url(#arwR)"/>
+  <rect x="710" y="269" width="140" height="34" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="780" y="290" text-anchor="middle" font-size="11" fill="#dc2626">401 REPLAY_DETECTED</text>
+
+  <line x1="680" y1="354" x2="706" y2="354" stroke="#fca5a5" stroke-width="1.5" marker-end="url(#arwR)"/>
+  <rect x="710" y="337" width="140" height="34" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="780" y="358" text-anchor="middle" font-size="11" fill="#dc2626">401 SIGN_INVALID</text>
+
+  <line x1="555" y1="381" x2="555" y2="398" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+  <rect x="430" y="402" width="250" height="52" rx="10" fill="#059669"/>
+  <text x="555" y="424" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">通过，进入业务 handler</text>
+  <text x="555" y="444" text-anchor="middle" font-size="11" fill="#d1fae5">c.Set("app") 传给后续逻辑</text>
+
+  <text x="44" y="486" font-size="12" fill="#94a3b8">密钥轮换：public_key 与 public_key_prev 两把依次试，给商户 24 小时灰度窗口 · GET 请求 body_sha256 固定填空串摘要</text>
+</svg>

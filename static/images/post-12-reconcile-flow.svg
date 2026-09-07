@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">对账模块：渠道账单和平台订单怎么对</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">T+1 拉渠道文件，聚合比对，差异自动分类处理</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="110" width="180" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">① 数据采集层</text>
+  <text x="150" y="162" text-anchor="middle" font-size="11" fill="#64748b">凌晨定时拉取文件</text>
+
+  <line x1="150" y1="179" x2="150" y2="192" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="194" width="180" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="224" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">② 数据聚合层</text>
+  <text x="150" y="246" text-anchor="middle" font-size="11" fill="#64748b">商户 + 渠道 + 日</text>
+
+  <line x1="150" y1="263" x2="150" y2="276" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="278" width="180" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="308" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">③ 对账引擎层</text>
+  <text x="150" y="330" text-anchor="middle" font-size="11" fill="#64748b">逐笔比对四字段</text>
+
+  <line x1="150" y1="347" x2="150" y2="360" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="362" width="180" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="392" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">④ 差异处理层</text>
+  <text x="150" y="414" text-anchor="middle" font-size="11" fill="#64748b">自动核销或工单</text>
+
+  <rect x="280" y="110" width="560" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="280" y="194" width="560" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="280" y="278" width="560" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="280" y="362" width="560" height="68" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <rect x="300" y="124" width="110" height="30" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="355" y="143" text-anchor="middle" font-size="11" fill="#475569">微信 CSV.gz</text>
+  <rect x="420" y="124" width="110" height="30" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="475" y="143" text-anchor="middle" font-size="11" fill="#475569">支付宝 ZIP</text>
+  <rect x="540" y="124" width="110" height="30" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="595" y="143" text-anchor="middle" font-size="11" fill="#475569">银联 定长文本</text>
+  <text x="665" y="143" font-size="11" fill="#475569">解析为 ChannelBill 落库</text>
+
+  <rect x="300" y="204" width="160" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="380" y="224" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">平台订单</text>
+  <text x="380" y="242" text-anchor="middle" font-size="9.5" fill="#64748b">笔数·金额·手续费·退款</text>
+
+  <rect x="470" y="204" width="160" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="550" y="224" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">渠道账单</text>
+  <text x="550" y="242" text-anchor="middle" font-size="9.5" fill="#64748b">笔数·金额·手续费·退款</text>
+  <text x="645" y="232" font-size="11" fill="#475569">维度：商户 + 渠道 + 日</text>
+
+  <text x="300" y="302" font-size="12" font-weight="700" fill="#1e293b">以渠道账单为基准，左连平台订单</text>
+  <text x="300" y="324" font-size="11" fill="#475569">逐笔比对：订单号 · 金额 · 状态 · 时间</text>
+
+  <rect x="530" y="294" width="76" height="32" rx="8" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="568" y="314" text-anchor="middle" font-size="11" fill="#6d28d9">长款</text>
+  <rect x="614" y="294" width="76" height="32" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="652" y="314" text-anchor="middle" font-size="11" fill="#0369a1">短款</text>
+  <rect x="698" y="294" width="76" height="32" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="736" y="314" text-anchor="middle" font-size="11" fill="#dc2626">金额不符</text>
+  <rect x="782" y="294" width="76" height="32" rx="8" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="820" y="314" text-anchor="middle" font-size="11" fill="#b45309">状态不符</text>
+
+  <line x1="514" y1="396" x2="536" y2="396" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="525" y="386" text-anchor="middle" font-size="9.5" fill="#94a3b8">核销不了</text>
+
+  <rect x="300" y="376" width="210" height="40" rx="10" fill="#059669"/>
+  <text x="405" y="393" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">自动核销</text>
+  <text x="405" y="409" text-anchor="middle" font-size="9.5" fill="#d1fae5">跨日清算：查次日账单金额一致</text>
+
+  <rect x="540" y="376" width="210" height="40" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="645" y="393" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">运营工单</text>
+  <text x="645" y="409" text-anchor="middle" font-size="9.5" fill="#64748b">附原始凭证 · 唯一索引防重复建单</text>
+
+  <text x="44" y="470" font-size="12" fill="#94a3b8">时区是最隐蔽的坑：渠道北京时间 vs 平台 UTC，聚合按商户时区切日 · 尾差 &lt;0.01 元入手续费尾差科目，不报警</text>
+</svg>
