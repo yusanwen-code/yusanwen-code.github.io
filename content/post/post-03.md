@@ -9,15 +9,17 @@ categories: ["可观测性"]
 description: "宠物医疗 SaaS 系统微服务中 Jaeger 链路追踪的接入与跨协议上下文透传实践"
 ---
 
-## 问题背景
+## 三个工程师查了两小时
 
-宠物医疗 SaaS 系统拆成微服务后，排查一次挂号请求要跨 API 网关、clinic-rpc、payment-rpc、inventory-rpc 四个服务。最开始出了问题只能靠日志拼时间线，每个服务打印自己的 requestId，但请求经过 gRPC 调用后 requestId 就断了，根本串不起来。一次"挂号后扣费失败"的线上问题，三个工程师对着日志查了两个小时才定位到是 inventory-rpc 超时导致的回滚失败。
+宠物医疗 SaaS 拆成微服务后，排查一次挂号请求要跨 API 网关、clinic-rpc、payment-rpc、inventory-rpc 四个服务。最开始出了问题只能靠日志拼时间线：每个服务打印自己的 requestId，但请求一经过 gRPC 调用，requestId 就断了，根本串不起来。
 
-我们必须上全链路追踪，选型用了 Jaeger，因为它兼容 OpenTracing 标准，go-zero 也有内置支持。
+有一次线上出问题，"挂号后扣费失败"，三个工程师对着日志查了两个小时，才定位到是 inventory-rpc 超时导致的回滚失败。小问题查成这样，必须上全链路追踪了。选型用了 Jaeger，因为它兼容 OpenTracing 标准，go-zero 也有内置支持。
 
-## 方案/设计
+## traceId 怎么透传
 
-核心思路是在入口层生成 traceId，然后通过 HTTP Header 和 gRPC metadata 一路透传下去，每个服务在处理请求时从 context 里取出 SpanContext，创建子 Span 上报给 Jaeger Agent。
+核心思路一句话能说完：在入口层生成 traceId，通过 HTTP Header 和 gRPC metadata 一路传下去，每个服务处理请求时从 context 里取出 SpanContext，创建子 Span 上报给 Jaeger Agent。
+
+![traceId 在 HTTP 与 gRPC 之间的透传链路](/images/post-03-trace-propagation.svg)
 
 go-zero 自带了 `trace` 包，在 API 层配置一个 Jaeger 上报地址即可自动注入：
 
@@ -33,7 +35,7 @@ Telemetry:
   Batcher: jaeger
 ```
 
-但 go-zero 内置的 trace 只覆盖了它自己生成的 gRPC 客户端，对于我们直接用 `grpc.Dial` 创建的连接，需要手动加拦截器。服务端拦截器负责从 incoming context 提取 SpanContext 并创建服务端 Span：
+但 go-zero 内置的 trace 只覆盖它自己生成的 gRPC 客户端。我们有些连接是直接用 `grpc.Dial` 创建的，这种就得手动加拦截器。服务端拦截器负责从 incoming context 提取 SpanContext 并创建服务端 Span：
 
 ```go
 func UnaryServerInterceptor(tracer opentracing.Tracer) grpc.UnaryServerInterceptor {
@@ -67,7 +69,7 @@ func UnaryServerInterceptor(tracer opentracing.Tracer) grpc.UnaryServerIntercept
 }
 ```
 
-客户端拦截器则把当前 SpanContext 注入 outgoing metadata：
+客户端拦截器反过来，把当前 SpanContext 注入 outgoing metadata：
 
 ```go
 func UnaryClientInterceptor(tracer opentracing.Tracer) grpc.UnaryClientInterceptor {
@@ -115,16 +117,16 @@ func TracingMiddleware(tracer opentracing.Tracer) gin.HandlerFunc {
 }
 ```
 
-## 踩坑/权衡
+## 链路是在哪里断的
 
-第一个坑是跨异步 goroutine 的 context 丢失。有些逻辑起 goroutine 异步处理，直接用了 `context.Background()`，Span 链就断了。我们的规矩是异步任务必须从父 context 派生，但要做 detach——不能直接用父 ctx，因为父 ctx 在 HTTP 返回后会被 cancel。我封装了一个 `detachContext`，只保留 trace 信息、不继承 cancel 信号。
+第一个断点是异步 goroutine。有些逻辑起 goroutine 异步处理，直接用了 `context.Background()`，Span 链就断了。我们的规矩是异步任务必须从父 context 派生，但要 detach——不能直接用父 ctx，因为父 ctx 在 HTTP 返回后会被 cancel。我封装了一个 `detachContext`，只保留 trace 信息、不继承 cancel 信号。
 
-第二个是采样率。生产环境 100% 采样会给 Jaeger 后端和网络带来不小压力，我们改成 10% 采样，错误请求强制 100% 采样（在拦截器里判断 err != nil 时设置 `sampling.priority=1`）。
+第二个是采样率。生产环境 100% 采样，Jaeger 后端和网络的压力都不小。我们改成 10% 采样，错误请求强制 100%（在拦截器里判断 err != nil 时设置 `sampling.priority=1`）。
 
 第三个是 B3 和 Jaeger 原生头的兼容。老版本 Istio sidecar 用的是 B3 头（`X-B3-TraceId`），我们应用层用的是 `uber-trace-id`，两边串不起来。统一改成 `W3C TraceContext`（`traceparent` 头）后解决了这个问题，也是未来的标准方向。
 
-## 小结
+## 值不值
 
-全链路追踪的价值不在平时，而在故障时——它把跨服务的黑盒变成了可观测的调用链。关键是 context 透传不能有断点：HTTP 入口、gRPC 双向、异步 goroutine 都要覆盖。踩过这些坑后，宠物医疗 SaaS 系统排查一次跨服务故障的平均时间从小时级降到了分钟级。
+全链路追踪的价值不在平时，而在故障时：它把跨服务的黑盒变成可观测的调用链。关键是 context 透传不能有断点，HTTP 入口、gRPC 双向、异步 goroutine 都要覆盖到。踩完这些坑之后，宠物医疗 SaaS 排查一次跨服务故障的平均时间，从小时级降到了分钟级。
 
 > 封面图：[dolbinator1000 / Flickr](https://www.flickr.com/photos/126654539@N08/16164233084) · CC BY 2.0

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">从 C/S 到 B/S：迁移前后的架构</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">单体拆成四个 RPC 服务，老客户端灰度过渡两个月</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="100" width="340" height="268" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="76" y="126" font-size="13" font-weight="700" fill="#dc2626">迁移前 · C/S 架构</text>
+  <text x="76" y="144" font-size="11" fill="#94a3b8">发版靠客户端升级 · 长连接绑定节点扩不了容</text>
+
+  <rect x="150" y="156" width="160" height="46" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="230" y="184" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Windows 客户端</text>
+  <line x1="230" y1="202" x2="230" y2="220" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="140" y="224" width="180" height="50" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="230" y="245" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">fasthttp 长连接</text>
+  <text x="230" y="263" text-anchor="middle" font-size="11" fill="#64748b">自定义二进制协议</text>
+  <line x1="230" y1="274" x2="230" y2="292" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="140" y="296" width="180" height="56" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="230" y="317" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">单体服务</text>
+  <text x="230" y="335" text-anchor="middle" font-size="11" fill="#64748b">改一处，全量回归</text>
+
+  <text x="440" y="214" text-anchor="middle" font-size="11" fill="#94a3b8">2023 重构</text>
+  <line x1="404" y1="230" x2="472" y2="230" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="480" y="100" width="340" height="268" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="496" y="126" font-size="13" font-weight="700" fill="#0369a1">迁移后 · B/S 微服务</text>
+  <text x="496" y="144" font-size="11" fill="#94a3b8">浏览器即开即用 · 服务独立部署</text>
+
+  <rect x="570" y="156" width="160" height="46" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="650" y="184" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">浏览器</text>
+  <line x1="650" y1="202" x2="650" y2="220" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="550" y="224" width="200" height="50" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="650" y="245" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">API 网关（go-zero）</text>
+  <text x="650" y="263" text-anchor="middle" font-size="11" fill="#64748b">.api 生成 · 熔断/限流/超时</text>
+  <line x1="650" y1="274" x2="527" y2="290" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="650" y1="274" x2="611" y2="290" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="650" y1="274" x2="695" y2="290" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="650" y1="274" x2="779" y2="290" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="490" y="294" width="74" height="40" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="527" y="319" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">挂号</text>
+  <rect x="574" y="294" width="74" height="40" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="611" y="319" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">诊疗</text>
+  <rect x="658" y="294" width="74" height="40" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="695" y="319" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">收费</text>
+  <rect x="742" y="294" width="74" height="40" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="779" y="319" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">库存</text>
+  <text x="650" y="354" text-anchor="middle" font-size="11" fill="#64748b">etcd 服务注册 · zrpc 直连带负载均衡</text>
+
+  <rect x="60" y="388" width="760" height="76" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="414" font-size="13" font-weight="700" fill="#b45309">过渡期：网关侧协议适配</text>
+  <text x="84" y="436" font-size="12" fill="#64748b">fasthttp 接收老协议 → 转 gRPC 调新服务，适配层强制注入 traceId</text>
+  <text x="84" y="454" font-size="12" fill="#64748b">老协议没有 trace 字段，不注入就是黑盒；灰度两个月后彻底切掉</text>
+
+  <text x="44" y="496" font-size="12" fill="#94a3b8">超时倒金字塔：API 5s ＞ RPC 3s ＞ DB 1s，外层必须大于内层，否则上游超时、下游空转</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="478" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">埋点异步上报：channel + worker</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">主链路只管扔，慢活全在后台</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <text x="233" y="126" text-anchor="middle" font-size="11" fill="#94a3b8">select + default</text>
+  <rect x="60" y="140" width="160" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="140" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">HTTP handler</text>
+  <text x="140" y="192" text-anchor="middle" font-size="12" fill="#64748b">立即返回 200</text>
+
+  <line x1="220" y1="182" x2="246" y2="182" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="250" y="140" width="160" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="330" y="166" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">buffered channel</text>
+  <text x="330" y="188" text-anchor="middle" font-size="12" fill="#475569">容量 10000</text>
+  <text x="330" y="206" text-anchor="middle" font-size="11" fill="#64748b">水位超 80% 报警</text>
+
+  <line x1="410" y1="182" x2="436" y2="182" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="440" y="140" width="160" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="520" y="166" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">worker × 10</text>
+  <text x="520" y="188" text-anchor="middle" font-size="12" fill="#64748b">批量消费</text>
+  <text x="520" y="206" text-anchor="middle" font-size="11" fill="#64748b">flush 独立 recover</text>
+
+  <line x1="600" y1="182" x2="626" y2="182" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="630" y="140" width="160" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="710" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">攒批刷库</text>
+  <text x="710" y="192" text-anchor="middle" font-size="12" fill="#64748b">满 100 条或 200ms</text>
+
+  <line x1="330" y1="224" x2="330" y2="286" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="250" y="290" width="160" height="60" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="330" y="314" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">满了就丢，不阻塞</text>
+  <text x="330" y="332" text-anchor="middle" font-size="11" fill="#64748b">丢弃数做成监控指标</text>
+
+  <line x1="710" y1="224" x2="710" y2="286" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="630" y="290" width="160" height="60" rx="10" fill="#059669"/>
+  <text x="710" y="314" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">批量写库</text>
+  <text x="710" y="334" text-anchor="middle" font-size="11" fill="#d1fae5">user_event</text>
+
+  <rect x="60" y="374" width="760" height="62" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="400" font-size="13" font-weight="700" fill="#b45309">优雅关闭</text>
+  <text x="176" y="400" font-size="12" fill="#64748b">close(ch) → worker 刷完剩余数据</text>
+  <text x="84" y="422" font-size="12" fill="#64748b">WaitGroup 等待退出，最多等 5 秒；worker 用 e, ok := &lt;-r.ch 判零值退出</text>
+
+  <text x="44" y="462" font-size="12" fill="#94a3b8">非阻塞发送 · 批量写入 · panic 恢复 · 优雅关闭 · 水位监控，缺一不可</text>
+</svg>
