@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 530" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="528" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">Query 扩写：把「理解用户」交给模型</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">一句模糊的话，发散成多路检索形态——系统随模型自动升级</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="180" width="150" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="135" y="206" text-anchor="middle" font-size="12" fill="#64748b">用户 query</text>
+  <text x="135" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">系统有点慢，咋办？</text>
+
+  <line x1="210" y1="212" x2="248" y2="212" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="254" y="180" width="120" height="64" rx="10" fill="#6366f1"/>
+  <text x="314" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Query 扩写</text>
+  <text x="314" y="226" text-anchor="middle" font-size="12" fill="#e0e7ff">模型发散</text>
+
+  <line x1="374" y1="212" x2="424" y2="95" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="374" y1="212" x2="424" y2="161" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="374" y1="212" x2="424" y2="227" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="374" y1="212" x2="424" y2="293" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="430" y="70" width="210" height="50" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="445" y="90" font-size="12" font-weight="700" fill="#0369a1">同义改写</text>
+  <text x="445" y="108" font-size="12" fill="#1e293b">系统响应慢的原因排查</text>
+
+  <rect x="430" y="136" width="210" height="50" rx="10" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="445" y="156" font-size="12" font-weight="700" fill="#4338ca">上位扩展</text>
+  <text x="445" y="174" font-size="12" fill="#1e293b">性能问题的通用分析思路</text>
+
+  <rect x="430" y="202" width="210" height="50" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="445" y="222" font-size="12" font-weight="700" fill="#6d28d9">拆解子问题</text>
+  <text x="445" y="240" font-size="12" fill="#1e293b">上了什么变更？慢在哪个环节？</text>
+
+  <rect x="430" y="268" width="210" height="50" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="445" y="288" font-size="12" font-weight="700" fill="#b45309">补充限定</text>
+  <text x="445" y="306" font-size="12" fill="#1e293b">生产环境 · 高峰时段</text>
+
+  <line x1="640" y1="95" x2="698" y2="196" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="640" y1="161" x2="698" y2="200" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="640" y1="227" x2="698" y2="222" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="640" y1="293" x2="698" y2="228" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="704" y="180" width="130" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="769" y="206" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">并行检索</text>
+  <text x="769" y="226" text-anchor="middle" font-size="12" fill="#64748b">合并召回</text>
+
+  <line x1="769" y1="244" x2="769" y2="272" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="704" y="276" width="130" height="56" rx="10" fill="#059669"/>
+  <text x="769" y="298" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">生成回答</text>
+  <text x="769" y="316" text-anchor="middle" font-size="11" fill="#d1fae5">有据可依</text>
+
+  <rect x="60" y="386" width="380" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="84" y="412" font-size="13" font-weight="700" fill="#475569">旧升级路径：写在代码里</text>
+  <text x="84" y="436" font-size="12" fill="#64748b">同义词库 · 纠错规则 · 意图分类器</text>
+  <text x="84" y="454" font-size="12" fill="#64748b">bad case 补一条规则，升级靠排期发版</text>
+
+  <rect x="460" y="386" width="380" height="76" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="484" y="412" font-size="13" font-weight="700" fill="#059669">新升级路径：长在模型上</text>
+  <text x="484" y="436" font-size="12" fill="#047857">扩写是模型做的——模型升级那天</text>
+  <text x="484" y="454" font-size="12" fill="#047857">扩写质量自动跟涨，一行代码不用改</text>
+
+  <text x="44" y="502" font-size="12" fill="#94a3b8">工程退到评测与兜底：「理解」的实现权交给模型，「验收」的责任留给人</text>
+</svg>
