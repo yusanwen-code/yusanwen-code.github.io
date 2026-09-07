@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="428" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">RSA 单点登录：私钥只在一处，公钥到处验签</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">HMAC 对称密钥一处泄露全线崩；非对称把风险收敛进认证中心</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="104" width="380" height="80" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="84" y="130" font-size="13" font-weight="700" fill="#dc2626">为什么放弃 HMAC</text>
+  <text x="84" y="152" font-size="12" fill="#64748b">所有下游系统共享同一把密钥，一处泄露全线崩</text>
+  <text x="84" y="172" font-size="12" fill="#64748b">轮换密钥要挨个通知所有业务方，运维成本高</text>
+
+  <rect x="60" y="218" width="380" height="146" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="244" font-size="13" font-weight="700" fill="#b45309">密钥轮换怎么做到无感</text>
+  <text x="84" y="268" font-size="12" fill="#64748b">① 新旧两把私钥并行签发</text>
+  <text x="84" y="290" font-size="12" fill="#64748b">② JWKS 先上两把公钥，业务系统缓存 10 分钟</text>
+  <text x="84" y="312" font-size="12" fill="#64748b">③ 存量 token 自然过期后，下线旧私钥</text>
+  <text x="84" y="342" font-size="12" fill="#b45309">顺序不能反：先发公钥，再切私钥</text>
+
+  <rect x="500" y="104" width="330" height="80" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="665" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">统一认证中心</text>
+  <text x="665" y="150" text-anchor="middle" font-size="11" fill="#1e293b">持 RSA 私钥 · RS256 签发</text>
+  <text x="665" y="168" text-anchor="middle" font-size="11" fill="#64748b">iss=passport · 私钥永不出认证中心</text>
+
+  <line x1="665" y1="184" x2="665" y2="212" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="730" y="204" text-anchor="middle" font-size="11" fill="#94a3b8">Access 2h · Refresh 7d 轮转</text>
+
+  <rect x="500" y="216" width="330" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="665" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">JWT</text>
+  <text x="665" y="260" text-anchor="middle" font-size="11" fill="#1e293b">user_id · app_id · team_id · roles · jti</text>
+  <text x="665" y="278" text-anchor="middle" font-size="11" fill="#64748b">iss=passport · aud=目标 AppID，防跨应用滥用</text>
+
+  <line x1="665" y1="292" x2="665" y2="320" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="736" y="310" text-anchor="middle" font-size="11" fill="#94a3b8">Cookie / Authorization 头</text>
+
+  <rect x="500" y="324" width="330" height="40" rx="10" fill="#059669"/>
+  <text x="665" y="349" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">网关公钥本地验签，不回源</text>
+
+  <text x="44" y="404" font-size="12" fill="#94a3b8">alg 必须校验为 RS256，不信 header；jti 进 Redis 黑名单可主动吊销</text>
+</svg>

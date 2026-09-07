@@ -9,13 +9,13 @@ categories: ["安全"]
 description: "统一认证中心实现标准 OAuth2/OIDC 协议端点的工程细节"
 ---
 
-## 问题背景
+## 自定义协议走不通了
 
-统一认证中心第一版只做了内部系统的 SSO，用的是自定义的 cookie + session 方案。后来要接入外部第三方应用，还要让企业客户用自己的飞书/企微做身份源（IdP），自定义协议就走不通了。我当时决定把统一认证中心改造成标准的 **OAuth2/OIDC Provider**，让任何符合协议的客户端都能接入，同时也能作为 RP 对接外部 IdP。
+统一认证中心第一版只做了内部系统的 SSO，用的是自定义的 cookie + session 方案。后来要接入外部第三方应用，还要让企业客户拿自己的飞书/企微做身份源（IdP），自定义协议就走不通了。于是我决定把它改造成标准的 OAuth2/OIDC Provider：任何符合协议的客户端都能接入，认证中心自己也能作为 RP 去对接外部 IdP。
 
-标准协议听起来就是实现几个端点，但真正落地有一堆工程细节：授权码模式的 PKCE、state/nonce 防 CSRF、redirect_uri 严格校验、ID Token 的签名与 claims、JWKS 公钥轮换。
+标准协议听起来就是实现几个端点的事，真落地才发现一堆工程细节等着：授权码模式的 PKCE、state/nonce 防 CSRF、redirect_uri 严格校验、ID Token 的签名与 claims、JWKS 公钥轮换。
 
-## 方案设计
+## 四个端点
 
 OIDC 在 OAuth2 之上加了身份层，核心要实现四个端点：
 
@@ -24,11 +24,13 @@ OIDC 在 OAuth2 之上加了身份层，核心要实现四个端点：
 - `GET /oauth/userinfo`：用 access_token 取用户信息；
 - `GET /.well-known/openid-configuration` 和 `/oauth/jwks`：发现文档与公钥集合。
 
-授权码模式（Authorization Code）+ PKCE 作为默认，所有 public client 强制 PKCE；client credentials 用于服务间调用。
+授权码模式（Authorization Code）+ PKCE 作为默认，所有 public client 强制 PKCE；client credentials 留给服务间调用。
 
-## 关键代码
+![OIDC 授权码模式：从跳转登录到签发 token 的完整链路](/images/post-14-oidc-flow.svg)
 
-`/authorize` 端点先做参数校验，再判断是否已登录，没登录跳转到登录页，带上 state 保证回跳：
+## /authorize：先校验，再谈登录
+
+这个端点先做参数校验，再看登录态，没登录就跳登录页，state 带上保证回跳：
 
 ```go
 func (h *OAuthHandler) Authorize(c *gin.Context) {
@@ -80,7 +82,9 @@ func (h *OAuthHandler) Authorize(c *gin.Context) {
 }
 ```
 
-`/token` 端点校验 code、PKCE verifier，然后签发 token：
+## /token：验完 code 和 PKCE 才发 token
+
+客户端拿到 code 之后来换 token，服务端要校验 code 和 PKCE verifier，都过了才签发：
 
 ```go
 func (h *OAuthHandler) Token(c *gin.Context) {
@@ -138,7 +142,7 @@ func (h *OAuthHandler) Token(c *gin.Context) {
 }
 ```
 
-PKCE 校验就是 SHA256 + Base64URL：
+PKCE 校验本身没什么玄机，就是 SHA256 + Base64URL：
 
 ```go
 func Verify(challenge, verifier string) bool {
@@ -148,7 +152,9 @@ func Verify(challenge, verifier string) bool {
 }
 ```
 
-ID Token 是 OIDC 的核心，必须包含标准 claims：
+## ID Token 与 JWKS
+
+ID Token 是 OIDC 的核心，标准 claims 一个不能少：
 
 ```go
 func (s *Service) buildIDToken(input OIDCTokenInput, user *User) (string, error) {
@@ -179,7 +185,7 @@ func (h *OAuthHandler) JWKS(c *gin.Context) {
 }
 ```
 
-公钥的 JSON 表示要用 `jwk` 格式（kty/n/e/x5c 等字段），我用 `lestrrat-go/jwx/jwk` 来做序列化，避免手写：
+公钥的 JSON 表示要用 jwk 格式（kty/n/e/x5c 等字段）。我用 `lestrrat-go/jwx/jwk` 来做序列化，不手写：
 
 ```go
 import "github.com/lestrrat-go/jwx/jwk"
@@ -197,22 +203,22 @@ func (s *KeyService) PublicKeySet() jwk.Set {
 }
 ```
 
-## 踩坑与权衡
+## 那些必须较真的细节
 
-**redirect_uri 必须精确匹配**。早期为了方便支持了前缀匹配，被安全团队指出有开放重定向风险，改成配置里完整 URL 白名单，查询参数不参与匹配。
+redirect_uri 必须精确匹配。早期为了图方便支持了前缀匹配，被安全团队指出有开放重定向风险，后来改成配置里的完整 URL 白名单，查询参数不参与匹配。
 
-**ID Token 的 nonce 一定要原样回传**。客户端用它防重放，如果我们漏传，严格的 OIDC 客户端会直接拒绝登录。
+ID Token 的 nonce 一定要原样回传。客户端靠它防重放，如果我们漏传，严格的 OIDC 客户端会直接拒绝登录。
 
-**Code 一次性使用 + 短过期**。我把 code 设成 60 秒过期、用后即删，并且同一 code 被二次使用时立即吊销该 app 下所有该用户的活跃 token，这是 OAuth2 安全 BCP 推荐做法。
+code 一次性使用，加短过期。我设成 60 秒过期、用后即删，而且同一个 code 被二次使用时，立即吊销该 app 下该用户的所有活跃 token——这是 OAuth2 安全 BCP 的推荐做法。
 
-**公钥轮换**要平滑。JWT header 里带 `kid`，资源服务器按 `kid` 从 JWKS 缓存公钥；换密钥时新私钥签发带新 kid 的 token，旧公钥在 JWKS 里保留 7 天，让存量 token 自然过期。
+公钥轮换要平滑。JWT header 里带 `kid`，资源服务器按 `kid` 从 JWKS 缓存公钥；换密钥时，新私钥签发的 token 带新 kid，旧公钥在 JWKS 里保留 7 天，让存量 token 自然过期。
 
-**/userinfo 接口**默认只返回 sub，其他 claims 要看 access token 的 scope 是否包含 `profile/email/phone`，不能一股脑把用户信息全吐出去。
+/userinfo 默认只返回 sub，其他 claims 要看 access token 的 scope 里有没有 `profile/email/phone`。不能一股脑把用户信息全吐出去。
 
-**不要自己造 JWT 轮子**。我用 `golang-jwt/jwt/v5` 签发、`lestrrat-go/jwx` 处理 JWK，两个库都是社区主流，避免自己手写 base64 和 JSON 序列化时漏边界条件。
+还有一条经验：别自己造 JWT 轮子。我签发用 `golang-jwt/jwt/v5`，JWK 处理用 `lestrrat-go/jwx`，两个都是社区主流，省得自己手写 base64 和 JSON 序列化时漏掉边界条件。
 
-## 小结
+## 后来
 
-实现标准 OAuth2/OIDC 的工作量不在代码量，而在把协议里那些 MUST/SHOULD 的安全要求逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。统一认证中心改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能通过同一个 OIDC 联邦框架对接，扩展性比自定义协议好得多。标准协议的价值，就在于它让"对接"这件事不再需要一对一谈判。
+实现标准 OAuth2/OIDC，工作量真不在代码量，而在把协议里那些 MUST/SHOULD 逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能走同一个 OIDC 联邦框架，扩展性比自定义协议好得多。标准协议的价值就在这里：对接这件事，不再需要一对一谈判。
 
 > 封面图：[Strooks-traveller1 / Flickr](https://www.flickr.com/photos/44241312@N08/4059216490) · CC BY-SA 2.0

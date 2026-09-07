@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">多应用接入：一个应用一套身份、两种 Token</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">权限、限流、审计都能按应用切开</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="104" width="220" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="170" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">前端 SPA</text>
+  <text x="170" y="146" text-anchor="middle" font-size="11" fill="#64748b">浏览器里的用户操作</text>
+  <rect x="300" y="104" width="220" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="410" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">后端服务间调用</text>
+  <text x="410" y="146" text-anchor="middle" font-size="11" fill="#64748b">没有用户在场的机器流量</text>
+  <rect x="540" y="104" width="220" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="650" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">第三方合作方系统</text>
+  <text x="650" y="146" text-anchor="middle" font-size="11" fill="#64748b">更要隔离开</text>
+
+  <line x1="170" y1="160" x2="350" y2="194" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="410" y1="160" x2="410" y2="194" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="650" y1="160" x2="470" y2="194" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="300" y="198" width="220" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="410" y="222" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">管理后台创建应用</text>
+  <text x="410" y="242" text-anchor="middle" font-size="11" fill="#1e293b">签发 AppID（Snowflake）+ AppSecret</text>
+  <text x="410" y="260" text-anchor="middle" font-size="11" fill="#64748b">明文只显示一次，库中只存 bcrypt 哈希</text>
+
+  <line x1="350" y1="274" x2="245" y2="300" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="470" y1="274" x2="575" y2="300" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="304" width="330" height="88" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="84" y="330" font-size="13" font-weight="700" fill="#047857">用户级 Access Token</text>
+  <text x="84" y="350" font-size="11" fill="#1e293b">用户登录后签发，audience 绑定到该 AppID</text>
+  <text x="84" y="368" font-size="11" fill="#64748b">代表"某个用户在这个应用里的操作"</text>
+
+  <rect x="470" y="304" width="330" height="88" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="494" y="330" font-size="13" font-weight="700" fill="#6d28d9">应用级 Access Token</text>
+  <text x="494" y="350" font-size="11" fill="#1e293b">client_credentials：AppID+AppSecret 换取</text>
+  <text x="494" y="368" font-size="11" fill="#64748b">无用户上下文 · 带 app_role 和 scope · 2 小时</text>
+
+  <line x1="225" y1="392" x2="300" y2="418" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="635" y1="392" x2="560" y2="418" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="422" width="740" height="40" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="447" font-size="12" fill="#b45309">网关：按 AppID 独立限流（QPS 配额）· 按 scope 鉴权 · Secret 重置有 10 分钟宽限期，新旧并行</text>
+
+  <text x="44" y="488" font-size="12" fill="#94a3b8">新增应用只在后台创建、分配权限，认证中心代码一行不用改</text>
+</svg>

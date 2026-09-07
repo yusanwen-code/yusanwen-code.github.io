@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">统一认证中心：五个核心域与一条信任链</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">只做身份、认证、应用信任；组织和资源权限留给业务系统</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="100" width="230" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="175" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">统一支付平台</text>
+  <text x="175" y="142" text-anchor="middle" font-size="11" fill="#64748b">原来自己一套账号</text>
+  <rect x="325" y="100" width="230" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="440" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">数据治理 / 数据集管理</text>
+  <text x="440" y="142" text-anchor="middle" font-size="11" fill="#64748b">又一套 · 外部客户重复注册</text>
+  <rect x="590" y="100" width="230" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="705" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">知识库问答服务</text>
+  <text x="705" y="142" text-anchor="middle" font-size="11" fill="#64748b">再一套 · 员工记四五个密码</text>
+
+  <line x1="175" y1="156" x2="175" y2="184" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="440" y1="156" x2="440" y2="184" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="705" y1="156" x2="705" y2="184" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="440" y="176" text-anchor="middle" font-size="11" fill="#94a3b8">统一跳转登录（SSO）</text>
+
+  <rect x="60" y="188" width="760" height="152" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="80" y="212" font-size="14" font-weight="700" fill="#1e293b">统一认证中心（passport）</text>
+
+  <rect x="80" y="224" width="132" height="100" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="146" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">身份域</text>
+  <text x="146" y="268" text-anchor="middle" font-size="11" fill="#1e293b">全局 UserID</text>
+  <text x="146" y="286" text-anchor="middle" font-size="11" fill="#1e293b">Snowflake 生成</text>
+  <text x="146" y="304" text-anchor="middle" font-size="11" fill="#64748b">多凭证：密码/手机/OAuth</text>
+
+  <rect x="227" y="224" width="132" height="100" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="293" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">应用域</text>
+  <text x="293" y="268" text-anchor="middle" font-size="11" fill="#1e293b">AppID / AppSecret</text>
+  <text x="293" y="286" text-anchor="middle" font-size="11" fill="#1e293b">回调地址 · 授权方式</text>
+  <text x="293" y="304" text-anchor="middle" font-size="11" fill="#64748b">可用登录 Provider</text>
+
+  <rect x="374" y="224" width="132" height="100" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="440" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">组织域</text>
+  <text x="440" y="268" text-anchor="middle" font-size="11" fill="#1e293b">AppRole 租户隔离</text>
+  <text x="440" y="286" text-anchor="middle" font-size="11" fill="#1e293b">RBAC 权限模型</text>
+  <text x="440" y="304" text-anchor="middle" font-size="11" fill="#64748b">组织树留给业务系统</text>
+
+  <rect x="521" y="224" width="132" height="100" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="587" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">会话域</text>
+  <text x="587" y="268" text-anchor="middle" font-size="11" fill="#1e293b">JWT · RSA 私钥签</text>
+  <text x="587" y="286" text-anchor="middle" font-size="11" fill="#1e293b">Access 2h · Refresh 7d</text>
+  <text x="587" y="304" text-anchor="middle" font-size="11" fill="#64748b">RefreshToken 存 Redis 可吊销</text>
+
+  <rect x="668" y="224" width="132" height="100" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="734" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Provider 域</text>
+  <text x="734" y="268" text-anchor="middle" font-size="11" fill="#1e293b">短信 · 邮件 · 验证码</text>
+  <text x="734" y="286" text-anchor="middle" font-size="11" fill="#1e293b">社交登录可插拔</text>
+  <text x="734" y="304" text-anchor="middle" font-size="11" fill="#64748b">FanoutProvider 按权重分流</text>
+
+  <line x1="587" y1="324" x2="560" y2="356" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="400" y="360" width="170" height="64" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="485" y="386" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">JWKS 公钥端点</text>
+  <text x="485" y="406" text-anchor="middle" font-size="11" fill="#64748b">暴露当前公钥，支持轮换</text>
+
+  <line x1="570" y1="392" x2="616" y2="392" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="593" y="384" text-anchor="middle" font-size="11" fill="#94a3b8">RS256</text>
+
+  <rect x="620" y="360" width="200" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="720" y="386" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">业务系统本地验签</text>
+  <text x="720" y="406" text-anchor="middle" font-size="11" fill="#64748b">不回源 · 认证中心不参与每次请求</text>
+
+  <rect x="60" y="360" width="310" height="64" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="84" y="384" font-size="13" font-weight="700" fill="#dc2626">用户合并：最棘手的一块</text>
+  <text x="84" y="404" font-size="11" fill="#64748b">user_bindings 多对一 → 挂新 UserID + 审计日志 → 发事件让各系统做 ID 映射</text>
+
+  <text x="44" y="466" font-size="12" fill="#94a3b8">上线后：新业务接入 SSO 半天搞定 · 离职账号一处关停、全端下线 · 审计有统一入口</text>
+</svg>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="478" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">OIDC 授权码模式：从跳转登录到签发 token</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">安全要求全卡在链路上：PKCE · state/nonce · 精确 redirect_uri · code 一次性</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="104" width="160" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="140" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">第三方应用</text>
+  <text x="140" y="150" text-anchor="middle" font-size="11" fill="#64748b">public client</text>
+  <text x="140" y="168" text-anchor="middle" font-size="11" fill="#64748b">强制 PKCE</text>
+
+  <line x1="220" y1="149" x2="246" y2="149" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="104" width="210" height="90" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="355" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">GET /oauth/authorize</text>
+  <text x="355" y="148" text-anchor="middle" font-size="11" fill="#1e293b">redirect_uri 白名单精确匹配</text>
+  <text x="355" y="166" text-anchor="middle" font-size="11" fill="#1e293b">code_challenge 必须是 S256</text>
+  <text x="355" y="184" text-anchor="middle" font-size="11" fill="#64748b">未登录 → 登录页，state 保证回跳</text>
+
+  <line x1="460" y1="149" x2="486" y2="149" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="490" y="104" width="180" height="90" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="580" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">签发授权码 code</text>
+  <text x="580" y="148" text-anchor="middle" font-size="11" fill="#1e293b">60 秒过期 · 用后即删</text>
+  <text x="580" y="166" text-anchor="middle" font-size="11" fill="#1e293b">二次使用 → 吊销该 app</text>
+  <text x="580" y="184" text-anchor="middle" font-size="11" fill="#64748b">该用户所有活跃 token</text>
+
+  <line x1="670" y1="149" x2="696" y2="149" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="700" y="104" width="140" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="770" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">302 回跳</text>
+  <text x="770" y="150" text-anchor="middle" font-size="11" fill="#1e293b">redirect_uri 原样带回</text>
+  <text x="770" y="168" text-anchor="middle" font-size="11" fill="#64748b">code + state</text>
+
+  <line x1="770" y1="194" x2="168" y2="226" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="470" y="200" text-anchor="middle" font-size="11" fill="#94a3b8">客户端拿 code 来换 token</text>
+
+  <rect x="60" y="230" width="210" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="165" y="254" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">POST /oauth/token</text>
+  <text x="165" y="274" text-anchor="middle" font-size="11" fill="#1e293b">Basic Auth：AppID/Secret</text>
+  <text x="165" y="292" text-anchor="middle" font-size="11" fill="#64748b">带 code + code_verifier</text>
+
+  <line x1="270" y1="268" x2="296" y2="268" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="300" y="230" width="170" height="76" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="385" y="254" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">PKCE 校验</text>
+  <text x="385" y="274" text-anchor="middle" font-size="11" fill="#1e293b">SHA256(verifier) 对上 challenge</text>
+  <text x="385" y="292" text-anchor="middle" font-size="11" fill="#64748b">常数时间比较，防时序攻击</text>
+
+  <line x1="470" y1="268" x2="496" y2="268" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="500" y="230" width="340" height="76" rx="10" fill="#059669"/>
+  <text x="670" y="254" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">签发三件套</text>
+  <text x="670" y="274" text-anchor="middle" font-size="11" fill="#d1fae5">id_token（含 nonce · auth_time）· access_token · refresh_token</text>
+  <text x="670" y="292" text-anchor="middle" font-size="11" fill="#d1fae5">RS256 签名，header 带 kid</text>
+
+  <line x1="580" y1="306" x2="380" y2="336" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="480" y="322" text-anchor="middle" font-size="11" fill="#94a3b8">Bearer access_token</text>
+
+  <line x1="690" y1="306" x2="690" y2="336" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="748" y="324" text-anchor="middle" font-size="11" fill="#94a3b8">按 kid 验签</text>
+
+  <rect x="60" y="340" width="380" height="66" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="84" y="364" font-size="13" font-weight="700" fill="#0369a1">GET /oauth/userinfo</text>
+  <text x="84" y="384" font-size="11" fill="#1e293b">默认只给 sub；profile/email/phone 按 scope 放行，不全吐</text>
+
+  <rect x="470" y="340" width="370" height="66" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="494" y="364" font-size="13" font-weight="700" fill="#6d28d9">/oauth/jwks + 发现文档</text>
+  <text x="494" y="384" font-size="11" fill="#1e293b">新 kid 签发新 token，旧公钥保留 7 天，存量自然过期</text>
+
+  <text x="44" y="444" font-size="12" fill="#94a3b8">工作量不在代码量，在把协议里的 MUST/SHOULD 逐条落进工程</text>
+</svg>
