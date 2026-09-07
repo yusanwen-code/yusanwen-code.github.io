@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">认证 + 审计：两个中间件的处理链</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">JWT 注入身份；日志异步落盘，一条不丢</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="110" width="130" height="80" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="144" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">客户端请求</text>
+  <text x="125" y="166" text-anchor="middle" font-size="12" fill="#64748b">带 Authorization 头</text>
+
+  <line x1="190" y1="150" x2="218" y2="150" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="224" y="110" width="190" height="80" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="319" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">JWT 中间件</text>
+  <text x="319" y="160" text-anchor="middle" font-size="12" fill="#475569">验签 + 过期校验</text>
+  <text x="319" y="180" text-anchor="middle" font-size="11" fill="#64748b">注入 uid · hid · rol</text>
+
+  <line x1="414" y1="150" x2="442" y2="150" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="448" y="110" width="150" height="80" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="523" y="144" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">业务 handler</text>
+  <text x="523" y="166" text-anchor="middle" font-size="12" fill="#64748b">c.Next()</text>
+
+  <line x1="598" y1="150" x2="626" y2="150" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="632" y="110" width="188" height="80" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="726" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">日志中间件</text>
+  <text x="726" y="160" text-anchor="middle" font-size="12" fill="#475569">状态码 · 耗时 · 响应体大小</text>
+  <text x="726" y="180" text-anchor="middle" font-size="11" fill="#64748b">包装 ResponseWriter</text>
+
+  <line x1="726" y1="190" x2="726" y2="234" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="734" y="216" font-size="11" fill="#94a3b8">select + default</text>
+
+  <rect x="632" y="238" width="188" height="64" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="726" y="262" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">buffered channel</text>
+  <text x="726" y="284" text-anchor="middle" font-size="12" fill="#475569">非阻塞投递</text>
+
+  <rect x="60" y="238" width="300" height="140" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="264" font-size="13" font-weight="700" fill="#b45309">容易漏的细节</text>
+  <text x="84" y="288" font-size="12" fill="#64748b">· 请求体读完要放回（NopCloser + Buffer）</text>
+  <text x="84" y="310" font-size="12" fill="#64748b">· 大 body 截断，只记前 1KB</text>
+  <text x="84" y="332" font-size="12" fill="#64748b">· password / id_card / phone 入口掩码</text>
+  <text x="84" y="354" font-size="12" fill="#64748b">· JWT 黑名单：注销后 token 立即失效</text>
+
+  <line x1="676" y1="302" x2="540" y2="330" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="600" y="316" text-anchor="middle" font-size="11" fill="#94a3b8">正常</text>
+
+  <line x1="776" y1="302" x2="740" y2="330" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="786" y="316" font-size="11" fill="#dc2626">满了</text>
+
+  <rect x="392" y="334" width="210" height="64" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="497" y="358" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">后台 LogWriter</text>
+  <text x="497" y="380" text-anchor="middle" font-size="12" fill="#047857">满 200 条或 500ms 刷一次</text>
+
+  <rect x="640" y="334" width="180" height="64" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="730" y="358" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">降级写本地文件</text>
+  <text x="730" y="380" text-anchor="middle" font-size="12" fill="#64748b">channel 满的保底</text>
+
+  <line x1="497" y1="398" x2="497" y2="428" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="392" y="432" width="210" height="60" rx="10" fill="#059669"/>
+  <text x="497" y="456" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">MongoDB</text>
+  <text x="497" y="476" text-anchor="middle" font-size="11" fill="#d1fae5">审计日志最终落盘</text>
+
+  <line x1="730" y1="398" x2="730" y2="428" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arwC)"/>
+
+  <rect x="640" y="432" width="180" height="60" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="730" y="456" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">补传任务</text>
+  <text x="730" y="476" text-anchor="middle" font-size="12" fill="#64748b">定期扫描文件重放</text>
+
+  <line x1="640" y1="462" x2="606" y2="462" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arwG)"/>
+
+  <text x="44" y="506" font-size="12" fill="#94a3b8">正常路径走 channel 攒批，异常路径走文件 + 补传——审计日志一条都不能少</text>
+</svg>

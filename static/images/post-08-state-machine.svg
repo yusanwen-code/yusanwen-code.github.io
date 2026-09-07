@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">订单状态机：一张转移表</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">事件进来，聚合根查表决定能不能迁、迁时要做什么</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="120" width="130" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">CREATED</text>
+
+  <line x1="190" y1="148" x2="266" y2="148" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="228" y="136" text-anchor="middle" font-size="12" fill="#475569">PAY</text>
+  <text x="228" y="170" text-anchor="middle" font-size="11" fill="#94a3b8">hookLockAmount</text>
+
+  <rect x="270" y="120" width="130" height="56" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="335" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">PAYING</text>
+
+  <line x1="400" y1="148" x2="476" y2="148" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="438" y="136" text-anchor="middle" font-size="12" fill="#475569">PAY_SUCCESS</text>
+  <text x="438" y="170" text-anchor="middle" font-size="11" fill="#94a3b8">hookRecordBill</text>
+
+  <rect x="480" y="120" width="130" height="56" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="545" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">PAID</text>
+
+  <line x1="610" y1="148" x2="686" y2="148" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="648" y="136" text-anchor="middle" font-size="12" fill="#475569">SETTLE</text>
+
+  <rect x="690" y="120" width="130" height="56" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="755" y="153" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">SETTLING</text>
+
+  <line x1="755" y1="176" x2="755" y2="236" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="747" y="204" text-anchor="end" font-size="12" fill="#475569">SETTLE_DONE</text>
+  <text x="747" y="222" text-anchor="end" font-size="11" fill="#94a3b8">hookNotifyMerchant</text>
+
+  <rect x="690" y="240" width="130" height="56" rx="10" fill="#059669"/>
+  <text x="755" y="273" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">SETTLED</text>
+
+  <line x1="545" y1="176" x2="545" y2="236" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="553" y="204" font-size="12" fill="#475569">REFUND</text>
+  <text x="553" y="222" font-size="11" fill="#94a3b8">hookCreateRefundOrder</text>
+
+  <rect x="480" y="240" width="130" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="545" y="273" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">REFUNDING</text>
+
+  <line x1="545" y1="296" x2="545" y2="340" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="553" y="314" font-size="12" fill="#475569">REFUND_DONE</text>
+  <text x="553" y="332" font-size="11" fill="#94a3b8">hookReverseBill</text>
+
+  <rect x="480" y="344" width="130" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="545" y="377" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">REFUNDED</text>
+
+  <line x1="335" y1="176" x2="335" y2="236" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="343" y="204" font-size="12" fill="#dc2626">PAY_FAIL</text>
+  <text x="343" y="222" font-size="11" fill="#94a3b8">hookReleaseAmount</text>
+
+  <rect x="270" y="240" width="130" height="56" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="335" y="273" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">FAILED</text>
+
+  <line x1="125" y1="176" x2="125" y2="236" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arwC)"/>
+  <text x="133" y="212" font-size="11" fill="#94a3b8">任意非终态</text>
+
+  <rect x="60" y="240" width="130" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="266" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">CLOSED</text>
+  <text x="125" y="284" text-anchor="middle" font-size="10" fill="#94a3b8">超时 / 取消</text>
+
+  <rect x="60" y="420" width="760" height="76" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="442" font-size="13" font-weight="700" fill="#b45309">踩坑之后定下的规则</text>
+  <text x="84" y="464" font-size="12" fill="#64748b">同态事件幂等：PAID 再收到 PAY_SUCCESS，直接返回 nil——回调与补单任务竞态不再误报</text>
+  <text x="84" y="484" font-size="12" fill="#64748b">副作用与状态变更同事务，或走 Outbox；结算不拆聚合，SETTLING / SETTLED 留在同一张图</text>
+
+  <text x="44" y="514" font-size="12" fill="#94a3b8">先在状态图上画好新状态和新事件，再动手写代码</text>
+</svg>
