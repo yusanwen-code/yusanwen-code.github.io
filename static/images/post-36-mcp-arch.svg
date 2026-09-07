@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">MCP 接入：Registry 连 server，业务只认 ToolDef</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">stdio 与 SSE 双传输，工具发现与调用走标准 JSON-RPC</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="108" font-size="13" font-weight="700" fill="#475569">启动时：连接与发现</text>
+
+  <rect x="60" y="120" width="180" height="96" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="150" y="144" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">MCPRegistry</text>
+  <text x="150" y="164" text-anchor="middle" font-size="12" fill="#1e293b">按配置拉起 / 连接</text>
+  <text x="150" y="182" text-anchor="middle" font-size="12" fill="#1e293b">多个 MCP server</text>
+  <text x="150" y="200" text-anchor="middle" font-size="11" fill="#64748b">tools/list 缓存工具表</text>
+
+  <line x1="240" y1="148" x2="280" y2="146" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="240" y1="188" x2="280" y2="216" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="284" y="120" width="250" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="409" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Transport · stdio</text>
+  <text x="409" y="160" text-anchor="middle" font-size="11" fill="#64748b">本地子进程 · 进程组隔离 · SIGTERM 收尾</text>
+
+  <rect x="284" y="190" width="250" height="56" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="409" y="212" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">Transport · SSE</text>
+  <text x="409" y="230" text-anchor="middle" font-size="11" fill="#64748b">远程 server · 仅内网 · 白名单</text>
+
+  <line x1="534" y1="148" x2="566" y2="146" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="534" y1="218" x2="566" y2="220" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="570" y="120" width="125" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="632" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">知识库检索</text>
+
+  <rect x="705" y="120" width="125" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="767" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">订单查询</text>
+
+  <rect x="570" y="194" width="125" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="632" y="224" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">数据集导出</text>
+
+  <rect x="705" y="194" width="125" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="767" y="224" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">OpenAlex 文献</text>
+
+  <text x="60" y="300" font-size="13" font-weight="700" fill="#475569">一次工具调用</text>
+
+  <rect x="60" y="312" width="180" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">模型吐出 tool_calls</text>
+  <text x="150" y="356" text-anchor="middle" font-size="12" fill="#64748b">流式里的增量片段</text>
+
+  <line x1="240" y1="344" x2="264" y2="344" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="268" y="312" width="180" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="358" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">聚合为完整调用</text>
+  <text x="358" y="356" text-anchor="middle" font-size="12" fill="#64748b">解析 server 前缀</text>
+
+  <line x1="448" y1="344" x2="472" y2="344" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="476" y="312" width="180" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="566" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">tools/call</text>
+  <text x="566" y="356" text-anchor="middle" font-size="12" fill="#64748b">路由到对应 session</text>
+
+  <line x1="656" y1="344" x2="680" y2="344" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="684" y="312" width="156" height="64" rx="10" fill="#059669"/>
+  <text x="762" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">结果回填</text>
+  <text x="762" y="356" text-anchor="middle" font-size="12" fill="#d1fae5">role=tool 消息</text>
+
+  <text x="60" y="398" font-size="12" fill="#94a3b8">前端通过自定义事件 tool_call / tool_result 展示中间状态</text>
+
+  <rect x="60" y="420" width="380" height="64" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="84" y="444" font-size="13" font-weight="700" fill="#b91c1c">安全边界</text>
+  <text x="84" y="464" font-size="12" fill="#64748b">仅内网 SSE · stdio 白名单 · 参数 schema 校验</text>
+
+  <rect x="460" y="420" width="380" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="484" y="444" font-size="13" font-weight="700" fill="#475569">工具描述截断</text>
+  <text x="484" y="464" font-size="12" fill="#64748b">一句话用途 + 关键字段，防 token 飙升</text>
+
+  <text x="44" y="506" font-size="12" fill="#94a3b8">新增工具 = 加一个 server 配置，业务代码零改动</text>
+</svg>

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="538" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">light_rag：入库抽图谱，查询走双路</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">图谱增强补跨文档关联，万级以内规模不背重型存储</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="112" font-size="13" font-weight="700" fill="#475569">入库时</text>
+
+  <rect x="60" y="124" width="140" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="130" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">新文档</text>
+  <text x="130" y="172" text-anchor="middle" font-size="12" fill="#64748b">入库请求</text>
+  <text x="130" y="190" text-anchor="middle" font-size="11" fill="#94a3b8">增量更新</text>
+
+  <line x1="200" y1="166" x2="246" y2="166" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="124" width="180" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="340" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">LightRAG.ainsert</text>
+  <text x="340" y="172" text-anchor="middle" font-size="12" fill="#1e293b">LLM 抽实体 · 关系</text>
+  <text x="340" y="190" text-anchor="middle" font-size="11" fill="#64748b">KV · 向量 · 图三套存储</text>
+
+  <line x1="430" y1="150" x2="516" y2="150" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="430" y1="182" x2="516" y2="196" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="520" y="124" width="300" height="40" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="670" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">图谱存储 · NetworkX</text>
+  <text x="670" y="156" text-anchor="middle" font-size="11" fill="#64748b">KV 存储即可，不依赖 Neo4j</text>
+
+  <rect x="520" y="176" width="300" height="40" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="670" y="194" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">向量存储 · Qdrant</text>
+  <text x="670" y="208" text-anchor="middle" font-size="11" fill="#64748b">chunk 向量，供低层检索用</text>
+
+  <text x="60" y="244" font-size="12" fill="#94a3b8">增量更新：新文档只抽新的实体和关系，不必重建整个图谱</text>
+
+  <text x="60" y="286" font-size="13" font-weight="700" fill="#475569">查询时</text>
+
+  <rect x="60" y="298" width="140" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="130" y="326" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">用户问题</text>
+  <text x="130" y="346" text-anchor="middle" font-size="12" fill="#64748b">跨文档多实体</text>
+  <text x="130" y="364" text-anchor="middle" font-size="11" fill="#94a3b8">或普通事实问答</text>
+
+  <line x1="200" y1="340" x2="246" y2="340" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="298" width="180" height="84" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="340" y="322" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">检索模式</text>
+  <text x="340" y="344" text-anchor="middle" font-size="12" fill="#1e293b">naive · local</text>
+  <text x="340" y="362" text-anchor="middle" font-size="12" fill="#1e293b">global · hybrid</text>
+  <text x="340" y="378" text-anchor="middle" font-size="11" fill="#64748b">按问题类型选</text>
+
+  <line x1="430" y1="322" x2="490" y2="322" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="430" y1="362" x2="490" y2="372" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="494" y="298" width="170" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="579" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">向量检索（低层）</text>
+  <text x="579" y="336" text-anchor="middle" font-size="11" fill="#64748b">找具体片段</text>
+
+  <rect x="494" y="362" width="170" height="52" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="579" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">图谱检索（高层）</text>
+  <text x="579" y="400" text-anchor="middle" font-size="11" fill="#64748b">找实体关联</text>
+
+  <line x1="664" y1="324" x2="706" y2="334" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="664" y1="388" x2="706" y2="362" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="710" y="298" width="130" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="775" y="326" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">去重合并</text>
+  <text x="775" y="346" text-anchor="middle" font-size="12" fill="#64748b">拼进 prompt</text>
+
+  <line x1="775" y1="382" x2="775" y2="410" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="710" y="414" width="130" height="52" rx="10" fill="#059669"/>
+  <text x="775" y="436" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">生成回答</text>
+  <text x="775" y="454" text-anchor="middle" font-size="11" fill="#d1fae5">有据可依</text>
+
+  <text x="44" y="504" font-size="12" fill="#94a3b8">hybrid 效果最好也最慢（约多 300–800ms）；延迟敏感默认 local，复杂问题才上 hybrid</text>
+</svg>

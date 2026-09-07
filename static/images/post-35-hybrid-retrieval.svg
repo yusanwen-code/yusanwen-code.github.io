@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="458" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">混合检索：双路召回，RRF 融合，Rerank 收尾</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">BM25 管精确匹配，向量管语义理解，两路都认可的文档自然靠前</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="150" width="140" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="130" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">用户 query</text>
+  <text x="130" y="198" text-anchor="middle" font-size="12" fill="#64748b">ERR_CONN_RESET</text>
+<text x="130" y="214" text-anchor="middle" font-size="11" fill="#94a3b8">精确词 + 口语描述</text>
+
+  <line x1="200" y1="172" x2="246" y2="150" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="200" y1="204" x2="246" y2="250" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="104" width="200" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="350" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">BM25 关键词检索</text>
+  <text x="350" y="150" text-anchor="middle" font-size="12" fill="#1e293b">Elasticsearch · TopN</text>
+  <text x="350" y="168" text-anchor="middle" font-size="11" fill="#64748b">ik_max_word · title^2 加权</text>
+
+  <rect x="250" y="208" width="200" height="84" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="350" y="234" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">向量相似度检索</text>
+  <text x="350" y="254" text-anchor="middle" font-size="12" fill="#1e293b">Qdrant · TopN</text>
+  <text x="350" y="272" text-anchor="middle" font-size="11" fill="#64748b">bge-large-zh-v1.5 · 余弦</text>
+
+  <line x1="450" y1="146" x2="500" y2="170" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="450" y1="250" x2="500" y2="214" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="504" y="150" width="180" height="84" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="594" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">RRF 融合</text>
+  <text x="594" y="196" text-anchor="middle" font-size="12" fill="#1e293b">k=60 · 只看排名</text>
+  <text x="594" y="214" text-anchor="middle" font-size="11" fill="#64748b">不依赖原始分数</text>
+
+  <line x1="684" y1="192" x2="720" y2="192" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="702" y="184" text-anchor="middle" font-size="10" fill="#94a3b8">Top30</text>
+
+  <rect x="724" y="150" width="116" height="84" rx="10" fill="#059669"/>
+  <text x="782" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Cross-Encoder</text>
+  <text x="782" y="196" text-anchor="middle" font-size="11" fill="#d1fae5">bge-reranker-v2-m3</text>
+  <text x="782" y="214" text-anchor="middle" font-size="11" fill="#d1fae5">Top30 → Top5</text>
+
+  <line x1="782" y1="234" x2="782" y2="262" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+  <text x="782" y="282" text-anchor="middle" font-size="12" fill="#475569">Top5 上下文</text>
+
+  <rect x="60" y="310" width="380" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="84" y="336" font-size="13" font-weight="700" fill="#475569">全链路兜底</text>
+  <text x="84" y="356" font-size="12" fill="#64748b">任一路检索失败 → 用另一路结果</text>
+  <text x="84" y="374" font-size="12" fill="#64748b">Rerank 800ms 超时 → 用融合排序</text>
+
+  <rect x="460" y="310" width="380" height="76" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="484" y="336" font-size="13" font-weight="700" fill="#059669">上线效果</text>
+  <text x="484" y="356" font-size="12" fill="#047857">首条命中率：约 60% → 80% 以上</text>
+  <text x="484" y="374" font-size="12" fill="#047857">错误码、编号、人名类查询改善最明显</text>
+
+  <text x="44" y="430" font-size="12" fill="#94a3b8">Rerank 是延迟大头：30 条批量约 200–500ms，只放融合后 Top30 进精排</text>
+</svg>

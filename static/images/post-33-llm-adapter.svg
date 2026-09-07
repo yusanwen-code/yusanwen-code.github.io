@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">统一 LLM 适配层：一套接口，多路供应商</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">差异压进各 Provider，上层业务只认 LLMProvider</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="104" width="160" height="72" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="140" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">上层业务</text>
+  <text x="140" y="150" text-anchor="middle" font-size="12" fill="#64748b">知识库问答服务</text>
+  <text x="140" y="166" text-anchor="middle" font-size="11" fill="#94a3b8">只面对一套接口</text>
+
+  <line x1="220" y1="140" x2="246" y2="140" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="104" width="200" height="72" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="350" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">模型路由 Router</text>
+  <text x="350" y="148" text-anchor="middle" font-size="12" fill="#1e293b">别名 → Provider · 主备模型</text>
+  <text x="350" y="164" text="按优先级 · 按成本 · 自动降级" text-anchor="middle" font-size="11" fill="#64748b"/>
+
+  <line x1="450" y1="140" x2="476" y2="140" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="480" y="104" width="360" height="72" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="660" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">interface LLMProvider</text>
+  <text x="660" y="146" text-anchor="middle" font-size="12" fill="#1e293b">ChatCompletion · ChatCompletionStream</text>
+  <text x="660" y="162" text-anchor="middle" font-size="11" fill="#64748b">Supports()：function_calling · vision · json_mode</text>
+
+  <line x1="520" y1="176" x2="150" y2="230" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="600" y1="176" x2="345" y2="230" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="680" y1="176" x2="540" y2="230" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="760" y1="176" x2="735" y2="230" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="232" width="180" height="96" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="150" y="258" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">OpenAI 兼容基类</text>
+  <text x="150" y="278" text-anchor="middle" font-size="12" fill="#1e293b">baseURL + apiKey 即接入</text>
+  <text x="150" y="296" text-anchor="middle" font-size="11" fill="#64748b">VLLM · DeepSeek · 通义 · 智谱</text>
+  <text x="150" y="312" text-anchor="middle" font-size="11" fill="#64748b">多走这一路</text>
+
+  <rect x="255" y="232" width="180" height="96" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="345" y="258" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">Azure Provider</text>
+  <text x="345" y="278" text-anchor="middle" font-size="12" fill="#1e293b">api-key header 鉴权</text>
+  <text x="345" y="296" text-anchor="middle" font-size="11" fill="#64748b">/openai/deployments/{d}/...</text>
+  <text x="345" y="312" text-anchor="middle" font-size="11" fill="#64748b">api-version 参数</text>
+
+  <rect x="450" y="232" width="180" height="96" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="540" y="258" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">VLLM Provider</text>
+  <text x="540" y="278" text-anchor="middle" font-size="12" fill="#1e293b">基本兼容 OpenAI 格式</text>
+  <text x="540" y="296" text-anchor="middle" font-size="11" fill="#64748b">tool_calls chunk 有差异</text>
+  <text x="540" y="312" text-anchor="middle" font-size="11" fill="#64748b">空 chunk 直接跳过</text>
+
+  <rect x="645" y="232" width="180" height="96" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="735" y="258" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">TGI 适配器</text>
+  <text x="735" y="278" text-anchor="middle" font-size="12" fill="#1e293b">inputs ≠ messages</text>
+  <text x="735" y="296" text-anchor="middle" font-size="11" fill="#64748b">旧版本专门适配</text>
+  <text x="735" y="312" text-anchor="middle" font-size="11" fill="#64748b">新版 Messages API 好转</text>
+
+  <rect x="60" y="360" width="380" height="72" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="84" y="386" font-size="13" font-weight="700" fill="#475569">错误重试统一收口</text>
+  <text x="84" y="406" font-size="12" fill="#64748b">429 · 500 · 502 · 503 识别为可重试，指数退避</text>
+
+  <rect x="460" y="360" width="380" height="72" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="484" y="386" font-size="13" font-weight="700" fill="#059669">配置热更新</text>
+  <text x="484" y="406" font-size="12" fill="#047857">路由表在配置中心，变更即刷新，不用重启</text>
+
+  <text x="44" y="466" font-size="12" fill="#94a3b8">新增供应商 = 实现 LLMProvider 并注册，上层业务代码一行不改</text>
+</svg>
