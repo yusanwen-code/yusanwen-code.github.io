@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="538" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">Temporal 质量检查工作流：规则进配置，检查并行跑</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">error 阻断发布等人工，warning 放行留记录</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="96" width="180" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="150" y="122" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">quality_rules 表</text>
+  <text x="150" y="141" text-anchor="middle" font-size="11" fill="#64748b">类型 not_null/regex/sql/custom</text>
+  <text x="150" y="157" text-anchor="middle" font-size="11" fill="#64748b">参数 · 严重级别 · 适用数据源</text>
+
+  <line x1="240" y1="131" x2="306" y2="131" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="310" y="96" width="230" height="70" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="425" y="122" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">QualityCheckWorkflow</text>
+  <text x="425" y="142" text-anchor="middle" font-size="11" fill="#64748b">加载数据集启用的规则</text>
+
+  <line x1="400" y1="166" x2="184" y2="206" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="430" y1="166" x2="448" y2="206" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="450" y1="166" x2="706" y2="206" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="330" y="196" text-anchor="middle" font-size="11" fill="#94a3b8">并行执行</text>
+
+  <rect x="60" y="210" width="240" height="64" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="180" y="236" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">SQL 规则 Activity</text>
+  <text x="180" y="258" text-anchor="middle" font-size="11" fill="#64748b">下发 StarRocks · 大表聚合</text>
+
+  <rect x="330" y="210" width="240" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="450" y="236" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">not_null / regex</text>
+  <text x="450" y="258" text-anchor="middle" font-size="11" fill="#64748b">Worker 内存执行</text>
+
+  <rect x="630" y="210" width="190" height="64" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="725" y="236" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">custom</text>
+  <text x="725" y="258" text-anchor="middle" font-size="11" fill="#64748b">对应 Activity 分支</text>
+
+  <rect x="60" y="292" width="760" height="40" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="84" y="317" font-size="12" text-anchor="start" fill="#475569">Activity 幂等：dataset_id + rule_code 为幂等键，结果写 quality_results 表，重跑时已通过的规则可跳过</text>
+
+  <line x1="440" y1="332" x2="440" y2="352" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="300" y="356" width="280" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="440" y="380" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">收集结果</text>
+  <text x="440" y="400" text-anchor="middle" font-size="11" fill="#64748b">error 阻断发布 · warning 记录放行</text>
+
+  <line x1="580" y1="384" x2="616" y2="384" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="620" y="356" width="200" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="720" y="380" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">SaveReport</text>
+  <text x="720" y="400" text-anchor="middle" font-size="11" fill="#64748b">质量报告 · 通知数据负责人</text>
+
+  <line x1="360" y1="412" x2="181" y2="434" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="248" y="424" text-anchor="middle" font-size="11" fill="#94a3b8">无 error</text>
+  <line x1="500" y1="412" x2="467" y2="434" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="522" y="424" text-anchor="middle" font-size="11" fill="#dc2626">有 error</text>
+
+  <rect x="60" y="440" width="230" height="56" rx="10" fill="#059669"/>
+  <text x="175" y="464" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">PublishDataset 发布</text>
+  <text x="175" y="484" text-anchor="middle" font-size="11" fill="#d1fae5">检查通过或已豁免</text>
+
+  <rect x="350" y="440" width="230" height="56" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="465" y="464" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">等待人工 Signal</text>
+  <text x="465" y="484" text-anchor="middle" font-size="11" fill="#64748b">quality-resolve：豁免 / 修复</text>
+
+  <rect x="630" y="440" width="190" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="725" y="464" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">ContinueAsNew</text>
+  <text x="725" y="484" text-anchor="middle" font-size="11" fill="#64748b">非豁免则重跑检查</text>
+
+  <line x1="350" y1="468" x2="296" y2="468" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+  <text x="322" y="458" text-anchor="middle" font-size="11" fill="#047857">豁免</text>
+  <line x1="580" y1="468" x2="624" y2="468" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="605" y="458" text-anchor="middle" font-size="11" fill="#94a3b8">非豁免</text>
+
+  <text x="44" y="522" font-size="12" fill="#94a3b8">重试策略：3 次指数退避 · Workflow 内不用 time.Sleep / goroutine，改用 workflow.Sleep / workflow.Go</text>
+</svg>

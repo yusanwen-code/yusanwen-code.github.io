@@ -9,25 +9,28 @@ categories: ["存储"]
 description: "用预签名 URL 让客户端直传 S3，减轻后端带宽压力"
 ---
 
-## 问题背景
+## 后端中转扛不住
 
-数据治理服务接收的论文 PDF、数据集文件普遍在几十到几百 MB，早期走"客户端 → 后端 → MinIO"的中转上传，后端服务的带宽和内存压力很大：Go 的 `c.FormFile` 会把 multipart 内容写临时文件，并发一上来磁盘 IO 和 GC 都吃紧，大文件上传中断后还得从头重来。
+数据治理服务接收的论文 PDF、数据集文件普遍在几十到几百 MB。早期上传走的是「客户端 → 后端 → MinIO」的中转，后端的带宽和内存压力很大：Go 的 `c.FormFile` 会把 multipart 内容写临时文件，并发一上来磁盘 IO 和 GC 都吃紧。更难受的是，大文件传到一半断了，只能从头再来。
 
-更合理的做法是客户端直接把文件 PUT 到对象存储，后端只负责签发上传 URL 和记录元信息。S3 兼容协议（我们用 MinIO）提供的预签名 URL 正好做这件事。
+结论很自然：客户端直接把文件 PUT 到对象存储，后端只负责签发上传 URL 和记录元信息。S3 兼容协议（我们用 MinIO）的预签名 URL 正好干这件事。
 
-## 方案设计
+## 客户端直传，后端只签名
 
-后端提供一个 `POST /files/presign` 接口，入参是文件名、大小、MIME、内容 SHA256，后端：
+后端提供一个 `POST /files/presign` 接口，入参是文件名、大小、MIME、内容 SHA256。后端做四件事：
+
 1. 生成全局 file_id 和 object key（`raw/{tenant}/{yyyy}/{mm}/{file_id}.ext`）；
-2. 调用 S3 SDK 生成一个 15 分钟有效的 PUT 预签名 URL，绑定 Content-Type；
-3. 在 file_objects 表插入一条 status=uploading 的记录；
+2. 调 S3 SDK 生成一个 15 分钟有效的 PUT 预签名 URL，绑定 Content-Type；
+3. 在 file_objects 表插一条 status=uploading 的记录；
 4. 把 URL 和 file_id 返回给客户端。
 
-客户端用这个 URL 直接 PUT 文件到 MinIO，上传完成后回调 `POST /files/{id}/complete`，后端校验对象是否真实存在、大小是否匹配，然后把状态置为 uploaded 并投递解析任务。
+客户端拿着这个 URL 直接 PUT 文件到 MinIO，传完回调 `POST /files/{id}/complete`。后端校验对象是否真实存在、大小是否匹配，状态置为 uploaded，然后投递解析任务。
 
-对超过 100MB 的文件，我们走分片上传（CreateMultipartUpload → 各分片预签名 → CompleteMultipartUpload），支持断点续传。
+超过 100MB 的文件走分片上传（CreateMultipartUpload → 各分片预签名 → CompleteMultipartUpload），支持断点续传。
 
-## 关键代码
+![预签名直传链路：客户端直传 MinIO，后端只签名与校验](/images/post-26-presign-upload.svg)
+
+## Presign 与 Complete
 
 ```go
 import (
@@ -109,16 +112,20 @@ func (h *FileHandler) Complete(c *gin.Context) {
 }
 ```
 
-## 踩坑与权衡
+## 五个坑
 
-- 预签名 URL 绑定了 HTTP 方法和 headers，客户端必须原样使用。前端最常见的错误是 PUT 时手动加了 `Content-Type` 但值和签名时不一致，S3 直接返回 SignatureDoesNotMatch。要么严格对齐，要么签名时不指定 ContentType 由客户端自定，但这样有被篡改类型的风险。
-- 预签名 URL 本身不鉴权，拿到的人都能上传。我们把有效期压到 15 分钟，并且 object key 用不可猜的 Snowflake ID，避免被枚举。
-- 大文件必须走分片。单片 PUT 虽然简单，但 500MB 文件断一次就要重传，体验很差。分片上传每片 16MB，并发上传，单片失败只需重传那片。
-- HeadObject 校验不能省。客户端可能拿到 URL 后不传或传一半就调 complete，必须从 S3 侧确认对象真实存在且大小匹配。
-- MinIO 的预签名 v4 和 AWS S3 行为基本一致，但部分老版本 MinIO 对带 Metadata 的签名有兼容问题，升级到最新稳定版即可。
+第一个最常见：预签名 URL 绑定了 HTTP 方法和 headers，客户端必须原样使用。前端爱犯的错是 PUT 时手动加了个 `Content-Type`，值却和签名时不一致，S3 直接甩回来一个 SignatureDoesNotMatch。要么严格对齐，要么签名时不指定 ContentType 让客户端自定——但后者有类型被篡改的风险。
 
-## 小结
+第二个是权限。预签名 URL 本身不鉴权，拿到的人都能传。我们把有效期压到 15 分钟，object key 用不可猜的 Snowflake ID，防枚举。
 
-预签名上传把后端从数据通路中摘出来，只做签名和校验，带宽压力下降明显，客户端还能享受对象存储的分片和断点续传能力。配合 file_objects 表的状态机，上传、校验、解析三步衔接清晰，是大文件场景值得采用的模式。
+第三个是大文件。单片 PUT 虽然简单，500MB 的文件断一次就得重传，体验很差。分片上传每片 16MB，并发传，单片失败只需重传那一片。
+
+第四个：HeadObject 校验不能省。客户端可能拿到 URL 后根本不传，或者传一半就调 complete，必须从 S3 侧确认对象真实存在且大小匹配。
+
+第五个是 MinIO 版本。它的预签名 v4 和 AWS S3 行为基本一致，但部分老版本对带 Metadata 的签名有兼容问题，升级到最新稳定版就好。
+
+## 后来
+
+预签名上传把后端从数据通路里摘了出去，只做签名和校验，带宽压力降得非常明显，客户端还能直接享受对象存储的分片和断点续传。配上 file_objects 表的状态机，上传、校验、解析三步衔接得很清楚。大文件场景，这个模式值得用。
 
 > 封面图：[Aaron Volkening / Flickr](https://www.flickr.com/photos/87297882@N03/52077049549) · CC BY 2.0

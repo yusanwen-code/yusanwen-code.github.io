@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 528" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="526" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">数据治理链路：从原始文件到结构化元数据</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">存储、解析、元数据三件事解耦，每一步可独立重试和替换</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="100" width="760" height="80" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="76" y="132" font-size="13" font-weight="700" text-anchor="start" fill="#1e293b">原始文件层</text>
+  <text x="76" y="152" font-size="11" text-anchor="start" fill="#94a3b8">路径 raw/{tenant}/{yyyy}/{mm}/{id}.pdf</text>
+  <rect x="200" y="114" width="180" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="290" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">S3 预签名直传</text>
+  <text x="290" y="154" text-anchor="middle" font-size="11" fill="#64748b">客户端直达对象存储</text>
+  <line x1="380" y1="140" x2="400" y2="140" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="406" y="114" width="190" height="52" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="501" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">MinIO 对象存储</text>
+  <text x="501" y="154" text-anchor="middle" font-size="11" fill="#64748b">按租户和年月组织路径</text>
+  <line x1="596" y1="140" x2="616" y2="140" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="620" y="114" width="180" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="710" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">file_objects 表</text>
+  <text x="710" y="154" text-anchor="middle" font-size="11" fill="#64748b">大小·类型·哈希·状态</text>
+
+  <text x="458" y="197" font-size="11" fill="#94a3b8">任务表 + 消息队列解耦</text>
+  <line x1="440" y1="180" x2="440" y2="202" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="204" width="760" height="92" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="76" y="236" font-size="13" font-weight="700" text-anchor="start" fill="#1e293b">解析层</text>
+  <text x="76" y="256" font-size="11" text-anchor="start" fill="#94a3b8">按类型路由</text>
+  <rect x="200" y="222" width="140" height="56" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="270" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">异步 Worker</text>
+  <text x="270" y="266" text-anchor="middle" font-size="11" fill="#64748b">消费解析任务</text>
+  <line x1="340" y1="238" x2="374" y2="236" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="340" y1="250" x2="374" y2="250" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="340" y1="262" x2="374" y2="264" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="380" y="222" width="140" height="56" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="450" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">pdfplumber</text>
+  <text x="450" y="266" text-anchor="middle" font-size="11" fill="#64748b">文本 PDF · 章节结构</text>
+  <rect x="530" y="222" width="140" height="56" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="600" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">OCR</text>
+  <text x="600" y="266" text-anchor="middle" font-size="11" fill="#64748b">扫描件才进队列</text>
+  <rect x="680" y="222" width="140" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="750" y="246" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">GROBID / 正则</text>
+  <text x="750" y="266" text-anchor="middle" font-size="11" fill="#64748b">标题·作者·DOI·摘要</text>
+
+  <line x1="440" y1="296" x2="440" y2="314" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="316" width="760" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="76" y="344" font-size="13" font-weight="700" text-anchor="start" fill="#1e293b">清洗层</text>
+  <text x="76" y="364" font-size="11" text-anchor="start" fill="#94a3b8">副本出新版</text>
+  <rect x="200" y="328" width="620" height="46" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="510" y="347" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Temporal 工作流编排</text>
+  <text x="510" y="366" text-anchor="middle" font-size="11" fill="#64748b">作者名标准化 · 机构归一化 · DOI 校验去重</text>
+
+  <line x1="440" y1="386" x2="440" y2="406" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="410" width="760" height="80" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="76" y="442" font-size="13" font-weight="700" text-anchor="start" fill="#1e293b">元数据层</text>
+  <text x="76" y="462" font-size="11" text-anchor="start" fill="#94a3b8">多态存储</text>
+  <rect x="200" y="424" width="180" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="290" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">MySQL 权威库</text>
+  <text x="290" y="464" text-anchor="middle" font-size="11" fill="#64748b">在线读写</text>
+  <rect x="396" y="424" width="180" height="52" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="486" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">StarRocks</text>
+  <text x="486" y="464" text-anchor="middle" font-size="11" fill="#64748b">分析查询</text>
+  <rect x="592" y="424" width="180" height="52" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="682" y="446" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Elasticsearch</text>
+  <text x="682" y="464" text-anchor="middle" font-size="11" fill="#64748b">全文索引</text>
+
+  <text x="44" y="512" font-size="12" fill="#94a3b8">原始文件永远不修改：清洗基于副本生成新版本，解析可随时重跑 · 结果挂在 file_id 下可追溯</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">MySQL + StarRocks：两类负载，两个库</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">交易走 MySQL，分析走 StarRocks，同步链路补齐数据</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="110" width="200" height="170" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="160" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">应用服务</text>
+  <rect x="76" y="150" width="168" height="44" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="160" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">交易 DAO</text>
+  <text x="160" y="186" text-anchor="middle" font-size="11" fill="#64748b">*gorm.DB · 在线读写</text>
+  <rect x="76" y="210" width="168" height="44" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="160" y="228" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">分析 DAO</text>
+  <text x="160" y="246" text-anchor="middle" font-size="11" fill="#64748b">*sql.DB · OLAP</text>
+
+  <rect x="330" y="110" width="220" height="90" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="440" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">MySQL 权威库</text>
+  <text x="440" y="158" text-anchor="middle" font-size="11" fill="#64748b">低延迟 · 强事务 · 在线读写</text>
+  <text x="440" y="176" text-anchor="middle" font-size="11" fill="#64748b">文件 · 元数据 · 规则 · 任务状态</text>
+
+  <rect x="330" y="270" width="220" height="90" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="440" y="298" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">StarRocks</text>
+  <text x="440" y="318" text-anchor="middle" font-size="11" fill="#64748b">主键模型做明细</text>
+  <text x="440" y="336" text-anchor="middle" font-size="11" fill="#64748b">聚合模型做汇总</text>
+
+  <line x1="260" y1="172" x2="326" y2="160" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="293" y="150" text-anchor="middle" font-size="11" fill="#94a3b8">交易 SQL</text>
+  <line x1="260" y1="232" x2="326" y2="312" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="283" y="275" text-anchor="middle" font-size="11" fill="#94a3b8">分析 SQL</text>
+
+  <line x1="400" y1="204" x2="400" y2="264" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="392" y="226" text-anchor="end" font-size="11" fill="#94a3b8">SeaTunnel 批量</text>
+  <text x="392" y="242" text-anchor="end" font-size="11" fill="#94a3b8">updated_at 增量</text>
+  <line x1="480" y1="204" x2="480" y2="264" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="488" y="226" text-anchor="start" font-size="11" fill="#94a3b8">Canal 实时</text>
+  <text x="488" y="242" text-anchor="start" font-size="11" fill="#94a3b8">binlog · 质量结果等表</text>
+
+  <rect x="620" y="110" width="220" height="76" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="730" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">配置中心</text>
+  <text x="730" y="156" text-anchor="middle" font-size="11" fill="#64748b">连接信息统一收口</text>
+  <text x="730" y="174" text-anchor="middle" font-size="11" fill="#64748b">启动构建两个单例</text>
+
+  <rect x="620" y="270" width="220" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="730" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">StarRocks 账号只读</text>
+  <text x="730" y="316" text-anchor="middle" font-size="11" fill="#64748b">防误写 · 评审重点看 DAO 注入哪个 db</text>
+  <text x="730" y="334" text-anchor="middle" font-size="11" fill="#64748b">「在事务里查分析库」是典型事故</text>
+
+  <rect x="60" y="396" width="760" height="56" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="84" y="420" font-size="13" font-weight="700" text-anchor="start" fill="#047857">对延迟坦诚</text>
+  <text x="84" y="440" font-size="12" text-anchor="start" fill="#64748b">同步延迟秒级到分钟级，分析页面标注「数据更新于 X 分钟前」 · 不做自动路由魔法，DAO 显式声明用哪个库</text>
+
+  <text x="44" y="478" font-size="12" fill="#94a3b8">StarRocks 兼容 MySQL 协议但方言有差异：不支持外键 · AutoMigrate 不可用 · 建表语句单独维护</text>
+</svg>
