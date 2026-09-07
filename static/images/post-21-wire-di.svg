@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="458" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">Wire：编译期拼装，运行时只认接口</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">对象创建与使用分开 · 生成 wire_gen.go · 无运行时反射</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="246" height="142" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="60" y="128" font-size="13" font-weight="700" fill="#0369a1">wire.go · wire.Build(...)</text>
+  <text x="60" y="150" font-size="12" fill="#1e293b">NewDB · dao.NewUserDAO</text>
+  <text x="60" y="168" font-size="12" fill="#1e293b">NewTencentSMSProvider</text>
+  <text x="60" y="186" font-size="12" fill="#1e293b">service.NewUserService</text>
+  <text x="60" y="204" font-size="12" fill="#1e293b">handler.NewUserHandler</text>
+  <text x="60" y="222" font-size="12" fill="#1e293b">NewApp</text>
+
+  <line x1="290" y1="175" x2="326" y2="175" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="330" y="122" width="220" height="106" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="350" y="148" font-size="13" font-weight="700" fill="#6d28d9">编译期生成 wire_gen.go</text>
+  <text x="350" y="170" font-size="12" fill="#1e293b">构造代码直接生成</text>
+  <text x="350" y="188" font-size="12" fill="#1e293b">类型在编译期对上</text>
+  <text x="350" y="208" font-size="11" fill="#64748b">无运行时反射</text>
+
+  <line x1="550" y1="175" x2="586" y2="175" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="590" y="130" width="180" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="680" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">main · InitApp()</text>
+  <text x="680" y="180" text-anchor="middle" font-size="11" fill="#64748b">一次调用拼好整图</text>
+  <text x="680" y="196" text-anchor="middle" font-size="11" fill="#64748b">返回 *App</text>
+
+  <text x="44" y="278" font-size="13" font-weight="700" fill="#475569">运行时的对象图</text>
+
+  <rect x="44" y="292" width="150" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="119" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">UserHandler</text>
+  <text x="119" y="338" text-anchor="middle" font-size="11" fill="#64748b">HTTP 入口</text>
+
+  <line x1="198" y1="324" x2="218" y2="324" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="224" y="292" width="200" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="324" y="314" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">UserService</text>
+  <text x="324" y="332" text-anchor="middle" font-size="11" fill="#64748b">依赖 UserDAO 接口</text>
+  <text x="324" y="348" text-anchor="middle" font-size="11" fill="#64748b">和 SMSProvider</text>
+
+  <line x1="428" y1="324" x2="448" y2="324" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="454" y="292" width="140" height="64" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="524" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">UserDAO 接口</text>
+  <text x="524" y="338" text-anchor="middle" font-size="11" fill="#64748b">Service 只认它</text>
+
+  <line x1="630" y1="324" x2="600" y2="324" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="615" y="312" text-anchor="middle" font-size="11" fill="#94a3b8">实现</text>
+
+  <rect x="634" y="292" width="150" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="709" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">GormDAO</text>
+  <text x="709" y="338" text-anchor="middle" font-size="11" fill="#64748b">唯一的落地实现</text>
+
+  <rect x="44" y="386" width="390" height="66" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="60" y="410" font-size="13" font-weight="700" fill="#059669">单测：不需要 Wire 参与</text>
+  <text x="60" y="432" font-size="12" fill="#047857">NewUserService(&amp;mockUserDAO{}, &amp;mockSMS{})</text>
+
+  <rect x="454" y="386" width="386" height="66" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="470" y="410" font-size="13" font-weight="700" fill="#b45309">两个绕不开的点</text>
+  <text x="470" y="430" font-size="12" fill="#1e293b">依赖循环 Wire 直接报错，逼你重新分层</text>
+  <text x="470" y="446" font-size="12" fill="#1e293b">wire_gen.go 要提交仓库，CI 里加 make wire</text>
+
+  <text x="44" y="468" font-size="12" fill="#94a3b8">Provider 按模块收成 ProviderSet，顶层 wire.Build 汇总；构造函数直接返回接口，Bind 基本用不上</text>
+</svg>

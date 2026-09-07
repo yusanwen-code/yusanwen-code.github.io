@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="458" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">事务藏在 Context 里，DAO 无感知</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">WithTx 存句柄 · GetDB 取句柄 · 三张表一个事务</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="220" height="120" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="60" y="130" font-size="13" font-weight="700" fill="#6d28d9">AppService.CreateApp</text>
+  <text x="60" y="152" font-size="12" fill="#1e293b">txm.WithTx(ctx, fn)</text>
+  <text x="60" y="170" font-size="12" fill="#1e293b">开事务，tx 存入 ctx</text>
+  <text x="60" y="192" font-size="11" fill="#64748b">成功提交 · 出错/panic 回滚</text>
+  <text x="60" y="244" font-size="11" fill="#94a3b8">同一个 ctx 一路传下去</text>
+
+  <line x1="264" y1="140" x2="312" y2="132" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="264" y1="164" x2="312" y2="200" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="264" y1="188" x2="312" y2="268" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="316" y="104" width="270" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="330" y="126" font-size="12" font-weight="700" fill="#1e293b">appDAO.Create(ctx)</text>
+  <text x="330" y="146" font-size="11" fill="#64748b">写 apps 表</text>
+
+  <rect x="316" y="172" width="270" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="330" y="194" font-size="12" font-weight="700" fill="#1e293b">appDAO.CreateCredential(ctx)</text>
+  <text x="330" y="214" font-size="11" fill="#64748b">写 app_credentials</text>
+
+  <rect x="316" y="240" width="270" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="330" y="262" font-size="12" font-weight="700" fill="#1e293b">auditDAO.Log(ctx)</text>
+  <text x="330" y="282" font-size="11" fill="#64748b">写 audit_logs</text>
+
+  <line x1="586" y1="132" x2="612" y2="180" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="586" y1="200" x2="612" y2="200" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="586" y1="268" x2="612" y2="220" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="620" y="156" width="216" height="88" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="636" y="182" font-size="13" font-weight="700" fill="#0369a1">GetDB(ctx, d.db)</text>
+  <text x="636" y="204" font-size="12" fill="#1e293b">ctx 里有 tx → 用 tx</text>
+  <text x="636" y="222" font-size="12" fill="#1e293b">没有 → 用默认 db</text>
+
+  <line x1="728" y1="244" x2="728" y2="284" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="620" y="288" width="216" height="96" rx="10" fill="#059669"/>
+  <text x="728" y="314" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">同一个事务</text>
+  <text x="728" y="336" text-anchor="middle" font-size="11" fill="#d1fae5">BEGIN → 三张表一起写</text>
+  <text x="728" y="352" text-anchor="middle" font-size="11" fill="#d1fae5">error / panic → 全回滚</text>
+  <text x="728" y="368" text-anchor="middle" font-size="11" fill="#d1fae5">成功 → 提交</text>
+
+  <rect x="44" y="288" width="270" height="96" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="60" y="314" font-size="13" font-weight="700" fill="#b91c1c">别把 ctx 传给 goroutine</text>
+  <text x="60" y="336" font-size="12" fill="#1e293b">异步任务 panic 不触发回滚</text>
+  <text x="60" y="354" font-size="12" fill="#1e293b">tx 那时可能已提交或回滚</text>
+  <text x="60" y="372" font-size="12" fill="#1e293b">异步改用 Background 另起</text>
+
+  <rect x="334" y="288" width="270" height="96" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="350" y="314" font-size="13" font-weight="700" fill="#b45309">嵌套 WithTx 靠 savepoint</text>
+  <text x="350" y="336" font-size="12" fill="#1e293b">内层回滚不连累外层</text>
+  <text x="350" y="354" font-size="12" fill="#1e293b">内层 error 被吞，外层照常提交</text>
+
+  <text x="44" y="432" font-size="12" fill="#94a3b8">代价：事务边界隐式藏在 ctx 里，靠 Code Review 和 Service 方法注释兜住</text>
+</svg>
