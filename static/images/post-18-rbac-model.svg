@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">用户-团队-角色-权限：模型与鉴权链路</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">网关管路由、服务管数据；缓存带版本号，变更递增即失效</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="140" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="114" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">用户 User</text>
+  <text x="114" y="156" text-anchor="middle" font-size="11" fill="#64748b">与团队多对多</text>
+  <text x="114" y="176" text-anchor="middle" font-size="11" fill="#64748b">在团队内绑角色</text>
+
+  <line x1="184" y1="152" x2="208" y2="152" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="212" y="104" width="170" height="96" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="297" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">团队 Team</text>
+  <text x="297" y="156" text-anchor="middle" font-size="11" fill="#1e293b">隔离边界</text>
+  <text x="297" y="176" text-anchor="middle" font-size="11" fill="#64748b">TeamMember 关联角色</text>
+
+  <line x1="382" y1="152" x2="406" y2="152" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="410" y="104" width="220" height="96" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="520" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">角色 Role</text>
+  <text x="520" y="156" text-anchor="middle" font-size="11" fill="#1e293b">全局角色 / AppRole</text>
+  <text x="520" y="176" text-anchor="middle" font-size="11" fill="#64748b">继承：team-admin 涵盖 team-viewer</text>
+
+  <line x1="630" y1="152" x2="652" y2="152" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="656" y="104" width="180" height="96" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="746" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">权限点 Permission</text>
+  <text x="746" y="156" text-anchor="middle" font-size="11" fill="#1e293b">「资源:操作」格式</text>
+  <text x="746" y="176" text-anchor="middle" font-size="11" fill="#64748b">dataset:read 等</text>
+
+  <text x="44" y="234" font-size="13" font-weight="700" fill="#475569">鉴权分两级，粗细各管一段</text>
+
+  <line x1="470" y1="200" x2="239" y2="254" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="570" y1="200" x2="647" y2="254" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="44" y="258" width="390" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="68" y="284" font-size="13" font-weight="700" fill="#0369a1">网关层 · 粗粒度</text>
+  <text x="68" y="306" font-size="11" fill="#1e293b">JWT 里的角色信息：这个 Token 能不能走这个路由</text>
+  <text x="68" y="326" font-size="11" fill="#64748b">本地判断，不回源</text>
+
+  <line x1="438" y1="300" x2="454" y2="300" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="458" y="258" width="378" height="84" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="482" y="284" font-size="13" font-weight="700" fill="#1e293b">业务服务层 · 细粒度</text>
+  <text x="482" y="306" font-size="11" fill="#1e293b">能不能操作这条数据：gRPC 调 CheckPermission</text>
+  <text x="482" y="326" font-size="11" fill="#64748b">或读本地权限缓存</text>
+
+  <rect x="44" y="372" width="792" height="90" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="68" y="398" font-size="13" font-weight="700" fill="#b45309">权限缓存：版本号方案</text>
+  <text x="68" y="420" font-size="11" fill="#1e293b">key：perm:{teamID}:{userID}:{appID} + 版本号；成员或角色变更时递增版本号</text>
+  <text x="68" y="440" font-size="11" fill="#64748b">角色变更不必遍历删用户缓存，避开击穿；代价是短暂的新旧权限并存窗口</text>
+
+  <text x="44" y="486" font-size="12" fill="#94a3b8">入转调离只在一处改权限；审计统一导出</text>
+</svg>

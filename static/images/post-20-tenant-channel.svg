@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">多租户通道：按 team / app / channel 切换</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">查配置 → 取 Provider 实例 → 发送；没有自定义配置就回退平台默认</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="190" height="88" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="139" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">发送请求</text>
+  <text x="139" y="154" text-anchor="middle" font-size="11" fill="#1e293b">team_id · app_id · channel</text>
+  <text x="139" y="174" text-anchor="middle" font-size="11" fill="#64748b">按上下文定位通道配置</text>
+
+  <line x1="234" y1="148" x2="258" y2="148" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="262" y="104" width="220" height="88" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="372" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">ChannelConfig</text>
+  <text x="372" y="154" text-anchor="middle" font-size="11" fill="#1e293b">DB：供应商 · 加密凭证</text>
+  <text x="372" y="174" text-anchor="middle" font-size="11" fill="#1e293b">模板 ID · 签名 · 状态</text>
+
+  <line x1="482" y1="148" x2="506" y2="148" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="510" y="104" width="180" height="88" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="600" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Provider 缓存</text>
+  <text x="600" y="154" text-anchor="middle" font-size="11" fill="#1e293b">sync.Map，key=配置 hash</text>
+  <text x="600" y="174" text-anchor="middle" font-size="11" fill="#64748b">client 并发安全，按配置复用</text>
+
+  <line x1="690" y1="148" x2="714" y2="148" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="718" y="104" width="118" height="88" rx="10" fill="#059669"/>
+  <text x="777" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">发送</text>
+  <text x="777" y="162" text-anchor="middle" font-size="11" fill="#d1fae5">短信 / 邮件</text>
+
+  <line x1="372" y1="192" x2="300" y2="242" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="356" y="226" text-anchor="middle" font-size="11" fill="#94a3b8">无自定义配置时</text>
+
+  <rect x="44" y="246" width="396" height="88" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="68" y="272" font-size="13" font-weight="700" fill="#b45309">回退机制</text>
+  <text x="68" y="294" font-size="11" fill="#1e293b">没有自定义配置的租户，直接用平台默认通道</text>
+  <text x="68" y="314" font-size="11" fill="#64748b">默认通道加令牌桶限流 + 告警，防共用账号触发限流</text>
+
+  <rect x="464" y="246" width="372" height="88" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="488" y="272" font-size="13" font-weight="700" fill="#6d28d9">人机校验前置</text>
+  <text x="488" y="294" font-size="11" fill="#1e293b">腾讯云验证码：前端先取 ticket</text>
+  <text x="488" y="314" font-size="11" fill="#64748b">后端校验通过才发码，叠加频率限制双保险</text>
+
+  <rect x="44" y="364" width="792" height="88" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="68" y="390" font-size="13" font-weight="700" fill="#b91c1c">凭证安全</text>
+  <text x="68" y="412" font-size="11" fill="#1e293b">AES-GCM 加密落库，明文不落盘；主密钥从 KMS 或环境变量读取</text>
+  <text x="68" y="432" font-size="11" fill="#64748b">配置变更：更新数据库 + 删缓存 key，下一个请求自动重建 Provider</text>
+
+  <text x="44" y="478" font-size="12" fill="#94a3b8">大流量客户引导改用自有腾讯云账号，签名和凭证彻底隔离</text>
+</svg>

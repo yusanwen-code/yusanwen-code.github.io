@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">验证码发送：Provider 抽象与配置化</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">业务只依赖接口，用哪家由配置决定，改配置不重启</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="200" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="144" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">VerifyService</text>
+  <text x="144" y="156" text-anchor="middle" font-size="11" fill="#1e293b">生成验证码存 Redis，5 分钟过期</text>
+  <text x="144" y="176" text-anchor="middle" font-size="11" fill="#64748b">调用注入的 Provider，只管发</text>
+
+  <line x1="244" y1="152" x2="268" y2="152" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="272" y="104" width="200" height="96" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="372" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">三个接口</text>
+  <text x="372" y="156" text-anchor="middle" font-size="11" fill="#1e293b">SMSProvider · EmailProvider</text>
+  <text x="372" y="176" text-anchor="middle" font-size="11" fill="#1e293b">CaptchaProvider</text>
+
+  <line x1="472" y1="140" x2="556" y2="119" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="472" y1="152" x2="556" y2="153" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="472" y1="164" x2="556" y2="187" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="560" y="106" width="276" height="26" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="698" y="123" text-anchor="middle" font-size="12" fill="#1e293b">腾讯云 SMS</text>
+
+  <rect x="560" y="140" width="276" height="26" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="698" y="157" text-anchor="middle" font-size="12" fill="#166534">SMTP 邮件</text>
+
+  <rect x="560" y="174" width="276" height="26" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="698" y="191" text-anchor="middle" font-size="12" fill="#1e293b">腾讯云验证码</text>
+
+  <line x1="242" y1="236" x2="150" y2="204" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="196" y="228" text-anchor="middle" font-size="11" fill="#94a3b8">注入实现</text>
+
+  <rect x="44" y="236" width="396" height="90" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="68" y="262" font-size="13" font-weight="700" fill="#6d28d9">工厂注册</text>
+  <text x="68" y="284" font-size="11" fill="#1e293b">各实现在自己的包里 init() 注册进 map</text>
+  <text x="68" y="304" font-size="11" fill="#64748b">Wire 注入时按配置名取工厂创建实例</text>
+
+  <line x1="462" y1="281" x2="444" y2="281" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="464" y="236" width="372" height="90" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="488" y="262" font-size="13" font-weight="700" fill="#b45309">配置热加载</text>
+  <text x="488" y="284" font-size="11" fill="#1e293b">配置存数据库，支持按应用/团队覆盖</text>
+  <text x="488" y="304" font-size="11" fill="#64748b">atomic.Value 整体替换，读端无锁</text>
+
+  <rect x="44" y="356" width="396" height="88" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="68" y="382" font-size="13" font-weight="700" fill="#166534">熔断降级</text>
+  <text x="68" y="404" font-size="11" fill="#1e293b">短信通道失败 → 自动降级发邮件（绑过邮箱才行）</text>
+  <text x="68" y="424" font-size="11" fill="#64748b">指标上报，用于告警</text>
+
+  <rect x="464" y="356" width="372" height="88" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="488" y="382" font-size="13" font-weight="700" fill="#b91c1c">限流防刷</text>
+  <text x="488" y="404" font-size="11" fill="#1e293b">同一手机号 60 秒 1 次，一天最多 10 次</text>
+  <text x="488" y="424" font-size="11" fill="#64748b">包在 Provider 外层，发送接口不被滥用</text>
+
+  <text x="44" y="472" font-size="12" fill="#94a3b8">新增供应商：实现接口 + init() 注册，业务代码零改动</text>
+</svg>
