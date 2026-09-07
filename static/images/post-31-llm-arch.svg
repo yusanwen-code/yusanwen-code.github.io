@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="538" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">知识库问答服务：六层架构</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">业务方只管知识库和提示词，模型、检索、上下文这些共性能力沉淀在平台里</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="210" width="200" height="170" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="144" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">业务方</text>
+  <text x="144" y="268" text-anchor="middle" font-size="12" fill="#1e293b">客服 · 智能问答</text>
+  <text x="144" y="292" text-anchor="middle" font-size="12" fill="#1e293b">研发 · 代码助手</text>
+  <text x="144" y="316" text-anchor="middle" font-size="12" fill="#1e293b">数据 · 自然语言查数</text>
+  <text x="144" y="352" text-anchor="middle" font-size="11" fill="#64748b">各自想接大模型</text>
+
+  <line x1="244" y1="296" x2="284" y2="296" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="264" y="256" text-anchor="middle" font-size="11" fill="#94a3b8">统一 API</text>
+
+  <rect x="290" y="104" width="380" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="306" y="126" font-size="13" font-weight="700" fill="#0369a1">接入层</text>
+  <text x="306" y="146" font-size="11" fill="#1e293b">统一鉴权（JWT）· 限流 · SSE 流式输出</text>
+
+  <rect x="290" y="164" width="380" height="52" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="306" y="186" font-size="13" font-weight="700" fill="#6d28d9">会话层</text>
+  <text x="306" y="206" font-size="11" fill="#1e293b">多轮历史 · Token 预算 · 对话摘要</text>
+
+  <rect x="290" y="224" width="380" height="52" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="306" y="246" font-size="13" font-weight="700" fill="#b45309">检索层</text>
+  <text x="306" y="266" font-size="11" fill="#1e293b">BM25 + 向量混合检索 · light_rag · 知识图谱</text>
+
+  <rect x="290" y="284" width="380" height="52" rx="10" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="306" y="306" font-size="13" font-weight="700" fill="#4338ca">模型层</text>
+  <text x="306" y="326" font-size="11" fill="#1e293b">OpenAI / Azure / VLLM / HuggingFace · 路由与降级</text>
+
+  <rect x="290" y="344" width="380" height="52" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="306" y="366" font-size="13" font-weight="700" fill="#059669">工具层</text>
+  <text x="306" y="386" font-size="11" fill="#1e293b">MCP 工具 · Function Calling · 外部 API 编排</text>
+
+  <rect x="290" y="404" width="380" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="306" y="426" font-size="13" font-weight="700" fill="#1e293b">数据层</text>
+  <text x="306" y="446" font-size="11" fill="#1e293b">PostgreSQL · Milvus/Qdrant · Redis</text>
+
+  <rect x="700" y="100" width="140" height="120" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="770" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">数据集管理服务</text>
+  <text x="770" y="152" text-anchor="middle" font-size="11" fill="#1e293b">文档解析 + 向量化</text>
+  <text x="770" y="172" text-anchor="middle" font-size="11" fill="#64748b">eino + pond 高并发</text>
+
+  <path d="M 770 220 L 770 420 L 676 420" fill="none" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="782" y="330" font-size="11" fill="#94a3b8">向量入库</text>
+
+  <text x="44" y="500" font-size="12" fill="#94a3b8">检索失败不阻断：800ms 超时即走纯对话兜底，响应头标注 X-Retrieval-Mode: fallback</text>
+</svg>
