@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">金丹技能包：字段进，prompt 出</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">用户只填字段；怎么渲染成提示词，由引擎统一控制</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="110" width="200" height="310" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="76" y="136" font-size="13" font-weight="700" fill="#0369a1">金丹 Elixir</text>
+  <text x="76" y="162" font-size="12" fill="#1e293b">identity 身份一句话</text>
+  <text x="76" y="184" font-size="12" fill="#1e293b">expertise 专长标签</text>
+  <text x="76" y="206" font-size="12" fill="#1e293b">tone 语气打分 0~1</text>
+  <text x="76" y="228" font-size="12" fill="#1e293b">principles 行为原则</text>
+  <text x="76" y="250" font-size="12" fill="#1e293b">constraints 硬约束</text>
+  <text x="76" y="272" font-size="12" fill="#1e293b">few_shots 示例对话</text>
+  <text x="76" y="294" font-size="12" fill="#1e293b">tools 工具白名单</text>
+  <text x="76" y="316" font-size="12" fill="#1e293b">priority · conflicts_with</text>
+  <text x="76" y="338" font-size="12" fill="#1e293b">version · content_hash</text>
+  <text x="76" y="368" font-size="11" fill="#64748b">style_notes 自由补充（放最后）</text>
+
+  <line x1="264" y1="225" x2="318" y2="225" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="291" y="212" text-anchor="middle" font-size="11" fill="#94a3b8">渲染</text>
+
+  <rect x="324" y="140" width="210" height="170" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="340" y="168" font-size="13" font-weight="700" fill="#b45309">render_elixir()</text>
+  <text x="340" y="194" font-size="12" fill="#1e293b">formality ≥ 0.7 → 措辞正式严谨</text>
+  <text x="340" y="216" font-size="12" fill="#1e293b">max_length → 回答不超过 N 字</text>
+  <text x="340" y="238" font-size="12" fill="#1e293b">forbidden_topics → 禁止讨论：xx</text>
+  <text x="340" y="260" font-size="12" fill="#1e293b">few_shots → # 示例 1、示例 2</text>
+  <text x="340" y="288" font-size="11" fill="#92400e">阈值与措辞随模型表现调</text>
+
+  <line x1="534" y1="225" x2="598" y2="225" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="566" y="212" text-anchor="middle" font-size="11" fill="#94a3b8">拼装</text>
+
+  <rect x="604" y="110" width="220" height="310" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="620" y="136" font-size="13" font-weight="700" fill="#475569">最终 system prompt</text>
+  <text x="620" y="162" font-size="12" fill="#1e293b"># 身份</text>
+  <text x="620" y="184" font-size="12" fill="#1e293b">资深 Go 后端工程师</text>
+  <text x="620" y="206" font-size="12" fill="#1e293b"># 语气</text>
+  <text x="620" y="228" font-size="12" fill="#1e293b">措辞正式严谨；回答简洁</text>
+  <text x="620" y="250" font-size="12" fill="#1e293b"># 硬性约束</text>
+  <text x="620" y="272" font-size="12" fill="#1e293b">回答不超过 300 字</text>
+  <text x="620" y="294" font-size="12" fill="#1e293b">禁止讨论：投资建议</text>
+  <text x="620" y="316" font-size="12" fill="#1e293b"># 示例</text>
+  <text x="620" y="338" font-size="12" fill="#1e293b">用户：… → 助手：…</text>
+  <text x="620" y="368" font-size="11" fill="#64748b">分节与顺序全归渲染管</text>
+
+  <rect x="60" y="430" width="380" height="58" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="84" y="452" font-size="13" font-weight="700" fill="#059669">content_hash 入库即算</text>
+  <text x="84" y="474" font-size="12" fill="#047857">sha256(规范化 JSON)，字段一动 hash 就变</text>
+
+  <rect x="460" y="430" width="360" height="58" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="484" y="452" font-size="13" font-weight="700" fill="#6d28d9">版本不可变</text>
+  <text x="484" y="474" font-size="12" fill="#5b21b6">被分身引用后只能新建 version，旧引用不受影响</text>
+
+  <text x="44" y="510" font-size="12" fill="#94a3b8">复用、diff、融合、缓存，都建立在结构化字段之上</text>
+</svg>

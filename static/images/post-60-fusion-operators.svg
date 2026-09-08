@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">三类融合算子与血统落账</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">crossover 组合 · mutation 探索 · ensemble 路由，产物全部带血统</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="120" width="150" height="58" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="135" y="143" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">金丹 A</text>
+  <text x="135" y="162" text-anchor="middle" font-size="11" fill="#64748b">结构化技能包</text>
+
+  <rect x="60" y="210" width="150" height="58" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="135" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">金丹 B</text>
+  <text x="135" y="252" text-anchor="middle" font-size="11" fill="#64748b">结构化技能包</text>
+
+  <line x1="210" y1="149" x2="252" y2="149" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="210" y1="239" x2="252" y2="239" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="252" y1="146" x2="252" y2="330" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <line x1="252" y1="146" x2="276" y2="146" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="252" y1="238" x2="276" y2="238" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="252" y1="330" x2="276" y2="330" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="280" y="104" width="220" height="84" rx="10" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="296" y="128" font-size="13" font-weight="700" fill="#4338ca">Crossover 交叉</text>
+  <text x="296" y="150" font-size="11" fill="#1e293b">tone 加权平均，principles 去重</text>
+  <text x="296" y="168" font-size="11" fill="#1e293b">few_shots 各取一半</text>
+  <text x="296" y="186" font-size="11" fill="#1e293b">硬冲突交 LLM 裁决并记录理由</text>
+
+  <rect x="280" y="204" width="220" height="68" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="296" y="228" font-size="13" font-weight="700" fill="#6d28d9">Mutation 变异</text>
+  <text x="296" y="250" font-size="11" fill="#1e293b">输入单个金丹，小步扰动</text>
+  <text x="296" y="268" font-size="11" fill="#1e293b">mutation_rate 默认 0.2~0.3</text>
+
+  <rect x="280" y="288" width="220" height="84" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="296" y="312" font-size="13" font-weight="700" fill="#b45309">Ensemble 集成</text>
+  <text x="296" y="334" font-size="11" fill="#1e293b">委员会：先判断该谁主导</text>
+  <text x="296" y="352" font-size="11" fill="#1e293b">再用对应子人格风格回答</text>
+  <text x="296" y="370" font-size="11" fill="#1e293b">专长差异大（Jaccard 距离）才默认</text>
+
+  <line x1="500" y1="146" x2="556" y2="190" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="500" y1="238" x2="556" y2="235" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="500" y1="330" x2="556" y2="272" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="560" y="150" width="260" height="170" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="580" y="178" font-size="13" font-weight="700" fill="#475569">融合产物 + 血统</text>
+  <text x="580" y="202" font-size="12" fill="#1e293b">新 system prompt / 委员会人格</text>
+  <text x="580" y="224" font-size="12" fill="#1e293b">resolution_notes 裁决记录</text>
+  <text x="580" y="246" font-size="12" fill="#1e293b">temperature / provider / op_version</text>
+  <text x="580" y="268" font-size="12" fill="#1e293b">lineage_hash = sha256(...)</text>
+  <text x="580" y="296" font-size="11" fill="#64748b">同输入同参数 → 命中缓存、可判同源</text>
+
+  <polyline points="690,320 690,440 40,440 40,149 54,149" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arwC)"/>
+  <text x="240" y="432" font-size="11" fill="#94a3b8">满意的产物固化为新金丹，作为下一次炼丹的原料</text>
+
+  <text x="44" y="486" font-size="12" fill="#94a3b8">去重、裁决、小步扰动：产物既要融合，也要认得出祖先</text>
+</svg>
