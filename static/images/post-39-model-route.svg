@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 530" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="528" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">模型路由：四步筛出一个能用的 endpoint</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">能力过滤 → 成本约束 → 排序 → 熔断健康检查，异常时自动降级</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="110" width="170" height="110" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="129" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">RouteRequest</text>
+  <text x="129" y="158" text-anchor="middle" font-size="11" fill="#64748b">要什么能力</text>
+  <text x="129" y="176" text-anchor="middle" font-size="11" fill="#64748b">预算 MaxCost</text>
+  <text x="129" y="194" text-anchor="middle" font-size="11" fill="#64748b">PreferFast</text>
+  <text x="129" y="212" text-anchor="middle" font-size="11" fill="#64748b">租户 TenantID</text>
+
+  <line x1="214" y1="165" x2="250" y2="165" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="254" y="110" width="150" height="110" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="329" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">① 能力过滤</text>
+  <text x="329" y="158" text-anchor="middle" font-size="11" fill="#1e293b">chat / tool_call</text>
+  <text x="329" y="176" text-anchor="middle" font-size="11" fill="#1e293b">vision / long_context</text>
+  <text x="329" y="194" text-anchor="middle" font-size="11" fill="#64748b">不满足直接出局</text>
+
+  <line x1="404" y1="165" x2="440" y2="165" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="444" y="110" width="150" height="110" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="519" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">② 成本约束</text>
+  <text x="519" y="158" text-anchor="middle" font-size="11" fill="#1e293b">MaxCost > 0 时</text>
+  <text x="519" y="176" text-anchor="middle" font-size="11" fill="#1e293b">单价超预算出局</text>
+
+  <line x1="594" y1="165" x2="630" y2="165" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="634" y="110" width="150" height="110" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="709" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">③ 排序</text>
+  <text x="709" y="158" text-anchor="middle" font-size="11" fill="#1e293b">默认按 priority</text>
+  <text x="709" y="176" text-anchor="middle" font-size="11" fill="#1e293b">PreferFast 按 P95</text>
+
+  <line x1="709" y1="220" x2="709" y2="254" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="634" y="258" width="150" height="110" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="709" y="284" text-anchor="middle" font-size="13" font-weight="700" fill="#b91c1c">④ 熔断检查</text>
+  <text x="709" y="306" text-anchor="middle" font-size="11" fill="#1e293b">滑动窗口错误率</text>
+  <text x="709" y="324" text-anchor="middle" font-size="11" fill="#1e293b">连续失败开 30 秒</text>
+  <text x="709" y="342" text-anchor="middle" font-size="11" fill="#64748b">打开期间跳过</text>
+
+  <line x1="634" y1="313" x2="588" y2="313" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="344" y="281" width="240" height="64" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="464" y="305" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">全被熔断</text>
+  <text x="464" y="325" text-anchor="middle" font-size="11" fill="#64748b">返回 ErrNoHealthyModel</text>
+
+  <line x1="709" y1="368" x2="709" y2="402" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="604" y="406" width="200" height="64" rx="10" fill="#059669"/>
+  <text x="704" y="430" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">选中的 endpoint</text>
+  <text x="704" y="450" text-anchor="middle" font-size="11" fill="#d1fae5">交给统一 Client 调用</text>
+
+  <text x="44" y="488" font-size="12" fill="#94a3b8">长上下文请求接近 token 阈值，自动切到 long_context 模型，对调用方透明</text>
+  <text x="44" y="510" font-size="12" fill="#94a3b8">实际成本按「平均 token 消耗 × 单价」算，不只看单价——便宜模型反复重试反而更贵</text>
+</svg>

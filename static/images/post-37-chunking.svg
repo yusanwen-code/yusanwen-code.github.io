@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="458" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">结构化分块：按标题聚合，表格单独成块</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">解析阶段保留结构，分块时用上——title_path 随 chunk 入库</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="120" width="180" height="130" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="134" y="146" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">ParsedDoc</text>
+  <text x="134" y="170" text-anchor="middle" font-size="12" fill="#64748b">段落 · 标题层级</text>
+  <text x="134" y="192" text-anchor="middle" font-size="12" fill="#64748b">表格 · 页码</text>
+  <text x="134" y="218" text-anchor="middle" font-size="11" fill="#94a3b8">Layout 识别产物</text>
+
+  <line x1="224" y1="185" x2="266" y2="185" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="272" y="104" width="280" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="412" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">① 按标题聚合</text>
+  <text x="412" y="148" text-anchor="middle" font-size="12" fill="#1e293b">标题+段落+子标题聚合</text>
+  <text x="412" y="166" text-anchor="middle" font-size="12" fill="#64748b">超过 max token 数就断开</text>
+
+  <rect x="272" y="196" width="280" height="76" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="412" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">② 表格独立成块</text>
+  <text x="412" y="240" text-anchor="middle" font-size="12" fill="#1e293b">不与正文混切</text>
+  <text x="412" y="258" text-anchor="middle" font-size="12" fill="#64748b">前补一行「表 X：标题」</text>
+
+  <rect x="272" y="288" width="280" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="412" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">③ metadata 随块入库</text>
+  <text x="412" y="332" text-anchor="middle" font-size="12" fill="#1e293b">title_path：第三章 > 3.2 实验设计</text>
+  <text x="412" y="352" text-anchor="middle" font-size="12" fill="#64748b">页码 · 文档 ID</text>
+
+  <line x1="224" y1="185" x2="272" y2="142" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="224" y1="185" x2="272" y2="234" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="224" y1="185" x2="272" y2="326" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="600" y="110" width="140" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="670" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">切好的 chunks</text>
+  <text x="670" y="162" text-anchor="middle" font-size="12" fill="#64748b">块间带结构</text>
+
+  <line x1="670" y1="200" x2="670" y2="238" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="600" y="242" width="140" height="64" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="670" y="268" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">Embedding</text>
+  <text x="670" y="288" text-anchor="middle" font-size="11" fill="#1e293b">统一过向量模型</text>
+
+  <line x1="670" y1="306" x2="670" y2="344" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="600" y="348" width="140" height="64" rx="10" fill="#059669"/>
+  <text x="670" y="372" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">向量库</text>
+  <text x="670" y="392" text-anchor="middle" font-size="11" fill="#d1fae5">带 metadata · 过滤重排</text>
+
+  <line x1="552" y1="142" x2="596" y2="140" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="552" y1="234" x2="596" y2="156" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="552" y1="326" x2="596" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <text x="44" y="442" font-size="12" fill="#94a3b8">定长切分的老毛病：表格腰斩、标题与正文分家——结构化分块逐条解掉</text>
+</svg>
