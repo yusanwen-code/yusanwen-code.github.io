@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 530" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="528" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">数据集管理服务：上传、处理、检索三条链路</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">上传走直传，处理走异步工作流，检索做多路召回</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+  <rect x="56" y="104" width="120" height="66" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="116" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">前端</text>
+  <text x="116" y="150" text-anchor="middle" font-size="11" fill="#64748b">拿预签名 URL 直传</text>
+  <line x1="176" y1="137" x2="212" y2="137" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="218" y="104" width="170" height="66" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="303" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">API 层 · Hertz</text>
+  <text x="303" y="146" text-anchor="middle" font-size="11" fill="#1e293b">鉴权 · 限流 · 登记元数据</text>
+  <text x="303" y="162" text-anchor="middle" font-size="11" fill="#64748b">签发预签名 URL</text>
+  <line x1="388" y1="137" x2="424" y2="137" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="406" y="128" text-anchor="middle" font-size="10" fill="#94a3b8">① 签 URL</text>
+  <rect x="430" y="104" width="190" height="66" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="525" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">S3 兼容存储（MinIO）</text>
+  <text x="525" y="146" text-anchor="middle" font-size="11" fill="#1e293b">原始文件直传，不过服务带宽</text>
+  <text x="525" y="162" text-anchor="middle" font-size="11" fill="#64748b">key 按租户前缀隔离</text>
+  <rect x="430" y="210" width="170" height="66" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="515" y="234" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Temporal workflow</text>
+  <text x="515" y="252" text-anchor="middle" font-size="11" fill="#1e293b">每个文档一个 workflow</text>
+  <text x="515" y="268" text-anchor="middle" font-size="11" fill="#64748b">重试 · 超时 · 状态持久化</text>
+  <line x1="525" y1="170" x2="515" y2="204" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="540" y="192" text-anchor="start" font-size="10" fill="#94a3b8">回调后投递解析任务</text>
+  <rect x="650" y="210" width="190" height="66" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="745" y="234" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">eino 编排 + pond 并发</text>
+  <text x="745" y="252" text-anchor="middle" font-size="11" fill="#1e293b">解析 → 分块 → embedding</text>
+  <text x="745" y="268" text-anchor="middle" font-size="11" fill="#64748b">→ 图谱写入</text>
+  <line x1="600" y1="243" x2="644" y2="243" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="303" y1="170" x2="181" y2="298" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="230" y="240" text-anchor="middle" font-size="10" fill="#94a3b8">元数据 · 状态机</text>
+  <line x1="700" y1="276" x2="451" y2="298" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="745" y1="276" x2="721" y2="298" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="56" y="304" width="250" height="60" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="181" y="328" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">GaussDB · 元数据</text>
+  <text x="181" y="347" text-anchor="middle" font-size="11" fill="#64748b">数据集 · 文档 · 权限 · 状态机</text>
+  <rect x="326" y="304" width="250" height="60" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="451" y="328" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">S3 · 中间结果缓存</text>
+  <text x="451" y="347" text-anchor="middle" font-size="11" fill="#64748b">解析文本/表格落盘，重试跳过已完成阶段</text>
+  <rect x="596" y="304" width="250" height="60" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="721" y="328" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">MongoDB</text>
+  <text x="721" y="347" text-anchor="middle" font-size="11" fill="#64748b">向量集合 + 图谱实体/关系</text>
+  <rect x="56" y="396" width="150" height="66" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="131" y="420" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">知识库问答服务</text>
+  <text x="131" y="440" text-anchor="middle" font-size="11" fill="#64748b">调统一 Search</text>
+  <line x1="206" y1="429" x2="242" y2="429" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="248" y="396" width="240" height="66" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="368" y="420" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">混合检索 · Search</text>
+  <text x="368" y="438" text-anchor="middle" font-size="11" fill="#1e293b">向量召回 + BM25 关键词召回</text>
+  <text x="368" y="454" text-anchor="middle" font-size="11" fill="#64748b">RRF 融合排序</text>
+  <line x1="488" y1="429" x2="524" y2="429" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="530" y="396" width="170" height="66" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="615" y="420" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">图谱扩展</text>
+  <text x="615" y="440" text-anchor="middle" font-size="11" fill="#64748b">top 结果补邻接实体</text>
+  <line x1="700" y1="429" x2="736" y2="429" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="742" y="396" width="90" height="66" rx="10" fill="#059669"/>
+  <text x="787" y="423" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">返回</text>
+  <text x="787" y="443" text-anchor="middle" font-size="11" fill="#d1fae5">带图谱上下文</text>
+  <line x1="660" y1="364" x2="640" y2="390" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arwC)"/>
+  <text x="44" y="492" font-size="12" fill="#94a3b8">多租户隔离贯穿全链路：所有查询强制带租户过滤，预签名 URL 带时效，防越权下载</text>
+</svg>

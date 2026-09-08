@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="478" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">S3 上传体系：控制面与数据面分开</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">后端只管鉴权和元数据，字节流直达对象存储</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+  <text x="56" y="108" font-size="12" font-weight="700" fill="#475569">控制面 · 业务后端</text>
+  <rect x="56" y="118" width="200" height="58" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="156" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">① 申请上传</text>
+  <text x="156" y="160" text-anchor="middle" font-size="11" fill="#1e293b">校验团队配额 · 大小 · MIME</text>
+  <line x1="156" y1="176" x2="156" y2="196" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="56" y="200" width="200" height="58" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="156" y="222" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">② 签发预签名 URL</text>
+  <text x="156" y="242" text-anchor="middle" font-size="11" fill="#1e293b">15 分钟时效 · 服务端加密</text>
+  <line x1="156" y1="258" x2="156" y2="278" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="56" y="282" width="200" height="58" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="156" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">③ 登记待确认记录</text>
+  <text x="156" y="324" text-anchor="middle" font-size="11" fill="#64748b">上传完成回调后转正式</text>
+  <rect x="352" y="196" width="130" height="100" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="417" y="238" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">客户端</text>
+  <text x="417" y="258" text-anchor="middle" font-size="11" fill="#64748b">浏览器 / 上传服务</text>
+  <line x1="352" y1="147" x2="262" y2="147" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="307" y="138" text-anchor="middle" font-size="10" fill="#94a3b8">先申请</text>
+  <line x1="262" y1="229" x2="352" y2="229" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="307" y="220" text-anchor="middle" font-size="10" fill="#94a3b8">URL 下发</text>
+  <line x1="352" y1="282" x2="262" y2="308" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arwC)"/>
+  <text x="307" y="276" text-anchor="middle" font-size="10" fill="#94a3b8">传完回调</text>
+  <rect x="650" y="112" width="190" height="236" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="745" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">S3 兼容对象存储</text>
+  <rect x="666" y="154" width="158" height="30" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="745" y="173" text-anchor="middle" font-size="11" fill="#1e293b">小文件 PUT（阈值 32MB）</text>
+  <rect x="666" y="192" width="158" height="30" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="745" y="211" text-anchor="middle" font-size="11" fill="#1e293b">申请 UploadID</text>
+  <rect x="666" y="230" width="158" height="30" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="745" y="249" text-anchor="middle" font-size="11" fill="#1e293b">Part × N：8MB · 并发 5</text>
+  <rect x="666" y="268" width="158" height="30" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="745" y="287" text-anchor="middle" font-size="11" fill="#1e293b">Complete（带各分片 ETag）</text>
+  <line x1="482" y1="226" x2="644" y2="190" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="566" y="202" text-anchor="middle" font-size="10" fill="#94a3b8">直传 PUT（小文件）</text>
+  <line x1="482" y1="262" x2="644" y2="262" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="566" y="252" text-anchor="middle" font-size="10" fill="#94a3b8">分片并发上传（大文件）</text>
+  <rect x="56" y="352" width="390" height="76" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="76" y="378" font-size="13" font-weight="700" fill="#b91c1c">孤儿分片要清理</text>
+  <text x="76" y="398" font-size="11" fill="#1e293b">传一半放弃的 UploadID 不会自己消失，Part 会一直计费</text>
+  <text x="76" y="416" font-size="11" fill="#1e293b">定时扫 ListMultipartUploads，超 24 小时未完成就 Abort</text>
+  <rect x="466" y="352" width="358" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="486" y="378" font-size="13" font-weight="700" fill="#6d28d9">下载走预签名 GET</text>
+  <text x="486" y="398" font-size="11" fill="#1e293b">敏感数据集只给 5 分钟时效，URL 绑定下载者 ID</text>
+  <text x="486" y="416" font-size="11" fill="#1e293b">签发前再校验一遍 RBAC 权限</text>
+  <text x="44" y="452" font-size="12" fill="#94a3b8">字节流从头到尾没进过后端，后端的内存和带宽不再随文件大小涨</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="468" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">两级 goroutine 池：文档级与 chunk 级隔离</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">容量跟着下游配额走，不跟 CPU 核数走</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="56" y="112" width="140" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="126" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">一个数据集</text>
+  <text x="126" y="157" text-anchor="middle" font-size="11" fill="#64748b">上千份文档</text>
+  <text x="126" y="174" text-anchor="middle" font-size="11" fill="#64748b">每份几十~上百 chunk</text>
+
+  <line x1="196" y1="150" x2="232" y2="150" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="238" y="112" width="190" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="333" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">docPool · 文档级</text>
+  <text x="333" y="153" text-anchor="middle" font-size="12" fill="#1e293b">pond.New(8, 1000)</text>
+  <text x="333" y="171" text-anchor="middle" font-size="11" fill="#64748b">同时最多 8 份文档</text>
+
+  <line x1="428" y1="150" x2="474" y2="110" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="428" y1="150" x2="474" y2="150" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="428" y1="150" x2="474" y2="190" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="484" y="90" width="104" height="40" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="536" y="115" text-anchor="middle" font-size="12" fill="#1e293b">文档 A</text>
+  <rect x="484" y="130" width="104" height="40" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="536" y="155" text-anchor="middle" font-size="12" fill="#1e293b">文档 B</text>
+  <rect x="484" y="170" width="104" height="40" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="536" y="195" text-anchor="middle" font-size="12" fill="#1e293b">…文档 N</text>
+
+  <line x1="588" y1="110" x2="630" y2="146" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="588" y1="150" x2="630" y2="150" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="588" y1="190" x2="630" y2="154" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="640" y="112" width="180" height="76" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="730" y="134" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">chunkPool · chunk 级</text>
+  <text x="730" y="153" text-anchor="middle" font-size="12" fill="#1e293b">pond.New(32, 5000)</text>
+  <text x="730" y="171" text-anchor="middle" font-size="11" fill="#64748b">同时最多 32 个 chunk</text>
+
+  <line x1="730" y1="188" x2="730" y2="218" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="640" y="224" width="180" height="64" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="730" y="248" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">远程 embedding 服务</text>
+  <text x="730" y="268" text-anchor="middle" font-size="11" fill="#64748b">单 key 并发上限 ≈ 32 这个量级</text>
+
+  <rect x="456" y="228" width="156" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="534" y="250" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">结果按 results[i] 写回</text>
+  <text x="534" y="268" text-anchor="middle" font-size="11" fill="#64748b">乱序完成也对齐</text>
+
+  <rect x="56" y="312" width="244" height="88" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="76" y="338" font-size="13" font-weight="700" fill="#b45309">错误别只留一个</text>
+  <text x="76" y="360" font-size="11" fill="#1e293b">firstErr 之外记失败计数，</text>
+  <text x="76" y="378" font-size="11" fill="#1e293b">前几条错误摘要进日志，</text>
+  <text x="76" y="396" font-size="11" fill="#1e293b">失败比例做监控告警</text>
+
+  <rect x="318" y="312" width="244" height="88" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="338" y="338" font-size="13" font-weight="700" fill="#0369a1">context 取消要传到底</text>
+  <text x="338" y="360" font-size="11" fill="#1e293b">Group 绑 context，取消后</text>
+  <text x="338" y="378" font-size="11" fill="#1e293b">未开始的任务不再执行；</text>
+  <text x="338" y="396" font-size="11" fill="#1e293b">在跑的靠 ctx 感知中断</text>
+
+  <rect x="580" y="312" width="244" height="88" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="600" y="338" font-size="13" font-weight="700" fill="#b91c1c">panic 要自己再捞一层</text>
+  <text x="600" y="360" font-size="11" fill="#1e293b">pond 默认 recover，进程不挂</text>
+  <text x="600" y="378" font-size="11" fill="#1e293b">但信息容易被吞；任务里</text>
+  <text x="600" y="396" font-size="11" fill="#1e293b">自己 recover，stack 进 Zap 日志</text>
+
+  <text x="44" y="438" font-size="12" fill="#94a3b8">池随服务起停（Stop().Wait()），不随请求新建；容量按下游配额与 P95 延迟定，不绑 NumCPU</text>
+</svg>
