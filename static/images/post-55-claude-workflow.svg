@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="468" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">五步工作流：先立规矩，再谈 Vibe</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">一个人扛 Go + Python + Next.js 三套栈，Claude Code 当主力，架构和验收留给人</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="50" y="120" width="132" height="86" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="116" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">写 CLAUDE.md</text>
+  <text x="116" y="166" text-anchor="middle" font-size="11" fill="#1e293b">结构 · 命令 · 规范</text>
+  <text x="116" y="182" text-anchor="middle" font-size="11" fill="#64748b">领域概念进长期记忆</text>
+
+  <line x1="182" y1="163" x2="206" y2="163" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="212" y="120" width="132" height="86" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="278" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">Plan 模式</text>
+  <text x="278" y="166" text-anchor="middle" font-size="11" fill="#1e293b">复杂功能先出计划</text>
+  <text x="278" y="182" text-anchor="middle" font-size="11" fill="#64748b">我审完才动手</text>
+
+  <line x1="344" y1="163" x2="368" y2="163" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="374" y="120" width="132" height="86" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="440" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">小步提交</text>
+  <text x="440" y="166" text-anchor="middle" font-size="11" fill="#1e293b">一个子任务一个 commit</text>
+  <text x="440" y="182" text-anchor="middle" font-size="11" fill="#64748b">好 review，好回滚</text>
+
+  <line x1="506" y1="163" x2="530" y2="163" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="536" y="120" width="132" height="86" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="602" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">测试先行</text>
+  <text x="602" y="166" text-anchor="middle" font-size="11" fill="#1e293b">按签名写 table-driven</text>
+  <text x="602" y="182" text-anchor="middle" font-size="11" fill="#64748b">我补边界 case</text>
+
+  <line x1="668" y1="163" x2="692" y2="163" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="698" y="120" width="132" height="86" rx="10" fill="#059669"/>
+  <text x="764" y="146" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">Task 跟踪</text>
+  <text x="764" y="166" text-anchor="middle" font-size="11" fill="#d1fae5">自跑 build + test</text>
+  <text x="764" y="182" text-anchor="middle" font-size="11" fill="#d1fae5">失败读报错自己修</text>
+
+  <rect x="60" y="270" width="240" height="80" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="84" y="296" font-size="13" font-weight="700" fill="#047857">Claude 擅长</text>
+  <text x="84" y="318" font-size="12" fill="#1e293b">样板代码 · 测试用例 · 跨文件重构</text>
+  <text x="84" y="336" font-size="12" fill="#64748b">根据报错自修复</text>
+
+  <rect x="320" y="270" width="240" height="80" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="344" y="296" font-size="13" font-weight="700" fill="#0369a1">我负责</text>
+  <text x="344" y="318" font-size="12" fill="#1e293b">架构 · 边界 · 验收</text>
+  <text x="344" y="336" font-size="12" fill="#64748b">关键路径逐行 review</text>
+
+  <rect x="580" y="270" width="240" height="80" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="604" y="296" font-size="13" font-weight="700" fill="#b45309">防幻觉</text>
+  <text x="604" y="318" font-size="12" fill="#1e293b">会编出不存在的 API 签名</text>
+  <text x="604" y="336" font-size="12" fill="#64748b">先 go doc / 读 vendor 确认</text>
+
+  <text x="44" y="424" font-size="12" fill="#94a3b8">上下文是稀缺资源：按目录切子任务，按服务分会话，增量 Edit 保持 diff 清晰</text>
+</svg>
+

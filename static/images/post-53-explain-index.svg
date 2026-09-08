@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 530" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="528" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">一条查询怎么从全表扫描变成索引定位</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">dataset 表几百万行 · WHERE + ORDER BY 走同一棵 B+Tree，filesort 消失</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path id="pG" d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <text x="60" y="118" font-size="13" font-weight="700" fill="#dc2626">优化前</text>
+  <rect x="60" y="130" width="200" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="160" y="154" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">多条件检索</text>
+  <text x="160" y="172" text-anchor="middle" font-size="11" fill="#64748b">tenant_id + type + 时间区间</text>
+  <text x="160" y="188" text-anchor="middle" font-size="11" fill="#64748b">ORDER BY updated_at DESC</text>
+
+  <line x1="260" y1="165" x2="286" y2="165" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwR)"/>
+
+  <rect x="292" y="130" width="190" height="70" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="387" y="154" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">全表扫描</text>
+  <text x="387" y="172" text-anchor="middle" font-size="11" fill="#b91c1c">type=ALL · rows≈820,000</text>
+  <text x="387" y="188" text-anchor="middle" font-size="11" fill="#b91c1c">每行都要看一遍</text>
+
+  <line x1="482" y1="165" x2="508" y2="165" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwR)"/>
+
+  <rect x="514" y="130" width="180" height="70" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="604" y="154" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">Using filesort</text>
+  <text x="604" y="172" text-anchor="middle" font-size="11" fill="#b91c1c">结果集再排一次序</text>
+  <text x="604" y="188" text-anchor="middle" font-size="11" fill="#b91c1c">3~5 秒的主要来源</text>
+
+  <line x1="694" y1="165" x2="720" y2="165" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwR)"/>
+
+  <rect x="726" y="130" width="114" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="783" y="160" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">LIMIT 20</text>
+  <text x="783" y="178" text-anchor="middle" font-size="11" fill="#64748b">LEFT JOIN owner</text>
+
+  <rect x="60" y="216" width="780" height="64" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="84" y="241" font-size="13" font-weight="700" fill="#0369a1">idx_tenant_type_updated (tenant_id, type, updated_at)</text>
+  <text x="84" y="262" font-size="12" fill="#1e293b">最左前缀：等值 · 等值 · 范围（范围列放最后，定位到此为止，排序仍可用）</text>
+
+  <text x="60" y="316" font-size="13" font-weight="700" fill="#059669">优化后</text>
+  <rect x="60" y="328" width="200" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="160" y="352" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">同一请求</text>
+  <text x="160" y="370" text-anchor="middle" font-size="11" fill="#64748b">FORCE INDEX 指定索引</text>
+  <text x="160" y="386" text-anchor="middle" font-size="11" fill="#64748b">不让优化器猜</text>
+
+  <line x1="260" y1="363" x2="286" y2="363" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="292" y="328" width="190" height="70" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="387" y="352" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">索引 range 定位</text>
+  <text x="387" y="370" text-anchor="middle" font-size="11" fill="#047857">type=range · rows≈1,200</text>
+  <text x="387" y="386" text-anchor="middle" font-size="11" fill="#047857">Using index condition</text>
+
+  <line x1="482" y1="363" x2="508" y2="363" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="514" y="328" width="180" height="70" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="604" y="352" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">无需 filesort</text>
+ <text x="604" y="370" text-anchor="middle" font-size="11" fill="#047857">索引序即结果序</text>
+  <text x="604" y="386" text-anchor="middle" font-size="11" fill="#047857">直接顺读 20 条</text>
+
+  <line x1="694" y1="363" x2="720" y2="363" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="726" y="328" width="114" height="70" rx="10" fill="#059669"/>
+  <text x="783" y="358" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">回表取列</text>
+  <text x="783" y="378" text-anchor="middle" font-size="11" fill="#d1fae5">只取列表需要的</text>
+
+  <rect x="60" y="418" width="380" height="66" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="442" font-size="13" font-weight="700" fill="#b45309">LIKE '%关键词%' 走不了 B+Tree</text>
+  <text x="84" y="462" font-size="12" fill="#1e293b">标题、摘要同步到 ES，MySQL 只做结构化过滤</text>
+
+  <rect x="460" y="418" width="380" height="66" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="484" y="442" font-size="13" font-weight="700" fill="#6d28d9">LIMIT 100000, 20 深翻页</text>
+  <text x="484" y="462" font-size="12" fill="#1e293b">扫完前 10 万行再扔 → 游标分页 updated_at &lt; 上一页末条</text>
+
+  <text x="44" y="512" font-size="12" fill="#94a3b8">索引不是越多越好：写入频繁的表控制在 5 个以内，定期清理冗余索引</text>
+</svg>

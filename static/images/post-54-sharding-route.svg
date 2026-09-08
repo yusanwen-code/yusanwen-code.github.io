@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 530" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="528" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">订单号里藏着路由：两种访问模式，两种拆法</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">支付订单按 merchant_id 哈希 16 库 × 8 表 · 登录日志按 user_id 分库、按月分表</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <line x1="440" y1="100" x2="440" y2="390" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <text x="60" y="118" font-size="13" font-weight="700" fill="#0369a1">支付订单：merchant_id 哈希，16 库 × 8 表</text>
+
+  <rect x="60" y="132" width="170" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="145" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">生成订单号</text>
+  <text x="145" y="176" text-anchor="middle" font-size="11" fill="#64748b">13位时间戳 + 3位分片位 + 5位序列号</text>
+
+  <line x1="230" y1="170" x2="256" y2="170" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="262" y="132" width="160" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="342" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">解析分片位</text>
+  <text x="342" y="176" text-anchor="middle" font-size="11" fill="#1e293b">bucket = orderNo[13:16]</text>
+  <text x="342" y="194" text-anchor="middle" font-size="11" fill="#1e293b">db = bucket % 16</text>
+
+  <line x1="342" y1="208" x2="342" y2="236" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="60" y="240" width="362" height="64" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="84" y="265" font-size="12" font-weight="700" fill="#047857">路由结果：db = bucket % 16 · table = bucket/16 % 8</text>
+  <text x="84" y="286" font-size="12" fill="#1e293b">128 张表 order_00~07 × db_00~15，无需路由表</text>
+
+  <line x1="140" y1="304" x2="140" y2="318" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <line x1="327" y1="304" x2="327" y2="318" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="322" width="150" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="135" y="346" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">商户维度查询</text>
+  <text x="135" y="364" text-anchor="middle" font-size="11" fill="#64748b">订单列表、对账</text>
+  <text x="135" y="380" text-anchor="middle" font-size="11" fill="#64748b">单片命中</text>
+
+  <rect x="222" y="322" width="218" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="331" y="346" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">C 端「我的订单」</text>
+  <text x="331" y="364" text-anchor="middle" font-size="11" fill="#1e293b">广播查询 → 冗余 user_id 查询库</text>
+  <text x="331" y="380" text-anchor="middle" font-size="11" fill="#64748b">Canal 同步 · 复杂检索走 ES</text>
+
+  <text x="460" y="118" font-size="13" font-weight="700" fill="#6d28d9">登录日志：user_id 分库，按月分表</text>
+
+  <rect x="460" y="132" width="170" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="545" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">按 user_id 分库</text>
+  <text x="545" y="176" text-anchor="middle" font-size="11" fill="#64748b">海量追加写入</text>
+
+  <rect x="650" y="132" width="170" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="735" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">按月分表</text>
+  <text x="735" y="176" text-anchor="middle" font-size="11" fill="#64748b">login_log_YYYYMM</text>
+
+  <line x1="545" y1="208" x2="545" y2="236" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <line x1="735" y1="208" x2="735" y2="236" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="460" y="240" width="360" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="484" y="265" font-size="12" font-weight="700" fill="#1e293b">查某用户最近登录 → 单片命中</text>
+  <text x="484" y="286" font-size="12" fill="#1e293b">按月归档清理 → 直接处理整月表</text>
+
+  <rect x="60" y="418" width="240" height="66" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="442" font-size="13" font-weight="700" fill="#b45309">跨片事务</text>
+  <text x="84" y="462" font-size="12" fill="#1e293b">订单+余额落同分片 → 本地事务</text>
+  <text x="84" y="478" font-size="12" fill="#64748b">跨片清结算 → 本地消息表，最终一致</text>
+
+  <rect x="320" y="418" width="240" height="66" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="344" y="442" font-size="13" font-weight="700" fill="#0369a1">跨商户统计</text>
+  <text x="344" y="462" font-size="12" fill="#1e293b">MySQL → StarRocks 离线同步</text>
+  <text x="344" y="478" font-size="12" fill="#64748b">不做强一致跨片 JOIN</text>
+
+  <rect x="580" y="418" width="240" height="66" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="604" y="442" font-size="13" font-weight="700" fill="#6d28d9">扩容与 ID</text>
+  <text x="604" y="462" font-size="12" fill="#1e293b">翻倍法 16→32 · 双写 + 对账迁移</text>
+  <text x="604" y="478" font-size="12" fill="#64748b">Snowflake 防 NTP 时钟回拨</text>
+
+  <text x="44" y="512" font-size="12" fill="#94a3b8">分片没有银弹：按什么分、哪些查询必须落单片、跨片去哪查、未来怎么扩</text>
+</svg>

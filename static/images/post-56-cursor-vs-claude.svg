@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="478" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">一个任务进来，先问自己一句话</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">知道要写什么 → Cursor 跟手 · 知道目标要它自己摸 → Claude Code 接手</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="370" y="104" width="140" height="54" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="440" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">新任务</text>
+  <text x="440" y="146" text-anchor="middle" font-size="11" fill="#64748b">改代码 · 日常迭代 · 修问题</text>
+
+  <line x1="400" y1="158" x2="255" y2="204" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <line x1="480" y1="158" x2="625" y2="204" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <text x="255" y="186" text-anchor="middle" font-size="11" fill="#64748b">只想快一点</text>
+  <text x="640" y="186" text-anchor="middle" font-size="11" fill="#64748b">要它自己跑</text>
+
+  <rect x="60" y="210" width="360" height="150" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="84" y="238" font-size="14" font-weight="700" fill="#0369a1">Cursor · IDE</text>
+  <text x="84" y="262" font-size="12" fill="#1e293b">「我知道要写什么，只是想快一点」</text>
+  <text x="84" y="284" font-size="12" fill="#1e293b">Tab 补全 · Cmd+K 内联编辑</text>
+  <text x="84" y="306" font-size="12" fill="#1e293b">日常业务代码 · 前端 JSX · SQL</text>
+  <text x="84" y="328" font-size="12" fill="#64748b">@file / @git / @docs 手动给上下文</text>
+  <text x="84" y="348" font-size="12" fill="#64748b">Composer 执行 go test 自查</text>
+
+  <rect x="460" y="210" width="360" height="150" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="484" y="238" font-size="14" font-weight="700" fill="#6d28d9">Claude Code · CLI + Agent</text>
+  <text x="484" y="262" font-size="12" fill="#1e293b">「我知道目标，要它自己摸代码、跑测试、改一轮」</text>
+  <text x="484" y="284" font-size="12" fill="#1e293b">Plan 模式 · 子任务 · Bash/Read/Edit 工具调用</text>
+  <text x="484" y="306" font-size="12" fill="#1e293b">跨服务加字段 · 批量修 lint · 数据迁移脚本</text>
+  <text x="484" y="328" font-size="12" fill="#64748b">Plan 模式 + 子任务控制上下文范围</text>
+  <text x="484" y="348" font-size="12" fill="#64748b">服务器 / 容器 / tmux 里直接跑</text>
+
+  <rect x="60" y="386" width="760" height="60" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="84" y="410" font-size="13" font-weight="700" fill="#059669">两个工具共同的规矩</text>
+  <text x="84" y="432" font-size="12" fill="#047857">项目规则文件（.cursorrules / CLAUDE.md）· 改完自己跑测试 · 不碰密钥与客户数据</text>
+
+  <text x="44" y="468" font-size="12" fill="#94a3b8">AI 是放大器，不是替代品——别迷信任何一个工具，对代码的判断力才是核心</text>
+</svg>
+
