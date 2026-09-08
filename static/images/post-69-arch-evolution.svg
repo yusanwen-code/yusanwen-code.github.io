@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 510" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="508" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">两年八个月：从 SaaS 单体到 AI 数据平台</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">SaaS 单体期 → 中台沉淀期 → AI 数据平台期，每段的核心服务与关键决策</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+  <rect x="44" y="120" width="240" height="78" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="58" y="144" font-size="13" font-weight="700" fill="#475569">fasthttp C/S 单体</text>
+  <text x="58" y="163" font-size="12" fill="#1e293b">所有医院共用代码与数据库</text>
+  <text x="58" y="180" font-size="12" fill="#94a3b8">手动 FTP 发版 · 回滚靠运气</text>
+  <rect x="324" y="120" width="240" height="78" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="338" y="144" font-size="13" font-weight="700" fill="#6d28d9">统一支付平台</text>
+  <text x="338" y="163" font-size="12" fill="#1e293b">订单状态机 + 幂等键 · 动态计费</text>
+  <text x="338" y="180" font-size="12" fill="#64748b">RSA/SHA 签名 OpenAPI · 对账导出</text>
+  <rect x="604" y="120" width="240" height="78" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="618" y="144" font-size="13" font-weight="700" fill="#047857">数据治理服务</text>
+  <text x="618" y="163" font-size="12" fill="#1e293b">Temporal 规则引擎 · S3/PDF 解析</text>
+  <text x="618" y="180" font-size="12" fill="#64748b">MySQL + StarRocks · OpenAlex 同步</text>
+  <rect x="44" y="214" width="240" height="78" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="58" y="238" font-size="13" font-weight="700" fill="#0369a1">迁 go-zero B/S 微服务</text>
+  <text x="58" y="257" font-size="12" fill="#1e293b">按业务域拆：医生端 · 医院管理 · HIS</text>
+  <text x="58" y="274" font-size="12" fill="#64748b">AI 影像判读 · gRPC · Jaeger 追踪</text>
+  <rect x="324" y="214" width="240" height="78" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="338" y="238" font-size="13" font-weight="700" fill="#6d28d9">统一认证中心</text>
+  <text x="338" y="257" font-size="12" fill="#1e293b">OAuth2/OIDC · JWT · SSO · RBAC</text>
+  <text x="338" y="274" font-size="12" fill="#64748b">微信/企微/飞书登录 · 可插拔 Provider</text>
+  <rect x="604" y="214" width="240" height="78" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="618" y="238" font-size="13" font-weight="700" fill="#047857">数据集管理服务</text>
+  <text x="618" y="257" font-size="12" fill="#1e293b">Hertz 接入 · eino + pond 解析向量化</text>
+  <text x="618" y="274" font-size="12" fill="#64748b">知识图谱 · GaussDB + MongoDB</text>
+  <rect x="44" y="308" width="240" height="78" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="58" y="332" font-size="13" font-weight="700" fill="#475569">经营分析平台 + 双端小程序</text>
+  <text x="58" y="351" font-size="12" fill="#1e293b">后端用同一套微服务支撑多端</text>
+  <text x="58" y="368" font-size="12" fill="#94a3b8">C 端顾客 · B 端管理</text>
+  <rect x="324" y="308" width="240" height="78" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="338" y="332" font-size="13" font-weight="700" fill="#475569">一套中台，多业务线复用</text>
+  <text x="338" y="351" font-size="12" fill="#1e293b">新增登录方式只需实现 Provider 接口</text>
+  <text x="338" y="368" font-size="12" fill="#94a3b8">过度抽象反而把业务方绑死</text>
+  <rect x="604" y="308" width="240" height="78" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="618" y="332" font-size="13" font-weight="700" fill="#047857">知识库问答服务</text>
+  <text x="618" y="351" font-size="12" fill="#1e293b">light_rag · MCP 工具调用 · 多模型路由</text>
+  <text x="618" y="368" font-size="12" fill="#64748b">统一 LLM 适配层：ChatCompletion 接口</text>
+  <rect x="44" y="402" width="240" height="58" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="58" y="426" font-size="12" font-weight="700" fill="#b45309">关键动作：飞行中换发动机</text>
+  <text x="58" y="445" font-size="12" fill="#1e293b">数据双写 · 灰度切流 · 老接口兼容</text>
+  <rect x="324" y="402" width="240" height="58" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="338" y="426" font-size="12" font-weight="700" fill="#b45309">审美：能拆就拆 → 该合就合</text>
+  <text x="338" y="445" font-size="12" fill="#1e293b">边界划在哪里，比框架重要</text>
+  <rect x="604" y="402" width="240" height="58" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="618" y="426" font-size="12" font-weight="700" fill="#b45309">核心矛盾换成长流程数据管道</text>
+  <text x="618" y="445" font-size="12" fill="#1e293b">Activity 重试 · Workflow 状态持久化</text>
+  <text x="44" y="106" font-size="13" font-weight="700" fill="#0369a1">① SaaS 单体期 · 2021.04 起</text>
+  <text x="324" y="106" font-size="13" font-weight="700" fill="#6d28d9">② 中台沉淀期 · 2023.12 起</text>
+  <text x="604" y="106" font-size="13" font-weight="700" fill="#047857">③ AI 数据平台期 · 现在</text>
+  <line x1="288" y1="270" x2="320" y2="270" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <line x1="568" y1="270" x2="600" y2="270" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="44" y="490" font-size="12" fill="#94a3b8">两年八个月不变的四件事：可观测性先于功能 · 管好状态与边界 · 选型服务于场景 · 发布回滚是底线</text>
+</svg>
