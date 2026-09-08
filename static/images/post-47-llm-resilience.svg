@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="518" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">一次 LLM 请求的防护链</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">限流、重试、熔断降级都沉在统一适配层，业务代码只面对一个 Chat 接口</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect x="220" y="92" width="620" height="390" rx="12" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="240" y="116" font-size="12" fill="#94a3b8">统一 LLM 适配层</text>
+
+  <rect x="60" y="160" width="120" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="120" y="190" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">业务代码</text>
+  <text x="120" y="212" text-anchor="middle" font-size="11" fill="#64748b">只面对一个 Chat 接口</text>
+
+  <line x1="184" y1="195" x2="236" y2="195" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="240" y="142" width="150" height="106" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="315" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">令牌桶限流</text>
+  <text x="315" y="188" text-anchor="middle" font-size="11" fill="#1e293b">按 供应商+模型 维度</text>
+  <text x="315" y="206" text-anchor="middle" font-size="11" fill="#1e293b">按配额打八折</text>
+  <text x="315" y="228" text-anchor="middle" font-size="11" fill="#64748b">拿不到令牌先排队</text>
+  <line x1="394" y1="195" x2="420" y2="195" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="424" y="126" width="180" height="124" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="514" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">重试判断</text>
+  <text x="514" y="170" text-anchor="middle" font-size="11" fill="#1e293b">429/5xx/连接错误 → 重试</text>
+  <text x="514" y="188" text-anchor="middle" font-size="11" fill="#1e293b">指数退避 + 抖动</text>
+  <text x="514" y="206" text-anchor="middle" font-size="11" fill="#1e293b">有 Retry-After 先听它的</text>
+  <text x="514" y="228" text-anchor="middle" font-size="11" fill="#dc2626">400/401/403 立即抛</text>
+  <text x="514" y="246" text-anchor="middle" font-size="11" fill="#dc2626">流式已吐 token 不重试</text>
+
+  <line x1="608" y1="195" x2="630" y2="195" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="634" y="142" width="166" height="106" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="717" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">熔断器（gobreaker）</text>
+  <text x="717" y="188" text-anchor="middle" font-size="11" fill="#1e293b">连续 5 次失败</text>
+  <text x="717" y="206" text-anchor="middle" font-size="11" fill="#1e293b">或 60 秒错误率超 50%</text>
+  <text x="717" y="224" text-anchor="middle" font-size="11" fill="#1e293b">→ 开路</text>
+  <text x="717" y="242" text-anchor="middle" font-size="11" fill="#64748b">半开放 1 个请求探测</text>
+  <line x1="717" y1="248" x2="717" y2="296" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="660" y1="248" x2="470" y2="296" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="560" y="288" text-anchor="middle" font-size="10" fill="#94a3b8">错误率超阈值 / 开路</text>
+
+  <rect x="220" y="300" width="340" height="64" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="390" y="324" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">非关键场景（标题生成、摘要）</text>
+  <text x="390" y="344" text-anchor="middle" font-size="11" fill="#1e293b">主路不可用 → 直接返回降级文案</text>
+
+  <rect x="634" y="300" width="166" height="64" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="717" y="324" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">主路供应商</text>
+  <text x="717" y="344" text-anchor="middle" font-size="11" fill="#1e293b">业务指定的主力模型</text>
+
+  <line x1="717" y1="364" x2="717" y2="394" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arwR)"/>
+  <text x="705" y="382" text-anchor="end" font-size="10" fill="#dc2626">主路仍失败</text>
+
+  <rect x="634" y="398" width="166" height="60" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="717" y="422" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">备用模型</text>
+  <text x="717" y="440" text-anchor="middle" font-size="11" fill="#64748b">同档位的另一家供应商</text>
+
+  <text x="44" y="506" font-size="12" fill="#94a3b8">绝大多数稳定性问题不在模型，而在周边的网络与配额</text>
+</svg>

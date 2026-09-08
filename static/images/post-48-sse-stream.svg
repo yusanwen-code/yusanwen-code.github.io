@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">SSE 流式链路：token 从模型到打字机</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">后端不是透传：统一格式 · 穿插业务事件 · 心跳保活 · 取消传播</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect x="60" y="110" width="170" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="145" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">LLM 流式接口</text>
+  <text x="145" y="158" text-anchor="middle" font-size="11" fill="#1e293b">OpenAI 风格 data 帧</text>
+  <text x="145" y="176" text-anchor="middle" font-size="11" fill="#1e293b">data: {...} 分帧</text>
+  <text x="145" y="194" text-anchor="middle" font-size="11" fill="#64748b">VLLM / Ollama 同协议</text>
+
+  <line x1="234" y1="158" x2="266" y2="158" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="270" y="96" width="254" height="240" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="397" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">后端（Gin）</text>
+  <text x="397" y="148" text-anchor="middle" font-size="11" fill="#1e293b">统一各家的 SSE 格式</text>
+  <text x="397" y="168" text-anchor="middle" font-size="11" fill="#1e293b">穿插业务事件，不只 token</text>
+  <text x="397" y="188" text-anchor="middle" font-size="11" fill="#1e293b">status：检索命中的文档</text>
+  <text x="397" y="208" text-anchor="middle" font-size="11" fill="#1e293b">done：带完整消息 ID</text>
+  <text x="397" y="228" text-anchor="middle" font-size="11" fill="#1e293b">error：显式错误帧</text>
+  <text x="397" y="252" text-anchor="middle" font-size="11" fill="#64748b">每 15s 一帧注释心跳</text>
+  <text x="397" y="272" text-anchor="middle" font-size="11" fill="#64748b">用户断开 → cancel 传到 LLM</text>
+  <text x="397" y="292" text-anchor="middle" font-size="11" fill="#64748b">省下白烧的 token 配额</text>
+  <line x1="524" y1="158" x2="546" y2="158" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="550" y="110" width="160" height="96" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="630" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Nginx / 网关</text>
+  <text x="630" y="158" text-anchor="middle" font-size="11" fill="#1e293b">默认攒缓冲，打字机变一坨</text>
+  <text x="630" y="176" text-anchor="middle" font-size="11" fill="#1e293b">X-Accel-Buffering: no</text>
+  <text x="630" y="194" text-anchor="middle" font-size="11" fill="#64748b">Ingress 显式关 proxy 缓冲</text>
+
+  <line x1="714" y1="158" x2="736" y2="158" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="740" y="110" width="110" height="96" rx="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="795" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">浏览器</text>
+  <text x="795" y="158" text-anchor="middle" font-size="11" fill="#1e293b">fetch 逐块读</text>
+  <text x="795" y="176" text-anchor="middle" font-size="11" fill="#1e293b">拼帧、按事件分发</text>
+  <text x="795" y="194" text-anchor="middle" font-size="11" fill="#64748b">打字机渲染</text>
+
+  <path d="M 750 206 L 750 346 L 160 346 L 160 352" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arwR)"/>
+  <text x="450" y="340" text-anchor="middle" font-size="10" fill="#dc2626">cancel 传播</text>
+  <rect x="60" y="356" width="190" height="96" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="155" y="382" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">用户点停止 / 断线</text>
+  <text x="155" y="402" text-anchor="middle" font-size="11" fill="#1e293b">ctx cancel 关掉 LLM 连接</text>
+  <text x="155" y="420" text-anchor="middle" font-size="11" fill="#1e293b">没收到 done → 标「输出中断」</text>
+  <text x="155" y="438" text-anchor="middle" font-size="11" fill="#64748b">可点重新生成</text>
+
+  <line x1="397" y1="336" x2="397" y2="352" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="270" y="356" width="360" height="96" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="290" y="382" font-size="11" fill="#475569">event: status · data: 检索相关文档...</text>
+  <text x="290" y="402" font-size="11" fill="#475569">event: delta · data: 一个词</text>
+  <text x="290" y="422" font-size="11" fill="#475569">: keepalive ← 注释帧，代理不掐</text>
+  <text x="290" y="442" font-size="11" fill="#475569">event: done · data: 带 trace_id</text>
+
+  <text x="44" y="478" font-size="12" fill="#94a3b8">SSE 看着简单，稳定可用靠的是这一整套细节</text>
+</svg>
