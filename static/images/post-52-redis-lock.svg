@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 500" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="498" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">扣额度：锁按商户加，扣减走 Lua</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">SET NX PX 加锁 · 看门狗续期 · 比对 token 释放 · Lua 保证扣减原子</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="112" width="130" height="46" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="140" text-anchor="middle" font-size="12" fill="#1e293b">PC 端</text>
+
+  <rect x="60" y="170" width="130" height="46" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="198" text-anchor="middle" font-size="12" fill="#1e293b">小程序</text>
+
+  <rect x="60" y="228" width="130" height="46" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="256" text-anchor="middle" font-size="12" fill="#1e293b">OpenAPI</text>
+
+  <line x1="190" y1="135" x2="246" y2="186" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="190" y1="193" x2="246" y2="196" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="190" y1="251" x2="246" y2="206" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="250" y="136" width="260" height="120" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="266" y="162" font-size="13" font-weight="700" fill="#0369a1">加锁</text>
+  <text x="266" y="186" font-size="12" fill="#1e293b">SET key value NX PX 30000</text>
+  <text x="266" y="208" font-size="11" fill="#1e293b">key = lock:quota:{merchant_id}</text>
+  <text x="266" y="230" font-size="11" fill="#64748b">value = 唯一 token（UUID）</text>
+
+  <line x1="510" y1="196" x2="556" y2="196" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="533" y="212" text-anchor="middle" font-size="11" fill="#94a3b8">持锁执行</text>
+
+  <rect x="560" y="136" width="270" height="120" rx="10" fill="#059669"/>
+  <text x="576" y="162" font-size="13" font-weight="700" fill="#ffffff">Lua 原子扣减</text>
+  <text x="576" y="186" font-size="11" fill="#d1fae5">HGET remain 检查余额</text>
+  <text x="576" y="208" font-size="11" fill="#d1fae5">够：HINCRBY -need；不够：返回 -1</text>
+  <text x="576" y="230" font-size="11" fill="#d1fae5">锁内免多次命令往返</text>
+
+  <line x1="380" y1="256" x2="380" y2="292" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="250" y="292" width="260" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="266" y="316" font-size="13" font-weight="700" fill="#b45309">看门狗续期</text>
+  <text x="266" y="338" font-size="11" fill="#64748b">每 ttl/3 续期，随 ctx 退出</text>
+
+  <line x1="695" y1="256" x2="695" y2="292" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <rect x="560" y="292" width="270" height="64" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="576" y="316" font-size="13" font-weight="700" fill="#1e293b">释放锁</text>
+  <text x="576" y="338" font-size="11" fill="#64748b">Lua 比对 token，一致才 DEL</text>
+
+  <rect x="60" y="384" width="470" height="76" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="76" y="408" font-size="13" font-weight="700" fill="#dc2626">早期 GET + DEL 出过的事故</text>
+  <text x="76" y="430" font-size="11" fill="#b91c1c">A 执行超 TTL，锁过期，B 拿到锁</text>
+  <text x="76" y="448" font-size="11" fill="#b91c1c">A 结束时 DEL，误删了 B 的锁</text>
+
+  <rect x="560" y="384" width="270" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="576" y="408" font-size="13" font-weight="700" fill="#6d28d9">锁不是正确性来源</text>
+  <text x="576" y="430" font-size="11" fill="#64748b">扣减 Lua 仍查余额</text>
+  <text x="576" y="448" font-size="11" fill="#64748b">数据库对账做最终兜底</text>
+
+  <text x="44" y="482" font-size="12" fill="#94a3b8">TTL 取业务 P99 的两倍左右；单商户热点 key 可再分桶 quota:{merchant}:{shard}</text>
+</svg>

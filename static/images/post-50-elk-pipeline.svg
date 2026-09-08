@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="478" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">一条日志的旅程：从 stdout 到 Kibana</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">trace_id 全程透传，跨服务排障按一个 ID 串起来</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="104" width="220" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="170" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">统一认证中心</text>
+  <text x="170" y="152" text-anchor="middle" font-size="11" fill="#1e293b">Gin 中间件：生成或透传 trace_id</text>
+  <text x="170" y="170" text-anchor="middle" font-size="11" fill="#64748b">顺手打访问日志</text>
+
+  <line x1="280" y1="146" x2="306" y2="146" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="550" y1="146" x2="596" y2="146" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="330" y="104" width="220" height="84" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="440" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">统一支付平台</text>
+  <text x="440" y="152" text-anchor="middle" font-size="11" fill="#1e293b">gRPC 拦截器：metadata 透传</text>
+  <text x="440" y="170" text-anchor="middle" font-size="11" fill="#64748b">跨进程串起来</text>
+
+  <rect x="600" y="104" width="220" height="84" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="710" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">知识库问答服务</text>
+  <text x="710" y="152" text-anchor="middle" font-size="11" fill="#1e293b">流式接口多打会话 ID 字段</text>
+  <text x="710" y="170" text-anchor="middle" font-size="11" fill="#64748b">复现某一轮对话</text>
+
+  <line x1="170" y1="188" x2="170" y2="236" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="440" y1="188" x2="440" y2="236" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="710" y1="188" x2="710" y2="236" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="240" width="760" height="44" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="440" y="267" text-anchor="middle" font-size="12" fill="#1e293b">Zap JSON 日志 · 统一写 stdout · 字段：trace_id / request_id / tenant_id</text>
+
+  <line x1="145" y1="284" x2="145" y2="320" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="320" width="180" height="88" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="76" y="344" font-size="12" font-weight="700" fill="#1e293b">Filebeat 采集</text>
+  <text x="76" y="364" font-size="11" fill="#64748b">Pod 重启不丢缓冲日志</text>
+  <text x="76" y="382" font-size="11" fill="#64748b">multiline 合并 panic 堆栈</text>
+
+  <line x1="240" y1="364" x2="276" y2="364" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="280" y="320" width="140" height="88" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="344" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Logstash</text>
+  <text x="350" y="364" text-anchor="middle" font-size="11" fill="#64748b">清洗</text>
+
+  <line x1="420" y1="364" x2="456" y2="364" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="460" y="320" width="150" height="88" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="535" y="344" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Elasticsearch</text>
+  <text x="535" y="364" text-anchor="middle" font-size="11" fill="#64748b">trace_id 可检索</text>
+
+  <line x1="610" y1="364" x2="646" y2="364" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="650" y="320" width="170" height="88" rx="10" fill="#059669" stroke-width="1"/>
+  <text x="735" y="344" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Kibana</text>
+  <text x="735" y="364" text-anchor="middle" font-size="11" fill="#d1fae5">按 trace_id 聚合查询</text>
+  <text x="735" y="382" text-anchor="middle" font-size="11" fill="#d1fae5">跨服务一次查全</text>
+
+  <text x="44" y="444" font-size="12" fill="#94a3b8">字段规范（trace_id / error / latency / biz_code）和上下游透传，是这套体系能串起来的前提</text>
+</svg>
