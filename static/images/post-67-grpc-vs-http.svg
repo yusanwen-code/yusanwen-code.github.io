@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 450" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="448" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">Go 与 Python 混部：两条同步链路</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">内部高频走 gRPC，跨边界低频走 HTTP，MQ 管异步解耦</text>
+
+  <defs>
+    <marker viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="180" height="86" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="134" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Go 调度器</text>
+  <text x="134" y="150" text-anchor="middle" font-size="11" fill="#1e293b">数据集管理服务</text>
+  <text x="134" y="170" text-anchor="middle" font-size="11" fill="#64748b">pond 控制并发度</text>
+
+  <text x="275" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">gRPC 双向流</text>
+  <text x="275" y="144" text-anchor="middle" font-size="11" fill="#94a3b8">Protobuf 契约</text>
+  <line x1="224" y1="158" x2="322" y2="158" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="326" y1="172" x2="228" y2="172" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="330" y="104" width="180" height="86" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="420" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Python worker 池</text>
+  <text x="420" y="150" text-anchor="middle" font-size="11" fill="#1e293b">grpc.aio + 多进程</text>
+  <text x="420" y="170" text-anchor="middle" font-size="11" fill="#64748b">单批上百个分片</text>
+
+  <rect x="540" y="104" width="296" height="86" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="560" y="130" font-size="13" font-weight="700" fill="#b45309">适用于：内部高频 · 强类型 · 延迟敏感</text>
+  <text x="560" y="150" font-size="12" fill="#1e293b">流式回传 · 连接多路复用省握手</text>
+  <text x="560" y="170" font-size="12" fill="#64748b">注意：Python 受 GIL 限制，吞吐靠多进程</text>
+
+  <rect x="44" y="222" width="180" height="86" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="134" y="248" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Go 网关</text>
+  <text x="134" y="268" text-anchor="middle" font-size="11" fill="#1e293b">alchemy-furnace · Gin + GORM</text>
+  <text x="134" y="288" text-anchor="middle" font-size="11" fill="#64748b">前面是 Nginx</text>
+
+  <text x="275" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">HTTP/JSON</text>
+  <line x1="224" y1="262" x2="322" y2="262" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <text x="275" y="282" text-anchor="middle" font-size="11" fill="#94a3b8">curl/Postman 直调</text>
+
+  <rect x="330" y="222" width="180" height="86" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="420" y="248" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Python 合成引擎</text>
+  <text x="420" y="268" text-anchor="middle" font-size="11" fill="#1e293b">FastAPI · 调多个 LLM 供应商</text>
+  <text x="420" y="288" text-anchor="middle" font-size="11" fill="#64748b">合成本身耗时长</text>
+
+  <rect x="540" y="222" width="296" height="86" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="560" y="248" font-size="13" font-weight="700" fill="#0369a1">适用于：跨边界 · 低频 · 强调试便利</text>
+  <text x="560" y="268" font-size="12" fill="#1e293b">curl/Postman 直调 · Nginx 超时/重试/日志成熟</text>
+  <text x="560" y="288" font-size="12" fill="#64748b">合成本身耗时长，流式优势发挥不出来</text>
+
+  <rect x="44" y="340" width="792" height="52" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="64" y="362" font-size="13" font-weight="700" fill="#475569">MQ 负责异步解耦，这一块没有争议</text>
+  <text x="64" y="380" font-size="12" fill="#64748b">同步调用选 gRPC 还是 HTTP，把瓶颈和团队维护成本算清楚</text>
+
+  <text x="44" y="424" font-size="12" fill="#94a3b8">纪律：Protobuf 字段只加不改 · CI 用 buf breaking 拦截误改；gRPC 默认开 reflection，生产接 Jaeger</text>
+</svg>

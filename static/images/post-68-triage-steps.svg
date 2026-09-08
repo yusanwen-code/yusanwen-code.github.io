@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 484" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="482" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">线上排障三步：先定边界，再定位置，最后看细节</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">顺序反了就是大海捞针——监控筛掉八成，链路定位到 span，日志定罪</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="244" height="132" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="64" y="132" font-size="14" font-weight="700" fill="#0369a1">① 监控定边界</text>
+  <text x="64" y="156" font-size="12" fill="#1e293b">Grafana · RED 指标（KubeSphere）</text>
+  <text x="64" y="176" font-size="12" fill="#1e293b">影响面多大 · 何时开始 · 哪个指标异常</text>
+  <text x="64" y="200" font-size="12" fill="#64748b">支付看成功率，认证看登录失败率</text>
+  <text x="64" y="222" font-size="12" fill="#64748b">→ 回答「哪里不对」</text>
+
+  <line x1="288" y1="170" x2="324" y2="170" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="330" y="104" width="244" height="132" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="350" y="132" font-size="14" font-weight="700" fill="#6d28d9">② 链路定位置</text>
+  <text x="350" y="156" font-size="12" fill="#1e293b">trace_id 全链路透传 → Jaeger 瀑布图</text>
+  <text x="350" y="176" font-size="12" fill="#1e293b">LLM 调用 · 向量检索 · S3 各自成 span</text>
+  <text x="350" y="200" font-size="12" fill="#64748b">一个「回答超时」分得清模型慢还是检索慢</text>
+  <text x="350" y="222" font-size="12" fill="#64748b">→ 回答「哪一步不对」</text>
+
+  <line x1="574" y1="170" x2="610" y2="170" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="616" y="104" width="220" height="132" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="636" y="132" font-size="14" font-weight="700" fill="#b45309">③ 日志看细节</text>
+  <text x="636" y="156" font-size="12" fill="#1e293b">ELK 按 trace_id 精确捞</text>
+  <text x="636" y="176" font-size="12" fill="#1e293b">顶层入参 + 最终错误，中间层只追加</text>
+  <text x="636" y="200" font-size="12" fill="#64748b">错误用 zap.Error 带堆栈</text>
+  <text x="636" y="222" font-size="12" fill="#64748b">→ 回答「为什么不对」</text>
+
+  <rect x="44" y="270" width="390" height="80" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="64" y="296" font-size="13" font-weight="700" fill="#b91c1c">告警要可收敛</text>
+  <text x="64" y="316" font-size="12" fill="#1e293b">按服务 + 错误类型聚合，5 分钟内同类只发一条</text>
+  <text x="64" y="334" font-size="12" fill="#64748b">错误率超阈值且持续 10 分钟才打电话</text>
+
+  <rect x="446" y="270" width="390" height="80" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="466" y="296" font-size="13" font-weight="700" fill="#059669">回滚优先于根因</text>
+  <text x="466" y="316" font-size="12" fill="#1e293b">发版引起的先回滚，容器化回滚 5 分钟内完成</text>
+  <text x="466" y="334" font-size="12" fill="#64748b">业务恢复之后再查根因，顺序不能反</text>
+
+  <rect x="44" y="374" width="792" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="64" y="398" font-size="13" font-weight="700" fill="#475569">容易断的一环：异步链路</text>
+  <text x="64" y="418" font-size="12" fill="#64748b">MQ 消费者、Temporal Workflow 不自动带 trace_id——生产端塞进消息体，消费端注入 context</text>
+
+  <text x="44" y="462" font-size="12" fill="#94a3b8">日志纪律：生产默认 INFO，大对象只打 ID 和长度，敏感字段一律脱敏</text>
+</svg>

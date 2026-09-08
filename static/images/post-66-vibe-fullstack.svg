@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="468" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">后端工程师的 Vibe Coding 全栈闭环</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">契约自己定，骨架 AI 搭，交互细抠——每生成一块就看一眼</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="244" height="90" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="64" y="130" font-size="13" font-weight="700" fill="#0369a1">① 先把契约定死</text>
+  <text x="64" y="152" font-size="12" fill="#1e293b">Go（Gin + GORM）写 API，Swagger 直接生成</text>
+  <text x="64" y="172" font-size="12" fill="#64748b">前端对文档调接口，不让 AI 猜后端</text>
+
+  <line x1="288" y1="149" x2="324" y2="149" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="330" y="104" width="244" height="90" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="130" font-size="13" font-weight="700" fill="#1e293b">② Cursor Composer 搭骨架</text>
+  <text x="350" y="152" font-size="12" fill="#1e293b">喂足上下文：Swagger · 设计截图 · 组件目录</text>
+  <text x="350" y="172" font-size="12" fill="#64748b">Next.js App Router + shadcn/ui + Tailwind</text>
+
+  <line x1="574" y1="149" x2="610" y2="149" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="616" y="104" width="220" height="90" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="636" y="130" font-size="13" font-weight="700" fill="#6d28d9">③ Claude Code 细抠</text>
+  <text x="636" y="152" font-size="12" fill="#1e293b">打开相关组件，读码后精准改</text>
+  <text x="636" y="172" font-size="12" fill="#64748b">如：树形可视化改成 DAG 布局</text>
+
+  <line x1="726" y1="194" x2="726" y2="242" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="166" y1="244" x2="166" y2="198" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+
+  <rect x="44" y="248" width="792" height="74" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="64" y="274" font-size="13" font-weight="700" fill="#b45309">反馈回路：每生成一块，就在浏览器里看一眼</text>
+  <text x="64" y="294" font-size="12" fill="#1e293b">布局错乱、断点不对、暗色漏色——截图丢回去让它修</text>
+  <text x="64" y="312" font-size="12" fill="#64748b">小步快跑，别攒到最后</text>
+
+  <rect x="44" y="352" width="390" height="70" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="64" y="378" font-size="13" font-weight="700" fill="#059669">类型安全守住</text>
+  <text x="64" y="398" font-size="12" fill="#1e293b">TypeScript strict 全开 · API 类型从 OpenAPI 生成</text>
+  <text x="64" y="414" font-size="12" fill="#64748b">后端改字段，前端编译期就发现</text>
+
+  <rect x="446" y="352" width="390" height="70" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="466" y="378" font-size="13" font-weight="700" fill="#0369a1">状态别过度设计</text>
+  <text x="466" y="398" font-size="12" fill="#1e293b">React Query 管服务端状态，useState 管本地</text>
+  <text x="466" y="414" font-size="12" fill="#64748b">DEMO 规模不引入全局状态库</text>
+
+  <text x="44" y="450" font-size="12" fill="#94a3b8">shadcn/ui 组件源码进仓库，AI 也最熟；门槛从「记住所有 API」降到「理解概念 + 能判断对错」</text>
+</svg>

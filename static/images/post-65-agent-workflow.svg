@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="458" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">智能体工作流：工作流骨架 + Agent 节点</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">确定性节点保可靠，Agent 节点管灵活，编排器守住成本与上限</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="104" width="390" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="64" y="130" font-size="13" font-weight="700" fill="#0369a1">确定性节点 — 用代码写死</text>
+  <text x="64" y="150" font-size="12" fill="#1e293b">检索 · SQL 查询 · 文件解析 · 导出</text>
+  <text x="64" y="168" font-size="12" fill="#64748b">输入输出明确，负责可靠</text>
+
+  <rect x="446" y="104" width="390" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="466" y="130" font-size="13" font-weight="700" fill="#6d28d9">Agent 节点 — LLM 决定下一步</text>
+  <text x="466" y="150" font-size="12" fill="#1e293b">ReAct：思考 → 工具调用（MCP）→ 结果回喂</text>
+  <text x="466" y="168" font-size="12" fill="#64748b">负责推理、选择、总结的环节</text>
+
+  <rect x="44" y="212" width="150" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="119" y="238" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">用户请求</text>
+  <text x="119" y="258" text-anchor="middle" font-size="11" fill="#64748b">查文献 → 对比 → 导出 Word</text>
+
+  <line x1="194" y1="250" x2="230" y2="250" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="234" y="212" width="176" height="76" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="322" y="236" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">轻量编排器</text>
+  <text x="322" y="254" text-anchor="middle" font-size="11" fill="#1e293b">有向图 · 条件分支 · 循环</text>
+  <text x="322" y="272" text-anchor="middle" font-size="11" fill="#64748b">状态统一写入 WorkflowState</text>
+
+  <line x1="410" y1="250" x2="446" y2="250" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="450" y="212" width="110" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="505" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">检索</text>
+  <text x="505" y="264" text-anchor="middle" font-size="11" fill="#64748b">确定性</text>
+
+  <line x1="560" y1="250" x2="590" y2="250" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="594" y="212" width="110" height="76" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="649" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">对比分析</text>
+  <text x="649" y="264" text-anchor="middle" font-size="11" fill="#64748b">Agent 节点</text>
+
+  <line x1="704" y1="250" x2="734" y2="250" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="738" y="212" width="98" height="76" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="787" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">导出 Word</text>
+  <text x="787" y="264" text-anchor="middle" font-size="11" fill="#64748b">确定性</text>
+
+  <rect x="44" y="320" width="390" height="80" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="64" y="346" font-size="13" font-weight="700" fill="#b45309">循环必须有刹车</text>
+  <text x="64" y="366" font-size="12" fill="#1e293b">节点最大重试次数 · 整图总步数</text>
+  <text x="64" y="384" font-size="12" fill="#64748b">总 token 预算，超限中断，返回当前最优结果</text>
+
+  <rect x="446" y="320" width="390" height="80" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="466" y="346" font-size="13" font-weight="700" fill="#059669">可观测性是生命线</text>
+  <text x="466" y="366" font-size="12" fill="#1e293b">节点进出写结构化日志：输入/输出摘要 · 耗时 · token</text>
+  <text x="466" y="384" font-size="12" fill="#64748b">trace_id 串起来，Jaeger 看节点瀑布图</text>
+
+  <text x="44" y="436" font-size="12" fill="#94a3b8">state 克制：只留下一阶段需要的最小字段；长文本进对象存储，state 里只留 ID 和摘要</text>
+</svg>
