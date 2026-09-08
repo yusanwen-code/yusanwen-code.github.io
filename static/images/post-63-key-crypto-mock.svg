@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 524" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="522" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">API Key 加密与演示模式 Mock：都在收窄可信边界</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">数据库泄露不等于 Key 泄露；访客随便点，也不碰真实额度</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="44" y="96" width="388" height="300" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="64" y="124" font-size="14" font-weight="700" fill="#475569">Key 的加密链路</text>
+
+  <rect x="64" y="140" width="160" height="52" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="144" y="161" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">控制台填入 API Key</text>
+  <text x="144" y="179" text-anchor="middle" font-size="11" fill="#64748b">明文只出现一次</text>
+
+  <line x1="224" y1="166" x2="252" y2="166" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="258" y="140" width="160" height="52" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="338" y="161" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">AES-256-GCM 加密</text>
+  <text x="338" y="179" text-anchor="middle" font-size="11" fill="#64748b">每次随机生成 nonce</text>
+
+  <line x1="338" y1="192" x2="338" y2="220" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="190" y="224" width="228" height="64" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="304" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">MySQL：key_ciphertext / key_nonce / key_version</text>
+  <text x="304" y="266" text-anchor="middle" font-size="11" fill="#64748b">不存明文，不存主密钥</text>
+
+  <line x1="144" y1="316" x2="236" y2="292" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="64" y="316" width="160" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="144" y="338" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">主密钥走环境变量</text>
+  <text x="144" y="356" text-anchor="middle" font-size="11" fill="#1e293b">K8s Secret 注入</text>
+  <text x="144" y="372" text-anchor="middle" font-size="11" fill="#64748b">按 key_version 取用</text>
+
+  <line x1="338" y1="288" x2="338" y2="316" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="258" y="316" width="160" height="64" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="338" y="338" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">解密：按 version 取钥</text>
+  <text x="338" y="356" text-anchor="middle" font-size="11" fill="#1e293b">只在内存短暂存在</text>
+  <text x="338" y="372" text-anchor="middle" font-size="11" fill="#64748b">用完即弃，不长持</text>
+
+  <rect x="452" y="96" width="384" height="300" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="472" y="124" font-size="14" font-weight="700" fill="#475569">DEMO_MODE：整体换掉 LLMClient</text>
+
+  <rect x="472" y="140" width="150" height="52" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="547" y="161" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">DEMO_MODE=true</text>
+  <text x="547" y="179" text-anchor="middle" font-size="11" fill="#64748b">环境变量开关</text>
+
+  <line x1="622" y1="166" x2="648" y2="166" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="654" y="140" width="166" height="52" rx="10" fill="#059669"/>
+  <text x="737" y="161" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">MockLLMClient</text>
+  <text x="737" y="179" text-anchor="middle" font-size="11" fill="#d1fae5">适配层整体替换</text>
+
+  <line x1="737" y1="192" x2="737" y2="220" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="472" y="224" width="344" height="64" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="644" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">不发任何 HTTP 请求</text>
+  <text x="644" y="266" text-anchor="middle" font-size="11" fill="#64748b">随机延迟 · 逐 chunk 吐流式 · 按任务返回不同结构的假 prompt</text>
+
+  <line x1="644" y1="288" x2="644" y2="316" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="472" y="316" width="344" height="64" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="644" y="338" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">SQLite 内存库，demo 数据带 demo=true 标记</text>
+  <text x="644" y="356" text-anchor="middle" font-size="11" fill="#64748b">演示环境不连生产资源：迁移、定时任务一并跳过</text>
+  <text x="644" y="372" text-anchor="middle" font-size="11" fill="#64748b">CI 跑测试也用 demo 模式，不需要任何真实 Key</text>
+
+  <rect x="44" y="420" width="792" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="68" y="446" font-size="13" font-weight="700" fill="#b45309">两条底线</text>
+  <text x="68" y="468" font-size="12" fill="#1e293b">GCM 的 nonce 绝不复用，每次加密随机生成、随密文一起存；供应商 Key 永不下发前端</text>
+
+  <text x="44" y="508" font-size="12" fill="#94a3b8">DEMO_MODE 不能只挡写不挡读：在适配层整体替换 client，业务逻辑无感知；更高安全等级可平滑升级到 KMS</text>
+</svg>

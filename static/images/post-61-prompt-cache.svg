@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="538" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">合成提示词缓存：内容寻址，性格变了才重建</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">key 由 lineage_hash 决定：金丹、算子、参数任何一项变，key 就变</text>
+
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="arwG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="96" width="230" height="48" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="175" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">父母金丹 content_hash</text>
+  <text x="303" y="126" text-anchor="middle" font-size="14" fill="#94a3b8">+</text>
+  <rect x="322" y="96" width="210" height="48" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="427" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">算子名 + OP_VERSION</text>
+  <text x="545" y="126" text-anchor="middle" font-size="14" fill="#94a3b8">+</text>
+  <rect x="564" y="96" width="210" height="48" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="669" y="125" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">融合参数</text>
+
+  <line x1="175" y1="144" x2="290" y2="186" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="427" y1="144" x2="420" y2="186" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="669" y1="144" x2="550" y2="186" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="190" width="760" height="56" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="84" y="214" font-size="13" font-weight="700" fill="#0369a1">lineage_hash → 缓存 key：furnace:synth:{lineage_hash}</text>
+  <text x="84" y="234" font-size="12" fill="#1e293b">内容不变就一直命中；内容一变，自然落到新 key</text>
+
+  <rect x="60" y="280" width="130" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="125" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">分身对话</text>
+  <text x="125" y="322" text-anchor="middle" font-size="11" fill="#64748b">要 system prompt</text>
+
+  <line x1="190" y1="308" x2="216" y2="308" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="222" y="280" width="170" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="307" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Go 网关</text>
+  <text x="307" y="322" text-anchor="middle" font-size="11" fill="#64748b">构造 key 查 Redis</text>
+
+  <line x1="392" y1="308" x2="418" y2="308" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="424" y="280" width="150" height="56" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="499" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">Redis GET</text>
+  <text x="499" y="322" text-anchor="middle" font-size="11" fill="#64748b">furnace:synth:{...}</text>
+
+  <line x1="574" y1="298" x2="626" y2="298" stroke="#10b981" stroke-width="2" marker-end="url(#arwG)"/>
+  <text x="600" y="290" text-anchor="middle" font-size="11" fill="#059669">命中</text>
+
+  <rect x="632" y="270" width="188" height="56" rx="10" fill="#059669"/>
+  <text x="726" y="292" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">直接返回</text>
+  <text x="726" y="310" text-anchor="middle" font-size="11" fill="#d1fae5">prompt + 工具定义</text>
+
+  <line x1="499" y1="336" x2="499" y2="372" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+  <text x="514" y="360" font-size="11" fill="#b45309">未命中</text>
+
+  <rect x="404" y="376" width="190" height="56" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="499" y="398" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">singleflight 合并</text>
+  <text x="499" y="416" text-anchor="middle" font-size="11" fill="#1e293b">同一 hash 只放一个去合成</text>
+
+  <line x1="499" y1="432" x2="420" y2="452" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="120" y="452" width="300" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="270" y="474" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Python 引擎：融合算子 + LLM 合成</text>
+  <text x="270" y="492" text-anchor="middle" font-size="11" fill="#1e293b">身份句子调用 temperature 0.4，子结果也有细粒度缓存</text>
+
+  <line x1="420" y1="480" x2="446" y2="480" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="452" y="452" width="220" height="56" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="562" y="474" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">SetNX 写回</text>
+  <text x="562" y="492" text-anchor="middle" font-size="11" fill="#047857">TTL 7 天，防并发重复写</text>
+
+  <text x="44" y="524" font-size="12" fill="#94a3b8">金丹更新是版本化的，不原地改：作者一改人设就是新版本；旧 key 不删，靠 TTL 自然回收，DEMO_MODE 下换内存 map</text>
+</svg>

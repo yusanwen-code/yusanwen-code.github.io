@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 524" font-family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect x="1" y="1" width="878" height="522" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="44" y="50" font-size="20" font-weight="700" fill="#1e293b">MCP：工具接入从「改代码发版」到「注册即插即用」</text>
+  <text x="44" y="74" font-size="13" fill="#64748b">客户端和工具点对点解耦，resources / tools / prompts 走统一协议</text>
+  <defs>
+    <marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="100" width="760" height="56" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="84" y="123" font-size="13" font-weight="700" fill="#dc2626">旧路子：Function Calling 硬编码</text>
+  <text x="84" y="143" font-size="12" fill="#1e293b">每接一个内部系统，就改一遍适配层、重新发版；几十个 JSON Schema 全塞上下文</text>
+
+  <line x1="440" y1="156" x2="440" y2="180" stroke="#cbd5e1" stroke-width="2" marker-end="url(#arwC)"/>
+
+  <rect x="60" y="190" width="210" height="110" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+  <text x="165" y="214" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">知识库问答服务（MCP Client）</text>
+  <text x="165" y="236" text-anchor="middle" font-size="11" fill="#1e293b">启动时 list_tools 拉取工具列表</text>
+  <text x="165" y="254" text-anchor="middle" font-size="11" fill="#1e293b">转成各家 LLM 的 FC 格式</text>
+  <text x="165" y="272" text-anchor="middle" font-size="11" fill="#64748b">按场景裁剪，不全塞上下文</text>
+
+  <text x="300" y="182" font-size="11" fill="#94a3b8">stdio（本地）· SSE（独立部署）</text>
+
+  <line x1="270" y1="225" x2="384" y2="218" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="270" y1="245" x2="384" y2="290" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="270" y1="265" x2="384" y2="362" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="390" y="190" width="200" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="490" y="212" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">检索 Server</text>
+  <text x="490" y="230" text-anchor="middle" font-size="11" fill="#64748b">knowledge://dataset/123</text>
+
+  <rect x="390" y="262" width="200" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="490" y="284" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">工单 Server</text>
+  <text x="490" y="302" text-anchor="middle" font-size="11" fill="#64748b">发工单、查进度</text>
+
+  <rect x="390" y="334" width="200" height="56" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="490" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">数据导出 Server</text>
+  <text x="490" y="374" text-anchor="middle" font-size="11" fill="#64748b">报表数据拉取与导出</text>
+
+  <line x1="590" y1="218" x2="644" y2="255" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="590" y1="290" x2="644" y2="270" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+  <line x1="590" y1="362" x2="644" y2="285" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arwC)"/>
+
+  <rect x="650" y="225" width="180" height="110" rx="10" fill="#059669"/>
+  <text x="740" y="251" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">模型按需调用</text>
+  <text x="740" y="271" text-anchor="middle" font-size="11" fill="#d1fae5">加工具 = 部署一个 Server</text>
+  <text x="740" y="289" text-anchor="middle" font-size="11" fill="#d1fae5">主服务不用动</text>
+  <text x="740" y="307" text-anchor="middle" font-size="11" fill="#d1fae5">改的是注册，不是代码</text>
+
+  <rect x="60" y="420" width="380" height="64" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="84" y="446" font-size="13" font-weight="700" fill="#b45309">权限与审计跟着上来</text>
+  <text x="84" y="466" font-size="12" fill="#1e293b">写操作强制二次确认 + 审批流</text>
+  <text x="84" y="484" font-size="12" fill="#64748b">tool call 记 trace_id、入参、结果，对接 ELK / Jaeger</text>
+
+  <rect x="460" y="420" width="380" height="64" rx="10" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1"/>
+  <text x="484" y="446" font-size="13" font-weight="700" fill="#6d28d9">工具描述就是给模型的提示词</text>
+  <text x="484" y="466" font-size="12" fill="#1e293b">写清做什么、什么时候用、参数含义</text>
+  <text x="484" y="484" font-size="12" fill="#64748b">附上一两个示例，调用准确率明显提升</text>
+
+  <text x="44" y="508" font-size="12" fill="#94a3b8">生态还在早期：现成 Server 质量参差，生产用前先过一遍代码；下一个问题是工具上百后的路由、权限与版本治理</text>
+</svg>
