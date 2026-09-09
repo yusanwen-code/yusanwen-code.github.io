@@ -130,6 +130,6 @@ func MerchantSignAuth(redis *redis.Client, merchantSvc MerchantService) gin.Hand
 
 ## 后来
 
-三端分离的本质不是物理上拆三个服务，是把"谁在用"和"怎么支付"拆开：认证、权限、DTO 组装留在接入层，状态机一致性和渠道扩展性收在核心层。支付系统还有条底线：业务代码不许直接改订单状态，所有流转都过状态机校验。
+三端分离拆的其实是"谁在用"和"怎么支付"这两件事：认证、权限、DTO 组装留在接入层，状态机一致性和渠道扩展性收在核心层。支付系统还有条底线：业务代码不许直接改订单状态，所有流转都过状态机校验。
 
 > 封面图：[The City of Toronto / Flickr](https://www.flickr.com/photos/34608255@N08/10056440086) · CC BY 2.0

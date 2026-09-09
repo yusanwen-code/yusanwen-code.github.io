@@ -17,7 +17,7 @@ alchemy-furnace 立项时，我面对一个很典型的矛盾：我是 Go 主力
 
 ## 稳定的归 Go，易变的归 Python
 
-职责切分就一条原则：**稳定的、要强类型和高并发的归 Go；易变的、AI 实验性强的归 Python；交互和渲染归 Next.js。**
+职责切分就一条原则：稳定的、要强类型和高并发的归 Go；易变的、AI 实验性强的归 Python；交互和渲染归 Next.js。
 
 - Go 网关（gateway）：用户认证、API Key 管理、金丹/任务/产物的 CRUD、计费配额、请求签名、SSE 进度推送、对 Python 引擎的调用与降级。Gin + GORM + Wire，MySQL 存元数据，Redis 做任务队列和缓存。
 

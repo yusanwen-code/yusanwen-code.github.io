@@ -30,7 +30,7 @@ description: "知识库问答服务的分层架构与核心模块设计"
 
 ## 网关入口
 
-网关入口的路由注册和中间件链：
+路由注册和中间件链长这样：
 
 ```go
 func NewRouter(h *Handler, auth *AuthMiddleware) *gin.Engine {
@@ -51,7 +51,7 @@ func NewRouter(h *Handler, auth *AuthMiddleware) *gin.Engine {
 
 ## 对话主流程
 
-对话主流程的编排（伪代码，展示核心链路）：
+编排长这样（伪代码，展示核心链路）：
 
 ```go
 func (h *Handler) ChatStream(c *gin.Context) {
@@ -103,7 +103,7 @@ func (h *Handler) ChatStream(c *gin.Context) {
 
 ## 四个权衡
 
-SSE 的错误处理是个坑：Header 一旦写出去，就回不去标准 JSON 错误了。所以先同步等模型连接成功——拿到第一个 chunk 或错误——再切换到 SSE 流；生成中途出错，用 `event: error` 事件推给客户端，客户端统一按事件处理。
+SSE 的错误处理是个坑：Header 一旦写出去，就回不去标准 JSON 错误了。所以先同步等模型连接成功（拿到第一个 chunk 或错误），再切换到 SSE 流；生成中途出错，用 `event: error` 事件推给客户端，客户端统一按事件处理。
 
 检索不能绑架主流程。向量库偶尔抖动超时，不能让整个问答跟着挂。检索设了 800ms 超时，超时就走纯对话模式，并在响应头标注 `X-Retrieval-Mode: fallback`，前端可以提示用户：这条答案没过知识库。
 

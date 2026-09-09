@@ -144,6 +144,6 @@ _ = sw.SetColStyle("D", moneyStyle)
 
 ## 改造之后
 
-改造后对账导出再没 OOM 过，运营也不再追着要文件。回头看，百万行 Excel 导出的关键根本不是哪个库的神技，而是整条链路都流式：数据库流式读、Excel 流式写、对象存储流式传，任何一环攒在内存里都会爆。Excelize 的 StreamWriter 已经把最难的 XML 分片写做掉了，应用层只要把生产和消费解耦，加上背压，就能稳定跑下来。
+改造后对账导出再没 OOM 过，运营也不再追着要文件。回头看，百万行 Excel 导出的关键是整条链路都流式：数据库流式读、Excel 流式写、对象存储流式传，任何一环攒在内存里都会爆。Excelize 的 StreamWriter 已经把最难的 XML 分片写做掉了，应用层只要把生产和消费解耦，加上背压，就能稳定跑下来。
 
 > 封面图：[NYC Wanderer / Flickr](https://www.flickr.com/photos/10183029@N00/3631902258) · CC BY-SA 2.0

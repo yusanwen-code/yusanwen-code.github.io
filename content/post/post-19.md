@@ -84,6 +84,6 @@ func (s *VerifyService) SendCode(ctx context.Context, channel, target string) er
 
 这套抽象做完，通知通道从硬编码变成了配置：新增一家供应商，实现接口、注册进工厂，业务代码零改动。
 
-同一套思路后来也用在了知识库问答服务的 LLM 适配层上：统一抽象 OpenAI、Azure、VLLM、HuggingFace 这些供应商，业务逻辑依赖接口、具体实现靠配置选择，本质是同一个设计模式。
+同一套思路后来也用在了知识库问答服务的 LLM 适配层上：统一抽象 OpenAI、Azure、VLLM、HuggingFace 这些供应商，业务逻辑依赖接口、具体实现靠配置选择，其实就是同一个设计模式。
 
 > 封面图：[espensorvik / Flickr](https://www.flickr.com/photos/28478778@N05/5729002702) · CC BY 2.0

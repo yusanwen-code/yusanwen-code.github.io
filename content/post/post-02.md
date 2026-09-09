@@ -19,7 +19,7 @@ description: "宠物医疗 SaaS 系统微服务拆分中 gRPC 通信的 proto �
 
 设计上我们守着一条大原则：每个服务一个独立的 proto package。请求和响应消息都带 `BaseResp` 作为统一返回体，业务错误码不通过 gRPC status 传，而是放在 `BaseResp` 里。
 
-为什么不走 status？gRPC status 适合表达 RPC 层的错误，比如超时、服务不可用；业务错误——宠物已建档、医生号源已满这类——要走 status 的话，拦截器很难把两类区分开。
+为什么不走 status？gRPC status 适合表达 RPC 层的错误，比如超时、服务不可用；业务错误（宠物已建档、医生号源已满这类）要走 status 的话，拦截器很难把两类区分开。
 
 ![业务错误与 RPC 错误分层处理](/images/post-02-grpc-error-layers.svg)
 

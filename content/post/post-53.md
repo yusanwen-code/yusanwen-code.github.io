@@ -92,6 +92,6 @@ rows 从 820000 降到 1200，filesort 也消失了。
 
 ## 后来
 
-回头看，EXPLAIN 是基本功，重点盯 `type`、`key`、`rows`、`Extra` 四列；索引设计要贴着真实的 WHERE 和 ORDER BY 来，不是凭感觉给每个字段撒一遍。模糊搜索交给 ES，MySQL 只干它最擅长的结构化查询——这套组合在数据治理服务里稳定扛住了日常的数据资产检索。
+回头看，EXPLAIN 是基本功，重点盯 `type`、`key`、`rows`、`Extra` 四列；索引设计要贴着真实的 WHERE 和 ORDER BY 来，不是凭感觉给每个字段撒一遍。模糊搜索交给 ES，MySQL 只干它最擅长的结构化查询。这套组合在数据治理服务里稳定扛住了日常的数据资产检索。
 
 > 封面图：[David W. Siu / Flickr](https://www.flickr.com/photos/7400937@N07/5101688010) · CC BY 2.0

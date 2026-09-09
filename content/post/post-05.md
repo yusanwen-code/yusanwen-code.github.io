@@ -135,6 +135,6 @@ func (m *MultiLevelCache) GetWithLoad(ctx context.Context, key string,
 
 ## 后来
 
-多级缓存不是银弹，只适合读多写少、能容忍短暂不一致的数据。这套跑下来，真正起决定作用的判断是先按一致性要求给数据分级，再决定谁能进本地缓存。分级立住了，TTL 怎么设、空值怎么防、singleflight 用在哪，都是顺手的工程活。
+多级缓存只适合读多写少、能容忍短暂不一致的数据。这套跑下来，真正起决定作用的判断是先按一致性要求给数据分级，再决定谁能进本地缓存。分级立住了，TTL 怎么设、空值怎么防、singleflight 用在哪，都是顺手的工程活。
 
 > 封面图：[rob.wall / Flickr](https://www.flickr.com/photos/49503072941@N01/2262564867) · CC BY 2.0

@@ -209,7 +209,7 @@ redirect_uri 必须精确匹配。早期为了图方便支持了前缀匹配，�
 
 ID Token 的 nonce 一定要原样回传。客户端靠它防重放，如果我们漏传，严格的 OIDC 客户端会直接拒绝登录。
 
-code 一次性使用，加短过期。我设成 60 秒过期、用后即删，而且同一个 code 被二次使用时，立即吊销该 app 下该用户的所有活跃 token——这是 OAuth2 安全 BCP 的推荐做法。
+code 一次性使用，加短过期。我设成 60 秒过期、用后即删，而且同一个 code 被二次使用时，立即吊销该 app 下该用户的所有活跃 token，这也是 OAuth2 安全 BCP 的推荐做法。
 
 公钥轮换要平滑。JWT header 里带 `kid`，资源服务器按 `kid` 从 JWKS 缓存公钥；换密钥时，新私钥签发的 token 带新 kid，旧公钥在 JWKS 里保留 7 天，让存量 token 自然过期。
 
@@ -219,6 +219,6 @@ code 一次性使用，加短过期。我设成 60 秒过期、用后即删，�
 
 ## 后来
 
-实现标准 OAuth2/OIDC，工作量真不在代码量，而在把协议里那些 MUST/SHOULD 逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能走同一个 OIDC 联邦框架，扩展性比自定义协议好得多。标准协议的价值就在这里：对接这件事，不再需要一对一谈判。
+实现标准 OAuth2/OIDC，工作量大头在把协议里那些 MUST/SHOULD 逐条落到工程里：PKCE、state/nonce、精确 redirect_uri、code 一次性、JWKS 轮换。改造完成后，任何标准 OIDC 客户端（NextAuth、Spring Security、Keycloak adapter）都能直接接入，飞书/企微作为外部 IdP 也能走同一个 OIDC 联邦框架，扩展性比自定义协议好得多：对接这件事，不再需要一对一谈判。
 
 > 封面图：[Strooks-traveller1 / Flickr](https://www.flickr.com/photos/44241312@N08/4059216490) · CC BY-SA 2.0

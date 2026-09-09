@@ -29,7 +29,7 @@ Provider 我们按模块收拢成 ProviderSet，比如 auth 模块的 Service、
 
 ## 构造函数直接返回接口
 
-有个约定值得单独说。构造函数返回具体类型、上层依赖接口时，得靠 wire.Bind 显式绑一下，多一道手续。我们的做法是让构造函数直接返回接口类型，Bind 基本就用不上了。
+构造函数返回具体类型、上层依赖接口时，得靠 wire.Bind 显式绑一下，多一道手续。我们的做法是让构造函数直接返回接口类型，Bind 基本就用不上了。
 
 单测也不需要 Wire 参与。手写个 mock 塞进构造函数就行：`NewUserService(&mockUserDAO{}, &mockSMS{})`。
 

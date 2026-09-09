@@ -17,7 +17,7 @@ description: "一个人用 Claude Code 交付 Go+Python+Next.js 全栈项目的�
 
 第一步，先写 `CLAUDE.md`，把项目结构、技术栈、启动命令、代码规范和关键领域概念（金丹、丹炉、血统追溯）写清楚，作为 Agent 的长期记忆。
 
-第二步，复杂功能——Promptbreeder 变异算子、合成提示词缓存、多供应商适配——先用 Plan 模式让它出实施计划，我审完再让它动手写代码。
+第二步，复杂功能（Promptbreeder 变异算子、合成提示词缓存、多供应商适配）先用 Plan 模式让它出实施计划，我审完再让它动手写代码。
 
 第三步，小步提交，每个子任务一个 commit，方便 review，也方便回滚。
 
@@ -79,6 +79,6 @@ description: "一个人用 Claude Code 交付 Go+Python+Next.js 全栈项目的�
 
 ## 后来
 
-Claude Code 让我这种以后端为主的人，敢一个人扛前端和算法服务。它最擅长样板代码、测试用例、跨文件重构和根据报错自修复；我负责架构、边界和验收。alchemy-furnace 能在业余时间快速做到 46 star，这套工作流功不可没。
+Claude Code 让我这种以后端为主的人，敢一个人扛前端和算法服务。它最擅长样板代码、测试用例、跨文件重构和根据报错自修复；我负责架构、边界和验收。alchemy-furnace 能在业余时间快速做到 46 star，靠的就是这套工作流。
 
 > 封面图：[recursion_see_recursion / Flickr](https://www.flickr.com/photos/39027808@N00/1423312308) · CC BY 2.0

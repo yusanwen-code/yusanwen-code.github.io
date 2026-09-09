@@ -175,7 +175,7 @@ func LogWriter(ctx context.Context, coll *mongo.Collection, ch <-chan *AccessLog
 
 ## 四个坑
 
-第一个坑是请求体。最开始我直接把 `c.Request.Body` 读出来记日志，读完之后后续 handler 再读就是空的——body 是个流，读一次就没了。要用 `io.NopCloser` 加 `bytes.Buffer` 复制一份放回去。另外大 body 必须截断，只记前 1KB，不然日志体积很快失控。
+第一个坑是请求体。最开始我直接把 `c.Request.Body` 读出来记日志，读完之后后续 handler 再读就是空的：body 是个流，读一次就没了。要用 `io.NopCloser` 加 `bytes.Buffer` 复制一份放回去。另外大 body 必须截断，只记前 1KB，不然日志体积很快失控。
 
 第二个是敏感字段。密码、身份证、手机号不能明文进日志。我在序列化前对 query 和 body 里的 `password`、`id_card`、`phone` 做了掩码。这事必须在入口做，等数据入了库再补救就晚了，合规也不认。
 

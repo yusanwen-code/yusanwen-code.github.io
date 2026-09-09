@@ -19,7 +19,7 @@ description: "在统一认证中心中落地 Snowflake 的工程实践与时钟�
 
 经典位分配：1 位符号 + 41 位毫秒时间戳 + 10 位 WorkerID + 12 位序列号，单机每毫秒理论上能出 4096 个 ID。
 
-真正要花心思的是 WorkerID 怎么分。我们跑在 KubeSphere 上，每个 Pod 用 StatefulSet 的下标派生 WorkerID（0-1023），再配合配置中心给不同服务预留号段范围，避免不同实例撞车。光这样还不放心，启动时把 WorkerID 连同 Pod IP、启动时间写进 Redis，做一次占用校验。
+要花心思的是 WorkerID 怎么分。我们跑在 KubeSphere 上，每个 Pod 用 StatefulSet 的下标派生 WorkerID（0-1023），再配合配置中心给不同服务预留号段范围，避免不同实例撞车。光这样还不放心，启动时把 WorkerID 连同 Pod IP、启动时间写进 Redis，做一次占用校验。
 
 ## 时钟回拨：等还是拒
 
@@ -108,7 +108,7 @@ func (u *User) BeforeCreate(tx *gorm.DB) error {
 
 WorkerID 10 位看着够用，但我们最初把多个服务混在同一号段里，压测时出现跨服务 WorkerID 碰撞。后来按服务前缀切分号段，配置中心统一管。
 
-时钟回拨的阈值不能设太大，也不能直接 panic。5ms 内等待，超过就返回错误让上游降级，比如重试到其他实例。底线只有一条：不生成重复 ID。
+时钟回拨的阈值不能设太大，也不能直接 panic。5ms 内等待，超过就返回错误让上游降级，比如重试到其他实例。
 
 GORM 的 BeforeCreate 在批量 Create 时每条记录都会调一次，Snowflake 单例的锁竞争要留心。实测万级批量写入时锁等待可接受，再大的批量建议分片。
 

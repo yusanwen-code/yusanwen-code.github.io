@@ -31,7 +31,7 @@ description: "基于游标的增量拉取与 OpenAlex ID 去重实践"
 
 ## 请求就一个 GET
 
-请求封装很薄，值得注意的是带上了 `mailto`，后面会讲为什么：
+请求封装很薄，带上了 `mailto`，后面会讲为什么：
 
 ```go
 type OpenAlexClient struct {

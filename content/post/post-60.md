@@ -25,7 +25,7 @@ description: "用 crossover 和 mutation 算子融合多个人格，并记录完
 
 ![三类融合算子与血统落账](/images/post-60-fusion-operators.svg)
 
-每个融合任务的输出不只是一段 system prompt，还有一份 `lineage`：
+每个融合任务的输出除了 system prompt，还有一份 `lineage`：
 
 ```json
 {
@@ -146,6 +146,6 @@ Ensemble 有代价。委员会人格每次回答要先做一次路由判断（"�
 
 ## 后来
 
-多金丹融合的关键不是"让 LLM 综合一下"，而是用结构化算子控制组合过程，用血统记录保证可解释、可复现。有了这套机制，炼丹就不再是开盲盒，而是一个可以迭代、可以追溯的工程过程。下一篇讲怎么基于血统做合成提示词缓存。
+多金丹融合的关键是用结构化算子控制组合过程，用血统记录保证可解释、可复现。有了这套机制，炼丹就从开盲盒变成了一个可以迭代、可以追溯的工程过程。下一篇讲怎么基于血统做合成提示词缓存。
 
 > 封面图：[Flocci Nivis / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=178341781) · CC BY 4.0

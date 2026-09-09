@@ -129,6 +129,6 @@ func RSAVerifyMiddleware(appDao dao.AppDAO, rdb *redis.Client) gin.HandlerFunc {
 
 ## 上线之后
 
-上线至今，没出过签名层面的安全事件。回头看，这套机制的核心不在算法多强，而在规则够不够死、边界够不够清：谁发的、有没有被改、是不是重放，一趟验签全解决。商户接入文档里我配了 Java、Python、Go 三份 SDK 示例，写文档花的功夫，比后来省下的联调时间少多了。
+上线至今，没出过签名层面的安全事件。回头看，这套机制立得住，靠的是规则够死、边界够清：谁发的、有没有被改、是不是重放，一趟验签全解决。商户接入文档里我配了 Java、Python、Go 三份 SDK 示例，写文档花的功夫，比后来省下的联调时间少多了。
 
 > 封面图：[Simon A. Eugster / Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=52421294) · CC BY-SA 3.0

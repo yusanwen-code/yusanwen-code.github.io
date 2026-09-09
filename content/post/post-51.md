@@ -19,7 +19,7 @@ description: "宠物医疗 SaaS 系统 go-zero 微服务里，用 Jaeger 定位�
 
 埋点用 OpenTelemetry SDK 统一做。gRPC unary interceptor 在服务端自动创建 span，客户端拦截器负责透传 trace context；Jaeger Collector 收 span 后写入 ES 后端，在 Jaeger UI 里按 operation 和耗时过滤。
 
-关键一步是把 DB 查询、Redis 调用、外部 AI 影像判读接口都包成子 span。瀑布图要真实反映每一跳的耗时，靠的就是这些。
+关键一步是把 DB 查询、Redis 调用、外部 AI 影像判读接口都包成子 span，瀑布图才能真实反映每一跳的耗时。
 
 ## 埋点代码
 

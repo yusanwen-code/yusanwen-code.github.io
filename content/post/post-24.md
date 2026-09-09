@@ -85,7 +85,7 @@ func (s *AppService) CreateApp(ctx context.Context, req CreateAppReq) (int64, er
 
 ## 坑都在事务边界外
 
-GORM 的 Transaction 回调里 panic 会被 recover 并回滚，但坑在回调外面：fn 里起了 goroutine，goroutine 的 panic 不会触发回滚，而且它拿着的 ctx 还指向原来的 tx——那时事务可能已经提交或回滚了。所以事务内别把 ctx 传给异步任务，异步用 context.Background() 另起。
+GORM 的 Transaction 回调里 panic 会被 recover 并回滚，但 recover 管不到别的 goroutine：fn 里起了 goroutine，它的 panic 不会触发回滚，而且它拿着的 ctx 还指向原来的 tx，那时事务可能已经提交或回滚了。所以事务内别把 ctx 传给异步任务，异步用 context.Background() 另起。
 
 嵌套调 WithTx 是可以的，GORM 基于 savepoint 实现嵌套事务。但内层回滚只回到 savepoint，不会连累外层整体回滚；内层的 error 要是被吞了，外层照样提交。error 老老实实 return 上去。
 
@@ -93,7 +93,7 @@ GORM 的 Transaction 回调里 panic 会被 recover 并回滚，但坑在回调�
 
 这套模式也有代价：事务边界隐式藏在 ctx 里，新人读代码看不出某个 DAO 调用在不在事务中。我们靠 Code Review 把关，Service 方法注释里标明事务边界。
 
-至于"context 该不该携带请求范围之外的数据"这个老争论——事务句柄确实是请求范围内的，又需要跨层透传，这个场景用 ctx 比把 tx 塞进每个方法签名实用。我站 ctx 这边。
+至于"context 该不该携带请求范围之外的数据"这个老争论：事务句柄确实是请求范围内的，又需要跨层透传，这个场景用 ctx 比把 tx 塞进每个方法签名实用。我站 ctx 这边。
 
 ## 后来
 

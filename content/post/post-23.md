@@ -19,7 +19,7 @@ description: "统一认证中心中三端 OAuth 登录与账号绑定的统一�
 
 ## 一个接口收编三个平台
 
-接口就两个方法：AuthURL 生成跳转地址，Exchange 拿 code 换身份信息，返回统一的 Identity——平台类型、OpenID、UnionID、昵称、头像，都在里面。
+接口就两个方法：AuthURL 生成跳转地址，Exchange 拿 code 换身份信息，返回统一的 Identity，平台类型、OpenID、UnionID、昵称、头像，都在里面。
 
 账号绑定关系落在 user_identities 表，user_id + provider + provider_uid 联合唯一。登录时按 provider + uid 查这张表：查到，直接签发 JWT；查不到但当前已登录，走绑定流程；完全没账号，自动注册再绑上。
 

@@ -11,9 +11,9 @@ description: "在数据集管理服务和 alchemy-furnace 中，Go 与 Python �
 
 ## 混部是常态
 
-AI 应用里 Go 和 Python 混部几乎是常态：Go 写网关、并发调度、业务 API，Python 写模型推理、向量计算、文档解析。我在数据集管理服务里用 Go（Hertz）做接入和任务分发，用 eino + pond 跑高并发文档解析和向量化；在 alchemy-furnace 里是 Go（Gin + GORM）做网关，Python（FastAPI）做合成引擎。
+AI 应用里 Go 和 Python 混部太常见了：Go 写网关、并发调度、业务 API，Python 写模型推理、向量计算、文档解析。我在数据集管理服务里用 Go（Hertz）做接入和任务分发，用 eino + pond 跑高并发文档解析和向量化；在 alchemy-furnace 里是 Go（Gin + GORM）做网关，Python（FastAPI）做合成引擎。
 
-两边怎么通信，是每次都要回答的问题。选项就三个：gRPC、HTTP/JSON、消息队列。MQ 用于异步解耦没有争议，争议集中在同步调用——gRPC 还是 HTTP。
+两边怎么通信，是每次都要回答的问题。选项就三个：gRPC、HTTP/JSON、消息队列。MQ 用于异步解耦没有争议，争议集中在同步调用：gRPC 还是 HTTP。
 
 两个项目我都做过，结论是按场景分。
 

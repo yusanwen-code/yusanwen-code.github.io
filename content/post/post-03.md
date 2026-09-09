@@ -119,7 +119,7 @@ func TracingMiddleware(tracer opentracing.Tracer) gin.HandlerFunc {
 
 ## 链路是在哪里断的
 
-第一个断点是异步 goroutine。有些逻辑起 goroutine 异步处理，直接用了 `context.Background()`，Span 链就断了。我们的规矩是异步任务必须从父 context 派生，但要 detach——不能直接用父 ctx，因为父 ctx 在 HTTP 返回后会被 cancel。我封装了一个 `detachContext`，只保留 trace 信息、不继承 cancel 信号。
+第一个断点是异步 goroutine。有些逻辑起 goroutine 异步处理，直接用了 `context.Background()`，Span 链就断了。我们的规矩是异步任务必须从父 context 派生，但要 detach，不能直接用父 ctx，因为父 ctx 在 HTTP 返回后会被 cancel。我封装了一个 `detachContext`，只保留 trace 信息、不继承 cancel 信号。
 
 第二个是采样率。生产环境 100% 采样，Jaeger 后端和网络的压力都不小。我们改成 10% 采样，错误请求强制 100%（在拦截器里判断 err != nil 时设置 `sampling.priority=1`）。
 

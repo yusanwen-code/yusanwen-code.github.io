@@ -114,7 +114,7 @@ func (h *FileHandler) Complete(c *gin.Context) {
 
 ## 五个坑
 
-第一个最常见：预签名 URL 绑定了 HTTP 方法和 headers，客户端必须原样使用。前端爱犯的错是 PUT 时手动加了个 `Content-Type`，值却和签名时不一致，S3 直接甩回来一个 SignatureDoesNotMatch。要么严格对齐，要么签名时不指定 ContentType 让客户端自定——但后者有类型被篡改的风险。
+第一个最常见：预签名 URL 绑定了 HTTP 方法和 headers，客户端必须原样使用。前端爱犯的错是 PUT 时手动加了个 `Content-Type`，值却和签名时不一致，S3 直接甩回来一个 SignatureDoesNotMatch。要么严格对齐，要么签名时不指定 ContentType 让客户端自定，但后者有类型被篡改的风险。
 
 第二个是权限。预签名 URL 本身不鉴权，拿到的人都能传。我们把有效期压到 15 分钟，object key 用不可猜的 Snowflake ID，防枚举。
 
@@ -126,6 +126,6 @@ func (h *FileHandler) Complete(c *gin.Context) {
 
 ## 后来
 
-预签名上传把后端从数据通路里摘了出去，只做签名和校验，带宽压力降得非常明显，客户端还能直接享受对象存储的分片和断点续传。配上 file_objects 表的状态机，上传、校验、解析三步衔接得很清楚。大文件场景，这个模式值得用。
+预签名上传把后端从数据通路里摘了出去，只做签名和校验，带宽压力降得非常明显，客户端还能直接用上对象存储的分片和断点续传。配上 file_objects 表的状态机，上传、校验、解析三步衔接得很清楚。大文件场景，我觉得这个模式值得用。
 
 > 封面图：[Aaron Volkening / Flickr](https://www.flickr.com/photos/87297882@N03/52077049549) · CC BY 2.0

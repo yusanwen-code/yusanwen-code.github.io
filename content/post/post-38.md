@@ -65,7 +65,7 @@ func (s *SearchDatasetTool) Schema() *jsonschema.Schema {
 
 ## 执行循环才是核心
 
-Function Calling 的核心是执行循环。一次用户请求内维护一个 `maxIterations`（默认 5），每次拿到模型响应后：
+一次用户请求内维护一个 `maxIterations`（默认 5），每次拿到模型响应后：
 
 1. 如果没有 `tool_calls`，把内容作为最终回答返回；
 2. 如果有，逐个执行工具，把结果以 `role=tool` 消息追加到对话历史；
@@ -116,6 +116,6 @@ for iter := 0; iter < maxIter; iter++ {
 
 ## 后来
 
-Function Calling 的工程化，难点不在调通接口，在围绕模型的不确定性做防御：schema 校验、执行隔离、迭代上限、结果裁剪。知识库问答服务用统一的 Tool 接口和执行循环，把这些横切逻辑收敛到框架里。新增业务工具只要实现接口、把描述写好，就能安全地交给模型调用。
+Function Calling 的工程化，难点是围绕模型的不确定性做防御：schema 校验、执行隔离、迭代上限、结果裁剪。知识库问答服务用统一的 Tool 接口和执行循环，把这些横切逻辑收敛到框架里。新增业务工具只要实现接口、把描述写好，就能安全地交给模型调用。
 
 > 封面图：[M McBey / Flickr](https://www.flickr.com/photos/158652122@N02/49467795397) · CC BY 2.0
